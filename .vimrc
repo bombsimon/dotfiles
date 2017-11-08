@@ -40,6 +40,9 @@ let g:airline_theme='ubaryd'
 let g:airline_powerline_fonts = 1 " Prepatched fonts: https://github.com/powerline/fonts.git
 let g:airline#extensions#tabline#enabled = 1
 
+" vim-go
+let g:go_fmt_command = "goimports"
+
 " Installed bundles
 " pathogen              : https://github.com/tpope/vim-pathogen.git
 " tabular               : https://github.com/godlygeek/tabular.git
