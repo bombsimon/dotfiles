@@ -24,6 +24,7 @@ colorscheme molokai     " https://github.com/tomasr/molokai.git
 " Alias
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> Wa ((getcmdtype() is# ':' && getcmdline() is# 'Wa')?('wa'):('Wa'))
+cnoreabbrev E Files
 
 " Mapping
 nnoremap <F11> :tabprevious<CR>
@@ -44,6 +45,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:go_fmt_command = "goimports"
 
 " Installed bundles
+" fzf                   : https://github.com/junegunn/fzf.vim (https://github.com/junegunn/fzf)
 " pathogen              : https://github.com/tpope/vim-pathogen.git
 " tabular               : https://github.com/godlygeek/tabular.git
 " vim-airline           : https://github.com/vim-airline/vim-airline.git
