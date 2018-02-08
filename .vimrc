@@ -1,3 +1,5 @@
+syntax on               " Needed for mac OS
+
 set number              " Show line numbers
 set showcmd             " Show command
 set autoindent          " Auto indent
@@ -22,9 +24,9 @@ filetype plugin indent on
 colorscheme molokai     " https://github.com/tomasr/molokai.git
 
 " Alias
-cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
-cnoreabbrev <expr> Wa ((getcmdtype() is# ':' && getcmdline() is# 'Wa')?('wa'):('Wa'))
-cnoreabbrev E Files
+command! W w
+command! Wa wa
+command! E Files
 
 " Mapping
 nnoremap <F11> :tabprevious<CR>
