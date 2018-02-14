@@ -1,5 +1,3 @@
-syntax on               " Needed for mac OS
-
 set number              " Show line numbers
 set showcmd             " Show command
 set autoindent          " Auto indent
@@ -17,11 +15,28 @@ set modeline            " Enable modline
 set modelines=3         " Look at max 3 lines
 set laststatus=2        " Always show status bar
 set pastetoggle=<F2>    " Enable paste toggle in insert mode
+set cursorline          " Mark whole line with cursor
 set t_Co=256            " Enable 256 colors
+set background=dark
 
+let mapleader=" "
+
+syntax on               " Needed for mac OS
 filetype plugin indent on
 
-colorscheme molokai     " https://github.com/tomasr/molokai.git
+colorscheme gruvbox     " https://github.com/morhetz/gruvbox
+
+" Disable Arrow keys in Escape mode
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+" Disable Arrow keys in Insert mode
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
 
 " Alias
 command! W w
@@ -39,7 +54,7 @@ cmap w!! w !sudo tee >/dev/null %
 execute pathogen#infect()
 
 " vim-airline settings
-let g:airline_theme='ubaryd'
+let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1 " Prepatched fonts: https://github.com/powerline/fonts.git
 let g:airline#extensions#tabline#enabled = 1
 
