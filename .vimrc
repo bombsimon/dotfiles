@@ -1,3 +1,23 @@
+call plug#begin('~/.vim/bundle')
+
+Plug '~/git/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'godlygeek/tabular'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'fatih/vim-go'
+Plug 'mhinz/vim-signify'
+Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
+
+call plug#end()
+
+colorscheme gruvbox
+filetype plugin indent on
+syntax on               " Needed for mac OS
+
 set number              " Show line numbers
 set showcmd             " Show command
 set autoindent          " Auto indent
@@ -20,11 +40,6 @@ set t_Co=256            " Enable 256 colors
 set background=dark
 
 let mapleader=" "
-
-syntax on               " Needed for mac OS
-filetype plugin indent on
-
-colorscheme gruvbox     " https://github.com/morhetz/gruvbox
 
 " Disable Arrow keys in Escape mode
 map <up> <nop>
@@ -50,9 +65,6 @@ nnoremap <F2> :set invpaste paste?<CR>
 
 cmap w!! w !sudo tee >/dev/null %
 
-" Load vim-pathogen (autoload plugins from ~/.vim/bundle
-execute pathogen#infect()
-
 " vim-airline settings
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1 " Prepatched fonts: https://github.com/powerline/fonts.git
@@ -60,15 +72,3 @@ let g:airline#extensions#tabline#enabled = 1
 
 " vim-go
 let g:go_fmt_command = "goimports"
-
-" Installed bundles
-" fzf                   : https://github.com/junegunn/fzf.vim (https://github.com/junegunn/fzf)
-" pathogen              : https://github.com/tpope/vim-pathogen.git
-" tabular               : https://github.com/godlygeek/tabular.git
-" vim-airline           : https://github.com/vim-airline/vim-airline.git
-" vim-airline-themes    : https://github.com/vim-airline/vim-airline-themes.git
-" vim-commentary        : https://github.com/tpope/vim-commentary.git
-" vim-fugitive          : https://github.com/tpope/vim-fugitive.git
-" vim-gitgutter         : https://github.com/airblade/vim-gitgutter.git
-" vim-go                : https://github.com/fatih/vim-go.git
-" vim-signify           : https://github.com/mhinz/vim-signify.git
