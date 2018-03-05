@@ -1,11 +1,11 @@
 # Source perlbrew if installed
-if [ -e $HOME/perl5/perlbrew/etc/bashrc ]; then
-    source $HOME/perl5/perlbrew/etc/bashrc
+if [ -e "$HOME/perl5/perlbrew/etc/bashrc" ]; then
+    source "$HOME/perl5/perlbrew/etc/bashrc"
 fi
 
 # Get name of git branch
 function parse_git_branch {
-    if [ ! $(which git) ]; then
+    if [ ! "$(which git)" ]; then
         return
     fi
 
@@ -13,7 +13,7 @@ function parse_git_branch {
 }
 
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    test -r ~/.dircolors && (eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)")
     alias l="ls -lh --color=auto"
     alias ls="ls --color=auto"
     alias lr="ls -lrth --color=auto"
@@ -25,8 +25,6 @@ else
     alias lr="ls -lrth"
 fi
 
-alias vi="vim"
-
 export PS1='\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\] (\[\e[31m\]\W\[\e[m\]) \[\e[33m\]`parse_git_branch`\[\e[m\]$ '
 
 export HISTCONTROL="ignoreboth"
@@ -37,14 +35,15 @@ export LESS="-+F"
 export EDITOR="vim"
 export VISUAL="vim"
 
-export GOROOT="/user/local/go"
+export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
 
 export GEM_PATH="${HOME}/.rvm/gems/ruby-2.4.0"
 
 unset MANPATH
+mpath="$(manpath)"
 export NPM_PACKAGES="${HOME}/.npm-packages"
-export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+export MANPATH="$NPM_PACKAGES/share/man:$mpath"
 
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
@@ -58,8 +57,8 @@ function rr {
     fi
 }
 
-function container_ip {                                                                     
-    CONTAINER=$1                                                                            
+function container_ip {
+    CONTAINER="$1"
 
-    docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" $CONTAINER 
-}                                                                                           
+    docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "$CONTAINER"
+}
