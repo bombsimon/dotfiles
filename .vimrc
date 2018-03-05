@@ -10,7 +10,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'mhinz/vim-signify'
+Plug 'w0rp/ale'
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+endif
 
 call plug#end()
 
@@ -35,11 +40,16 @@ set modeline            " Enable modline
 set modelines=3         " Look at max 3 lines
 set laststatus=2        " Always show status bar
 set pastetoggle=<F2>    " Enable paste toggle in insert mode
-set cursorline          " Mark whole line with cursor
 set t_Co=256            " Enable 256 colors
 set background=dark
 
 let mapleader=" "
+
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
 
 " Disable Arrow keys in Escape mode
 map <up> <nop>
@@ -72,3 +82,8 @@ let g:airline#extensions#tabline#enabled = 1
 
 " vim-go
 let g:go_fmt_command = "goimports"
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 1
+inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
