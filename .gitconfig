@@ -1,0 +1,14 @@
+[user]
+    name = Simon Sawert
+    email = simon@sawert.se
+[alias]
+    flog = log --oneline --decorate=full --graph
+    log1 = log --oneline
+[color]
+    ui = auto
+[core]
+    pager = less -R
+    editor = vim
+    excludesfile = ~/.gitignore_global
+[push]
+    default = tracking
