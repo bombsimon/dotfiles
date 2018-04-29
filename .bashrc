@@ -47,7 +47,14 @@ export MANPATH="$NPM_PACKAGES/share/man:$mpath"
 
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
-export PATH="$HOME/perl5/perlbrew/bin:$HOME/.rvm/bin:$GOPATH/bin:$GOROOT/bin:$PATH:$NPM_PACKAGES/bin"
+GOPATHS="$GOPATH/bin:$GOROOT/bin"
+PERLPATHS="~/perl5/perlbrew/bin"
+RUBYPATHS="~/.rvm/bin"
+NPMPATHS="$NPM_PACKAGES/bin"
+LOCALPATHS="~/bin:/usr/local/bin"
+RUSTPATHS="~/.cargo/bin"
+
+export PATH="$RUSTPATHS:$GOPATHS:$PERLPATHS:$RUBYPATHS:$NPMPATHS:$LOCALPATHS:$PATH"
 
 function rr {
     if [ -f /var/run/reboot-required ]; then
