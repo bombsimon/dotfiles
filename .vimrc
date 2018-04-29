@@ -1,17 +1,25 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/bundle')
 
 Plug '~/git/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'godlygeek/tabular'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
+
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
-Plug 'mhinz/vim-signify'
-Plug 'w0rp/ale'
+Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
+Plug 'mhinz/vim-signify'
+Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'w0rp/ale'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -27,9 +35,9 @@ set number              " Show line numbers
 set showcmd             " Show command
 set autoindent          " Auto indent
 set nowrap              " Don't wrap lines
-set ts=4                " Tab space 4
-set sw=4                " Shift width 4
-set et                  " Expand tabs
+set tabstop=4           " Tab stop 4
+set shiftwidth=4        " Shift width 4
+set expandtab           " Expand tabs
 set copyindent          " Use existing indents for new indents
 set ignorecase          " Search case insensitive
 set ruler               " Show the line number on the bar
@@ -41,10 +49,11 @@ set modelines=3         " Look at max 3 lines
 set laststatus=2        " Always show status bar
 set pastetoggle=<F2>    " Enable paste toggle in insert mode
 set t_Co=256            " Enable 256 colors
-set background=dark
+set background=dark     " Use dark background
 
 let mapleader=" "
 
+" Only show cursor in active windows when using splits
 augroup CursorLineOnlyInActiveWindow
   autocmd!
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
@@ -56,12 +65,6 @@ map <up> <nop>
 map <down> <nop>
 map <left> <nop>
 map <right> <nop>
-
-" Disable Arrow keys in Insert mode
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
 
 " Alias
 command! W w
@@ -87,3 +90,6 @@ let g:go_fmt_command = "goimports"
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#disable_auto_complete = 1
 inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
+
+" rust.vim
+let g:rustfmt_autosave = 1
