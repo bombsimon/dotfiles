@@ -7,7 +7,7 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch bar1 and bar2
-for m in $(polybar -m primary | awk -F':' '{print $1}'); do
+for m in $(polybar -m primary | awk -F':' '{print $1}' | sort -r); do
     MONITOR=$m polybar default &
 done
 
