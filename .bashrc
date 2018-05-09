@@ -25,6 +25,9 @@ else
     alias lr="ls -lrth"
 fi
 
+alias vi='nvim'
+alias vim='nvim'
+
 export PS1='\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\] (\[\e[31m\]\W\[\e[m\]) \[\e[33m\]`parse_git_branch`\[\e[m\]$ '
 
 export HISTCONTROL="ignoreboth"

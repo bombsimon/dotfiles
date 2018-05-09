@@ -4,6 +4,9 @@
 [alias]
     flog = log --oneline --decorate=full --graph
     log1 = log --oneline
+    latest = log -1 --pretty=%B
+    as     = commit -a --amend --no-edit
+    pf     = push --force-with-lease
 [color]
     ui = auto
 [core]

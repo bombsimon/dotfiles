@@ -36,7 +36,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -99,7 +99,7 @@ bindsym $mod+t layout toggle tabbed splitv splith
 bindsym $mod+Shift+Return split toggle
 
 # Lock screen
-bindsym Control+Mod1+l exec --no-startup-id "gnome-screensaver-command -l"
+bindsym Control+Mod1+l exec "loginctl lock-session"
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -186,16 +186,16 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-# bar {
-#     status_command i3status
-#     position bottom
-#     tray_output primary
-# }
+bar {
+    status_command i3status
+    position bottom
+    tray_output primary
+}
 
 # Startup executions
-exec --no-startup-id compton                                # Use compton as compositor
-exec_always --no-startup-id nm-applet                       # Network management applet
-exec --no-startup-id gnome-screensaver                      # Enable gnome screensaver
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh # Start polybar
-exec --no-startup-id feh --bg-fill ~/jnk/login.png          # Set desktop background
-exec --no-startup-id "/bin/bash -c sleep 1 && autorandr -c"
+exec --no-startup-id "/bin/bash -c sleep 1 && autorandr -c" # Force autorandr
+exec --no-startup-id compton                                # Start compositor
+exec --no-startup-id xss-lock -- i3lock-fancy               # Set lock
+exec --no-startup-id xfsettingsd --replace                  # XFCE settings daemon
+exec --no-startup-id nm-applet                              # Network management applet
+exec --no-startup-id pasystray                              # Sound control applet
