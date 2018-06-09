@@ -268,3 +268,7 @@ bind-key -n -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe 'xclip -i -
 
 # enable mouse
 set-option -g mouse off
+
+# Move tabs left/right with Ctrl+Shift+Arrow
+bind-key -n C-S-Left swap-window -t -1
+bind-key -n C-S-Right swap-window -t +1
