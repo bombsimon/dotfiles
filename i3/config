@@ -193,9 +193,9 @@ bar {
 }
 
 # Startup executions
-exec --no-startup-id "/bin/bash -c sleep 1 && autorandr -c" # Force autorandr
-exec --no-startup-id compton                                # Start compositor
-exec --no-startup-id xss-lock -- i3lock-fancy               # Set lock
-exec --no-startup-id xfsettingsd --replace                  # XFCE settings daemon
-exec --no-startup-id nm-applet                              # Network management applet
-exec --no-startup-id pasystray                              # Sound control applet
+exec --no-startup-id "/bin/bash -c sleep 1 && autorandr -c"     # Force autorandr
+exec --no-startup-id compton                                    # Start compositor
+exec --no-startup-id xss-lock -- i3lock -i ~/jnk/lock.png -t -e # Set lock
+exec --no-startup-id xfsettingsd --replace                      # XFCE settings daemon
+exec --no-startup-id nm-applet                                  # Network management applet
+exec --no-startup-id pasystray                                  # Sound control applet
