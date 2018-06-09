@@ -2,11 +2,16 @@
     name = Simon Sawert
     email = simon@sawert.se
 [alias]
+    co = checkout
+    as = commit -a --amend --no-edit
+    pf = push --force-with-lease
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    s = status
+    branch-name = "!git rev-parse --abbrev-ref HEAD"
+    pushup = "!git push -u origin $(git branch-name)"
     flog = log --oneline --decorate=full --graph
     log1 = log --oneline
     latest = log -1 --pretty=%B
-    as     = commit -a --amend --no-edit
-    pf     = push --force-with-lease
 [color]
     ui = auto
 [core]
