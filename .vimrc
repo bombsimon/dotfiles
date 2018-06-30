@@ -8,6 +8,8 @@ call plug#begin('~/.vim/bundle')
 
 Plug '~/git/fzf'
 
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'godlygeek/tabular'
@@ -88,6 +90,11 @@ let g:go_fmt_command = "goimports"
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#disable_auto_complete = 0
+
+" ale
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
 " Fix for deoplete in macOS
 if glob('/usr/local/bin/python2')
