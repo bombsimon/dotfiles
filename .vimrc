@@ -7,7 +7,7 @@ endif
 call plug#begin('~/.vim/bundle')
 
 Plug '~/git/fzf'
-
+Plug 'elmcast/elm-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'airblade/vim-gitgutter'
@@ -52,7 +52,7 @@ set pastetoggle=<F2>    " Enable paste toggle in insert mode
 set t_Co=256            " Enable 256 colors
 set background=dark     " Use dark background
 
-let mapleader=" "
+let mapleader="\<space>"
 
 " Only show cursor in active windows when using splits
 augroup CursorLineOnlyInActiveWindow
@@ -61,7 +61,7 @@ augroup CursorLineOnlyInActiveWindow
   autocmd WinLeave * setlocal nocursorline
 augroup END
 
-" Disable Arrow keys in Escape mode
+" Disable arrow keys in escape mode
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
@@ -74,7 +74,9 @@ command! E Files
 
 " Mapping
 nnoremap <F11> :tabprevious<CR>
+nnoremap <leader>p :tabprevious<CR>
 nnoremap <F12> :tabnext<CR>
+nnoremap <leader>n :tabnext<CR>
 nnoremap <F2> :set invpaste paste?<CR>
 
 cmap w!! w !sudo tee >/dev/null %
