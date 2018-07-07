@@ -78,6 +78,15 @@ nnoremap <leader>p :tabprevious<CR>
 nnoremap <F12> :tabnext<CR>
 nnoremap <leader>n :tabnext<CR>
 nnoremap <F2> :set invpaste paste?<CR>
+nnoremap <leader>tt :call TextwidthToggle()<CR>
+
+function! TextwidthToggle()
+  if &textwidth =~ '80'
+    set tw=0
+  else
+    set tw=80
+  endif
+endfunction
 
 cmap w!! w !sudo tee >/dev/null %
 
