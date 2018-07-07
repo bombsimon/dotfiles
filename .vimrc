@@ -1,10 +1,16 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if has('nvim')
+    let vimSource = '~/.local/share/nvim/plugged'
+else
+    let vimSource = '~/.vim/plugged'
+endif
+
+if empty(glob(vimSource))
+    silent !curl -fLo vimSource --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/bundle')
+call plug#begin(vimSource)
 
 Plug '~/git/fzf'
 Plug 'elmcast/elm-vim'
@@ -22,6 +28,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
+
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
@@ -80,13 +87,7 @@ nnoremap <leader>n :tabnext<CR>
 nnoremap <F2> :set invpaste paste?<CR>
 nnoremap <leader>tt :call TextwidthToggle()<CR>
 
-function! TextwidthToggle()
-  if &textwidth =~ '80'
-    set tw=0
-  else
-    set tw=80
-  endif
-endfunction
+inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
 
 cmap w!! w !sudo tee >/dev/null %
 
@@ -107,13 +108,22 @@ let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
+" rust.vim
+let g:rustfmt_autosave = 1
+
+" Functions
+function! TextwidthToggle()
+  if &textwidth =~ '80'
+    set tw=0
+  else
+    set tw=80
+  endif
+
+  echom "Textwidth set to " . &tw
+endfunction
+
 " Fix for deoplete in macOS
 if glob('/usr/local/bin/python2')
     let g:python3_host_prog='/usr/local/bin/python3'
     let g:python2_host_prog='/usr/local/bin/python2'
 endif
-
-inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
-
-" rust.vim
-let g:rustfmt_autosave = 1
