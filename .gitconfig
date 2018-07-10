@@ -16,7 +16,7 @@
     ui = auto
 [core]
     pager = less -R
-    editor = vim
+    editor = nvim
     excludesfile = ~/.gitignore_global
 [push]
     default = tracking
