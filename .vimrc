@@ -1,16 +1,15 @@
 if has('nvim')
-    let vimSource = '~/.local/share/nvim/plugged'
+    let g:vimSource = '~/.local/share/nvim/plugged'
 else
-    let vimSource = '~/.vim/plugged'
+    let g:vimSource = '~/.vim/plugged'
 endif
 
-if empty(glob(vimSource))
-    silent !curl -fLo vimSource --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob(g:vimSource))
+    silent exec "!curl -fLo " . g:vimSource . "--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin(vimSource)
+call plug#begin(g:vimSource)
 
 Plug '~/git/fzf'
 Plug 'elmcast/elm-vim'
@@ -35,7 +34,7 @@ endif
 
 call plug#end()
 
-colorscheme gruvbox
+silent! colorscheme gruvbox
 filetype plugin indent on
 syntax on               " Needed for mac OS
 
