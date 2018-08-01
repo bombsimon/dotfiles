@@ -1,9 +1,7 @@
 # Source perlbrew if installed
-if [ -e "$HOME/perl5/perlbrew/etc/bashrc" ]; then
-    source "$HOME/perl5/perlbrew/etc/bashrc"
-fi
+[ -f "~/perl5/perlbrew/etc/bashrc" ] && source "~/perl5/perlbrew/etc/bashrc"
 
-# Get name of git branch
+# Get name of git branch, used in prompt
 function parse_git_branch {
     if [ ! "$(which git)" ]; then
         return
@@ -25,8 +23,8 @@ else
     alias lr="ls -lrth"
 fi
 
-alias vi='nvim'
-alias vim='nvim'
+alias vi="nvim"
+alias vim="nvim"
 
 export PS1='\[\e[32m\]\u\[\e[m\]@\[\e[34m\]\h\[\e[m\] (\[\e[31m\]\W\[\e[m\]) \[\e[33m\]`parse_git_branch`\[\e[m\]$ '
 
@@ -35,20 +33,20 @@ export HISTSIZE=1000
 export HISTFILESIZE=2000
 
 export LESS="-+F"
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 export GOROOT="/usr/local/go"
-export GOPATH="$HOME/go"
+export GOPATH="~/go"
 
-export GEM_PATH="${HOME}/.rvm/gems/ruby-2.4.0"
+export GEM_PATH="~/.rvm/gems/ruby-2.4.0"
 
 unset MANPATH
 mpath="$(manpath)"
-export NPM_PACKAGES="${HOME}/.npm-packages"
+export NPM_PACKAGES="~/.npm-packages"
 export MANPATH="$NPM_PACKAGES/share/man:$mpath"
 
-export RIPGREP_CONFIG_PATH=~/.ripgreprc
+export RIPGREP_CONFIG_PATH="~/.ripgreprc"
 
 GOPATHS="$GOPATH/bin:$GOROOT/bin"
 PERLPATHS="~/perl5/perlbrew/bin"
@@ -60,7 +58,7 @@ RUSTPATHS="~/.cargo/bin"
 export PATH="$RUSTPATHS:$GOPATHS:$PERLPATHS:$RUBYPATHS:$NPMPATHS:$LOCALPATHS:$PATH"
 
 function rr {
-    if [ -f /var/run/reboot-required ]; then
+    if [ -f "/var/run/reboot-required" ]; then
         echo "Reboot required!!";
     else
         echo "No reboot needed";
