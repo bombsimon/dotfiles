@@ -11,14 +11,12 @@ endif
 
 call plug#begin(g:vimSource)
 
-Plug '~/git/fzf'
 Plug 'elmcast/elm-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'godlygeek/tabular'
-Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
 Plug 'mhinz/vim-signify'
 Plug 'rust-lang/rust.vim'
@@ -29,6 +27,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 
 if has('nvim')
+  Plug 'Shougo/denite.nvim'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 
@@ -54,6 +53,7 @@ set hlsearch            " Highlight serached text
 set modeline            " Enable modline
 set modelines=3         " Look at max 3 lines
 set laststatus=2        " Always show status bar
+set nojoinspaces        " Only one space when joining lines
 set pastetoggle=<F2>    " Enable paste toggle in insert mode
 set t_Co=256            " Enable 256 colors
 set background=dark     " Use dark background
@@ -89,6 +89,23 @@ nnoremap <leader>tt :call TextwidthToggle()<CR>
 inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
 
 cmap w!! w !sudo tee >/dev/null %
+
+" denite settings - use ripgrep for file/rec, and grep,
+" map <C-j/k> to down/up
+call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
+call denite#custom#var('grep', 'command', ['rg'])
+call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+
+nnoremap <C-f> :<C-u>Denite file_rec<CR>
+nnoremap <leader>b :<C-u>Denite buffer<CR>
+nnoremap <leader>f :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap <leader>F :<C-u>Denite grep:. -mode=normal<CR>
 
 " vim-airline settings
 let g:airline_theme='gruvbox'
