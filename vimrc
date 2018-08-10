@@ -25,18 +25,28 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
+Plug 'majutsushi/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 
 if has('nvim')
-  Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 
 call plug#end()
 
+" Set the schema for vim - silently if not yet installed
 silent! colorscheme gruvbox
-filetype plugin indent on
-syntax on               " Needed for mac OS
 
+" filetype detection:ON  plugin:ON  indent:ON
+filetype plugin indent on
+
+" Set omnifunc for autocomplete specifically for java files
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+syntax on               " Needed for mac OS
 set number              " Show line numbers
 set showcmd             " Show command
 set autoindent          " Auto indent
@@ -54,6 +64,8 @@ set modeline            " Enable modline
 set modelines=3         " Look at max 3 lines
 set laststatus=2        " Always show status bar
 set nojoinspaces        " Only one space when joining lines
+set autochdir           " Set working directory to current file
+set tags=tags;          " Set tags path
 set pastetoggle=<F2>    " Enable paste toggle in insert mode
 set t_Co=256            " Enable 256 colors
 set background=dark     " Use dark background
@@ -79,19 +91,41 @@ command! Wa wa
 command! E Files
 
 " Mapping
+" Jump between tabs
 nnoremap <F11> :tabprevious<CR>
 nnoremap <leader>p :tabprevious<CR>
 nnoremap <F12> :tabnext<CR>
 nnoremap <leader>n :tabnext<CR>
+
+" Enable paste toggle
 nnoremap <F2> :set invpaste paste?<CR>
+
+" Toggle text with to auto wrap text
 nnoremap <leader>tt :call TextwidthToggle()<CR>
 
+" Easier rezie
+nnoremap <C-h> :vertical resize -5<CR>
+nnoremap <C-l> :vertical resize +5<CR>
+nnoremap <C-j> :resize -5<CR>
+nnoremap <C-k> :resize +5<CR>
+
+" Fix to jump to tags since <C-]> is hard to reach on Swedish keyboards
+nnoremap <leader>gd :tag <C-R><C-W><CR>
+nnoremap <leader>ggd :ptag <C-R><C-W><CR>
+
+" Show autocomplete from deplete
 inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
 
+" Denite mappings for quick searches
+nnoremap <C-f> :<C-u>Denite file_rec<CR>
+nnoremap <leader>b :<C-u>Denite buffer<CR>
+nnoremap <leader>f :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap <leader>F :<C-u>Denite grep:. -mode=normal<CR>
+
+" Fix to save a file with sudo if permission is not sufficient
 cmap w!! w !sudo tee >/dev/null %
 
 " denite settings - use ripgrep for file/rec, and grep,
-" map <C-j/k> to down/up
 call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
 call denite#custom#var('grep', 'command', ['rg'])
 call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
@@ -102,10 +136,27 @@ call denite#custom#var('grep', 'final_opts', [])
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
 
-nnoremap <C-f> :<C-u>Denite file_rec<CR>
-nnoremap <leader>b :<C-u>Denite buffer<CR>
-nnoremap <leader>f :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-nnoremap <leader>F :<C-u>Denite grep:. -mode=normal<CR>
+" Defx
+autocmd FileType defx call s:defx_my_settings()
+function! s:defx_my_settings() abort
+  " Define mappings
+  nnoremap <silent><buffer><expr> <CR>
+  \ defx#do_action('open')
+  nnoremap <silent><buffer><expr> K
+  \ defx#do_action('new_directory')
+  nnoremap <silent><buffer><expr> N
+  \ defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> h
+  \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> ~
+  \ defx#do_action('cd')
+  nnoremap <silent><buffer><expr> <Space>
+  \ defx#do_action('toggle_select') . 'j'
+  nnoremap <silent><buffer><expr> j
+  \ line('.') == line('$') ? 'gg' : 'j'
+  nnoremap <silent><buffer><expr> k
+  \ line('.') == 1 ? 'G' : 'k'
+endfunction
 
 " vim-airline settings
 let g:airline_theme='gruvbox'
@@ -118,6 +169,11 @@ let g:go_fmt_command = "goimports"
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#disable_auto_complete = 0
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = []
+let g:deoplete#file#enable_buffer_path = 1
 
 " ale
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
