@@ -23,6 +23,7 @@ links: dirs
 	[ -f ~/.ripgreprc ]              || ln -s $(PWD)/ripgreprc ~/.ripgreprc
 	[ -f ~/.tmux.config ]            || ln -s $(PWD)/tmux.config ~/.tmux.config
 	[ -f ~/.tmux.config.local ]      || ln -s $(PWD)/tmux.config.local ~/.tmux.config.local
+	[ -f ~/.sqliterc                 || ln -s $(PWD)/sqliterc ~/.sqliterc
 	[ -f ~/.config/i3/config ]       || ln -s $(PWD)/i3/config ~/.config/i3/config
 	[ -f ~/.config/i3status/config ] || ln -s $(PWD)/i3/config ~/.config/i3status/config
 
@@ -38,6 +39,7 @@ clean:
 	rm -f ~/.ripgreprc
 	rm -f ~/.tmux.config
 	rm -f ~/.tmux.config.local
+	rm -f ~/.sqliterc
 	rm -f ~/.config/i3/config
 	rm -f ~/.config/i3status/config
 
