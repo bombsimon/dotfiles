@@ -21,11 +21,11 @@ links: dirs
 	[ -f ~/.gitconfig ]              || ln -s $(PWD)/gitconfig ~/.gitconfig
 	[ -f ~/.gitignore ]              || ln -s $(PWD)/gitignore ~/.gitignore
 	[ -f ~/.ripgreprc ]              || ln -s $(PWD)/ripgreprc ~/.ripgreprc
-	[ -f ~/.tmux.config ]            || ln -s $(PWD)/tmux.config ~/.tmux.config
-	[ -f ~/.tmux.config.local ]      || ln -s $(PWD)/tmux.config.local ~/.tmux.config.local
-	[ -f ~/.sqliterc                 || ln -s $(PWD)/sqliterc ~/.sqliterc
+	[ -f ~/.tmux.conf ]              || ln -s $(PWD)/tmux.conf ~/.tmux.conf
+	[ -f ~/.tmux.conf.local ]        || ln -s $(PWD)/tmux.conf.local ~/.tmux.conf.local
+	[ -f ~/.sqliterc ]               || ln -s $(PWD)/sqliterc ~/.sqliterc
 	[ -f ~/.config/i3/config ]       || ln -s $(PWD)/i3/config ~/.config/i3/config
-	[ -f ~/.config/i3status/config ] || ln -s $(PWD)/i3/config ~/.config/i3status/config
+	[ -f ~/.config/i3status/config ] || ln -s $(PWD)/i3status/config ~/.config/i3status/config
 
 source:
 	[ -f $(SOURCEFILE) ]        || touch $(SOURCEFILE)
