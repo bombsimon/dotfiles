@@ -15,7 +15,7 @@
 [color]
     ui = auto
 [core]
-    pager = less -R
+    pager = less -FRX
     editor = nvim
     excludesfile = ~/.gitignore
 [push]
