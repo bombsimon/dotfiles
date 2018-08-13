@@ -11,6 +11,9 @@ endif
 
 all: links source
 
+brew:
+	brew bundle
+
 dirs:
 	mkdir -p ~/.config/nvim
 	mkdir -p ~/.config/i3
@@ -43,6 +46,6 @@ clean:
 	rm -f ~/.config/i3/config
 	rm -f ~/.config/i3status/config
 
-.PHONY: all dirs links source clean
+.PHONY: all brew dirs links source clean
 
 # vim: set ts=4 sw=4 noexpandtab:
