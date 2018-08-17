@@ -27,6 +27,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
+Plug 'elixir-editors/vim-elixir'
 
 if has('ctags')
   Plug 'ludovicchabant/vim-gutentags'
@@ -129,7 +130,7 @@ nnoremap <leader>F :<C-u>Denite grep:. -mode=normal<CR>
 cmap w!! w !sudo tee >/dev/null %
 
 " denite settings - use ripgrep for file/rec, and grep,
-if exists('*denite#custom#var')
+" if exists('*denite#custom#var')
   call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
   call denite#custom#var('grep', 'command', ['rg'])
   call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
@@ -139,7 +140,7 @@ if exists('*denite#custom#var')
   call denite#custom#var('grep', 'final_opts', [])
   call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
   call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
-endif
+" endif
 
 " Defx
 autocmd FileType defx call s:defx_my_settings()
