@@ -35,7 +35,7 @@ mpath="$(manpath)"
 export NPM_PACKAGES="$HOME/npm-packages"
 export MANPATH="$NPM_PACKAGES/share/man:$mpath"
 
-export RIPGREP_CONFIG_PATH="$HOME/ripgreprc"
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 GOPATHS="$GOPATH/bin:$GOROOT/bin"
 PERLPATHS="$HOME/perl5/perlbrew/bin"
@@ -114,6 +114,14 @@ function bash_prompt {
     # extra backslash in front of \$ to make bash colorize the prompt
 
     PS1="${AC}→ ${R}\\W${Y}$(parse_git_branch)${NONE} "
+}
+
+function weather {
+    if perldoc -l ojo > /dev/null 2>&1; then
+        perl -Mojo -E 'binmode(STDOUT, "encoding(UTF-8)"); say g("http://wttr.in/stockholm?T")->dom->at("pre")->text'
+    else
+        echo "Cannot fetch weather, install ojo (Mojolicious)"
+    fi
 }
 
 PROMPT_COMMAND=bash_prompt
