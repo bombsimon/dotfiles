@@ -70,6 +70,7 @@ set laststatus=2        " Always show status bar
 set nojoinspaces        " Only one space when joining lines
 set autochdir           " Set working directory to current file
 set tags=tags;          " Set tags path
+set clipboard=unnamed   " 
 set pastetoggle=<F2>    " Enable paste toggle in insert mode
 set t_Co=256            " Enable 256 colors
 set background=dark     " Use dark background
