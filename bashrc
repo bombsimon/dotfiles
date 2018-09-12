@@ -1,6 +1,9 @@
 # Source perlbrew if installed
 [ -f "$HOME/perl5/perlbrew/etc/bashrc" ] && source "$HOME/perl5/perlbrew/etc/bashrc"
 
+# Source bashcompletions
+[ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
+
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && (eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)")
     alias l="ls -lh --color=auto"

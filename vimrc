@@ -1,41 +1,43 @@
 if has('nvim')
-    let g:vimSource = '~/.local/share/nvim/plugged'
+    let g:vimSource   = '~/.local/share/nvim/plugged'
+    let g:vimDownload = '~/.local/share/nvim/site/autoload/plug.vim'
 else
-    let g:vimSource = '~/.vim/plugged'
+    let g:vimSource   = '~/.vim/plugged'
+    let g:vimDownload = '~/.vim/autoload/plug.vim'
 endif
 
-if empty(glob(g:vimSource))
-    silent exec "!curl -fLo " . g:vimSource . "--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+if empty(glob(g:vimDownload))
+  silent exec "!curl -fLo " . g:vimDownload . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin(g:vimSource)
 
-Plug 'elmcast/elm-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 Plug 'airblade/vim-gitgutter'
+Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
+Plug 'elixir-editors/vim-elixir'
+Plug 'elmcast/elm-vim'
 Plug 'fatih/vim-go'
 Plug 'godlygeek/tabular'
-Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
+Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
+Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
-Plug 'majutsushi/tagbar'
-Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
-Plug 'elixir-editors/vim-elixir'
 
-if has('ctags')
+if executable('ctags')
   Plug 'ludovicchabant/vim-gutentags'
 endif
 
 if has('nvim')
-  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 
