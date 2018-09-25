@@ -52,6 +52,10 @@ filetype plugin indent on
 " Set omnifunc for autocomplete specifically for java files
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
+" Syntax
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufRead,BufNewFile *.make set filetype=make
+
 syntax on               " Needed for mac OS
 set number              " Show line numbers
 set showcmd             " Show command
@@ -72,10 +76,14 @@ set laststatus=2        " Always show status bar
 set nojoinspaces        " Only one space when joining lines
 set autochdir           " Set working directory to current file
 set tags=tags;          " Set tags path
-set clipboard=unnamed   " 
 set pastetoggle=<F2>    " Enable paste toggle in insert mode
 set t_Co=256            " Enable 256 colors
 set background=dark     " Use dark background
+
+" This will not work nice with macOS since I only access one register
+if !has('macunix')
+  set clipboard=unnamed " Set vim clipboard to to X clipboard
+endif
 
 let mapleader="\<space>"
 
