@@ -4,6 +4,7 @@
 # Source bashcompletions
 [ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
 
+# If dircolors can be executed, add color option
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && (eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)")
     alias l="ls -lh --color=auto"
@@ -16,6 +17,10 @@ else
     alias l="ls -lh"
     alias lr="ls -lrth"
 fi
+
+# Try to use colors no matter what
+export CLICOLOR=1;
+export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
 
 alias vi="nvim"
 alias vim="nvim"

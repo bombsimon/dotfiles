@@ -11,9 +11,6 @@ endif
 
 all: links source
 
-brew:
-	brew bundle
-
 dirs:
 	mkdir -p ~/.config/nvim
 	mkdir -p ~/.config/i3
@@ -29,6 +26,10 @@ links: dirs
 	[ -f ~/.config/i3status/config ] || ln -s $(PWD)/i3status/config ~/.config/i3status/config
 	[ -f ~/.tmux.conf ]              || ln -s $(PWD)/gpakosz.tmux/.tmux.conf ~/.tmux.conf
 	[ -f ~/.tmux.conf.local ]        || cp $(PWD)/gpakosz.tmux/.tmux.conf.local ~/.tmux.conf.local && cat $(PWD)/tmux.conf.local >> ~/.tmux.conf.local
+
+mac:
+	xcode-select --install
+	brew bundle
 
 source:
 	[ -f $(SOURCEFILE) ]        || touch $(SOURCEFILE)
@@ -46,6 +47,6 @@ clean:
 	rm -f ~/.config/i3/config
 	rm -f ~/.config/i3status/config
 
-.PHONY: all brew dirs links source clean
+.PHONY: all dirs links mac source clean
 
 # vim: set ts=4 sw=4 noexpandtab:
