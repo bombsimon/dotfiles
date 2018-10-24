@@ -15,16 +15,16 @@ call plug#begin(g:vimSource)
 
 Plug 'airblade/vim-gitgutter'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
-Plug 'elixir-editors/vim-elixir'
-Plug 'elmcast/elm-vim'
-Plug 'fatih/vim-go'
+Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
+Plug 'elmcast/elm-vim', { 'for': ['elm'] }
+Plug 'fatih/vim-go', { 'for': ['go'] }
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'rust-lang/rust.vim'
+Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
+Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
@@ -39,6 +39,7 @@ if has('nvim')
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
 endif
 
 call plug#end()
@@ -79,6 +80,7 @@ set tags=tags;          " Set tags path
 set pastetoggle=<F2>    " Enable paste toggle in insert mode
 set t_Co=256            " Enable 256 colors
 set background=dark     " Use dark background
+set termguicolors       " Use real colors from colorscheme
 
 " This will not work nice with macOS since I only access one register
 if !has('macunix')
@@ -87,11 +89,11 @@ endif
 
 let mapleader="\<space>"
 
-" Only show cursor in active windows when using splits
+" Only show cursor and colorcolumn in active windows when using splits
 augroup CursorLineOnlyInActiveWindow
   autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline colorcolumn=80
+  autocmd WinLeave * setlocal nocursorline colorcolumn=
 augroup END
 
 " Disable arrow keys in escape mode
@@ -129,7 +131,7 @@ nnoremap <leader>gd :tag <C-R><C-W><CR>
 nnoremap <leader>ggd :ptag <C-R><C-W><CR>
 
 " Show autocomplete from deplete
-inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
+inoremap <silent><expr><C-E> deoplete#mappings#manual_complete()
 
 " Denite mappings for quick searches
 nnoremap <C-f> :<C-u>Denite file_rec<CR>
@@ -185,12 +187,9 @@ let g:go_fmt_command = "goimports"
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 0
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
-let g:deoplete#sources = {}
-let g:deoplete#sources._ = []
-let g:deoplete#file#enable_buffer_path = 1
+call deoplete#custom#option({
+\   'min_pattern_length': 2,
+\})
 
 " ale
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
