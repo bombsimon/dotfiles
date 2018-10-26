@@ -1,5 +1,6 @@
 VIMFILE    ?= ~/.config/nvim/init.vim
 SOURCEFILE ?= ~/.bashrc
+BASH_COMP  ?= /etc/bash_completion
 
 ifeq ($(shell which nvim),)
     VIMFILE = ~/.vimrc
@@ -7,7 +8,10 @@ endif
 
 ifeq ($(shell uname -s),Darwin)
     SOURCEFILE = ~/.profile
+    BASH_COMP  = $(shell brew --prefix)/etc/bash_completion
 endif
+
+BASH_COMP_D ?= $(BASH_COMP).d/
 
 all: links source
 
@@ -30,10 +34,14 @@ links: dirs
 mac:
 	xcode-select --install
 	brew bundle
+	sudo curl -sL https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o $(BASH_COMP_D)/docker
+	sudo curl -sL https://raw.githubusercontent.com/docker/compose/1.22.0/contrib/completion/bash/docker-compose -o $(BASH_COMP_D)/docker-compose
+	sudo curl -L https://raw.githubusercontent.com/docker/machine/v0.14.0/contrib/completion/bash/docker-machine.bash -o $(BASH_COMP_D)/docker-machine
 
 source:
-	[ -f $(SOURCEFILE) ]        || touch $(SOURCEFILE)
-	grep dotfiles $(SOURCEFILE) || echo "[ -f ~/git/dotfiles/bashrc ] && source ~/git/dotfiles/bashrc" >> $(SOURCEFILE)
+	[ -f $(SOURCEFILE) ]            || touch $(SOURCEFILE)
+	grep dotfiles $(SOURCEFILE)     || echo "[ -f $(HOME)/git/dotfiles/bashrc ] && . $(HOME)/git/dotfiles/bashrc" >> $(SOURCEFILE)
+	grep $(BASH_COMP) $(SOURCEFILE) || echo "[ -f $(BASH_COMP) ] && . $(BASH_COMP)" >> $(SOURCEFILE)
 
 clean:
 	rm -f ~/.vimrc
