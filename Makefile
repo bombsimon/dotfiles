@@ -1,6 +1,6 @@
-VIMFILE    ?= ~/.config/nvim/init.vim
-SOURCEFILE ?= ~/.bashrc
-BASH_COMP  ?= /etc/bash_completion
+VIMFILE                ?= ~/.config/nvim/init.vim
+SOURCEFILE             ?= ~/.bashrc
+BASH_COMP              ?= /etc/bash_completion
 
 ifeq ($(shell which nvim),)
     VIMFILE = ~/.vimrc
@@ -12,8 +12,8 @@ ifeq ($(shell uname -s),Darwin)
 endif
 
 BASH_COMP_D ?= $(BASH_COMP).d/
-
-all: links source
+COMPLETE_DOCKER_COMPOSE = "1.22.0"
+COMPLETE_DOCKER_MACHINE = "v0.14.0"
 
 dirs:
 	mkdir -p ~/.config/nvim
@@ -27,17 +27,17 @@ links: dirs
 	[ -f ~/.ripgreprc ]              || ln -s $(PWD)/ripgreprc ~/.ripgreprc
 	[ -f ~/.sqliterc ]               || ln -s $(PWD)/sqliterc ~/.sqliterc
 	[ -f ~/.my.cnf ]                 || ln -s $(PWD)/my.cnf ~/.my.cnf
-	[ -f ~/.config/i3/config ]       || ln -s $(PWD)/i3/config ~/.config/i3/config
-	[ -f ~/.config/i3status/config ] || ln -s $(PWD)/i3status/config ~/.config/i3status/config
 	[ -f ~/.tmux.conf ]              || ln -s $(PWD)/gpakosz.tmux/.tmux.conf ~/.tmux.conf
 	[ -f ~/.tmux.conf.local ]        || cp $(PWD)/gpakosz.tmux/.tmux.conf.local ~/.tmux.conf.local && cat $(PWD)/tmux.conf.local >> ~/.tmux.conf.local
+	[ -f ~/.config/i3/config ]       || ln -s $(PWD)/i3/config ~/.config/i3/config
+	[ -f ~/.config/i3status/config ] || ln -s $(PWD)/i3status/config ~/.config/i3status/config
 
 mac:
 	xcode-select --install
 	brew bundle
 	sudo curl -sL https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o $(BASH_COMP_D)/docker
-	sudo curl -sL https://raw.githubusercontent.com/docker/compose/1.22.0/contrib/completion/bash/docker-compose -o $(BASH_COMP_D)/docker-compose
-	sudo curl -L https://raw.githubusercontent.com/docker/machine/v0.14.0/contrib/completion/bash/docker-machine.bash -o $(BASH_COMP_D)/docker-machine
+	sudo curl -sL https://raw.githubusercontent.com/docker/compose/$(COMPLETE_DOCKER_COMPOSE)/contrib/completion/bash/docker-compose -o $(BASH_COMP_D)/docker-compose
+	sudo curl -sL https://raw.githubusercontent.com/docker/machine/$(COMPLETE_DOCKER_MACHINE)/contrib/completion/bash/docker-machine.bash -o $(BASH_COMP_D)/docker-machine
 
 source:
 	[ -f $(SOURCEFILE) ]            || touch $(SOURCEFILE)
@@ -56,6 +56,6 @@ clean:
 	rm -f ~/.config/i3/config
 	rm -f ~/.config/i3status/config
 
-.PHONY: all dirs links mac source clean
+.PHONY: all dirs  links mac source clean
 
 # vim: set ts=4 sw=4 noexpandtab:

@@ -22,3 +22,5 @@
     default = tracking
 [pager]
     branch = false
+
+# vim: set ft=gitconfig:

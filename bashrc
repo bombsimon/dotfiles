@@ -1,27 +1,17 @@
 # Source perlbrew if installed
-[ -f "$HOME/perl5/perlbrew/etc/bashrc" ] && source "$HOME/perl5/perlbrew/etc/bashrc"
+[ -f "$HOME/perl5/perlbrew/etc/bashrc" ] && . "$HOME/perl5/perlbrew/etc/bashrc"
 
-# Source bashcompletions
-[ -f /usr/local/etc/bash_completion ] && source /usr/local/etc/bash_completion
-
-# If dircolors can be executed, add color option
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && (eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)")
-    alias l="ls -lh --color=auto"
-    alias ls="ls --color=auto"
-    alias lr="ls -lrth --color=auto"
-    alias grep="grep --color=auto"
-    alias fgrep="fgrep --color=auto"
-    alias egrep="egrep --color=auto"
-else
-    alias l="ls -lh"
-    alias lr="ls -lrth"
-fi
+# Source bash completions
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+[ -f /etc/bash_completion ]           && . /etc/bash_completion
 
 # Try to use colors no matter what
 export CLICOLOR=1;
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
+export LS_OPTIONS='--color=auto'
 
+alias l="ls -lh"
+alias lr="ls -lrth"
 alias vi="nvim"
 alias vim="nvim"
 
