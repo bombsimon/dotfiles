@@ -182,19 +182,39 @@ let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1 " Prepatched fonts: https://github.com/powerline/fonts.git
 let g:airline#extensions#tabline#enabled = 1
 
-" vim-go
+" Go
+let g:go_gocode_unimported_packages = 1
+let g:go_gocode_propose_source = 0
 let g:go_fmt_command = "goimports"
+
+" vim-go
+let g:go_fmt_autosave = 0
+let g:go_metalinter_autosave = 0
+
+" ale
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+let g:ale_fix_on_save = 1
+let g:ale_go_golangci_lint_package = 1
+let g:ale_go_golangci_lint_options = '--fast'
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'go': ['goimports', 'gofmt'],
+\}
+
+let g:ale_linters = {
+\   'go': ['golangci-lint', 'golint'],
+\}
+
+let g:ale_go_gofmt_options = '-s'
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
 \   'min_pattern_length': 2,
 \})
-
-" ale
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
 " rust.vim
 let g:rustfmt_autosave = 1
