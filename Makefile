@@ -26,6 +26,7 @@ links: dirs
 	[ -f ~/.gitignore ]              || ln -s $(PWD)/gitignore ~/.gitignore
 	[ -f ~/.ripgreprc ]              || ln -s $(PWD)/ripgreprc ~/.ripgreprc
 	[ -f ~/.sqliterc ]               || ln -s $(PWD)/sqliterc ~/.sqliterc
+	[ -f ~/.my.cnf ]                 || ln -s $(PWD)/my.cnf ~/.my.cnf
 	[ -f ~/.config/i3/config ]       || ln -s $(PWD)/i3/config ~/.config/i3/config
 	[ -f ~/.config/i3status/config ] || ln -s $(PWD)/i3status/config ~/.config/i3status/config
 	[ -f ~/.tmux.conf ]              || ln -s $(PWD)/gpakosz.tmux/.tmux.conf ~/.tmux.conf
