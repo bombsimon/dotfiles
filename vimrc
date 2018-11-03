@@ -139,6 +139,9 @@ nnoremap <leader>b :<C-u>Denite buffer<CR>
 nnoremap <leader>f :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
 nnoremap <leader>F :<C-u>Denite grep:. -mode=normal<CR>
 
+" Tagbar toggle
+nnoremap <leader>t :TagbarToggle<CR>
+
 " denite
 " use ripgrep for file/rec, and grep,
 if exists('*denite#custom#var')
@@ -158,6 +161,8 @@ autocmd FileType defx call s:defx_my_settings()
 nnoremap <leader>. :Defx -split=vertical -winwidth=30 -direction=topleft -toggle<CR>
 
 function! s:defx_my_settings() abort
+  set nonumber
+
   " Define mappings
   nnoremap <silent><buffer><expr> <CR>    defx#do_action('drop')
   nnoremap <silent><buffer><expr> c       defx#do_action('copy')
@@ -235,3 +240,5 @@ if glob('/usr/local/bin/python2')
     let g:python3_host_prog='/usr/local/bin/python3'
     let g:python2_host_prog='/usr/local/bin/python2'
 endif
+
+" vim: set ts=2 sw=2 et:
