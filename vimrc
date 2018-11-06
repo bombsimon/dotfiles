@@ -222,13 +222,14 @@ let g:ale_go_gofmt_options = '-s'
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'go': ['goimports', 'gofmt'],
-\   'perl': ['perlcritic'],
+\   'perl': ['perltidy'],
 \   'json': ['jq'],
 \}
 
 let g:ale_linters = {
 \   'go': ['golangci-lint', 'golint'],
 \   'javascript': ['eslint'],
+\   'perl': ['perlcritic'],
 \   'python': ['pylint'],
 \}
 
