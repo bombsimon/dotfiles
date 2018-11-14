@@ -13,6 +13,7 @@ endif
 
 call plug#begin(g:vimSource)
 
+Plug 'Einenlum/yaml-revealer', { 'for': ['yaml'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
@@ -216,7 +217,7 @@ let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 let g:ale_fix_on_save = 1
 let g:ale_go_golangci_lint_package = 1
-let g:ale_go_golangci_lint_options = '--fast'
+let g:ale_go_golangci_lint_options = '--fast --config ~/.golangci.yml'
 let g:ale_go_gofmt_options = '-s'
 
 let g:ale_fixers = {
