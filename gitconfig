@@ -12,6 +12,9 @@
     flog = log --oneline --decorate=full --graph
     log1 = log --oneline
     latest = log -1 --pretty=%B
+    remote-info = "!for branch in $(git branch -r | egrep -v 'HEAD|develop|stage|master'); do \
+            git show --format=\"%<(25)%an %<(15)%ar %s %d\" $branch | head -1; \
+        done"
 [color]
     ui = auto
 [core]

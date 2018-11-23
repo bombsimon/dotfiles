@@ -13,7 +13,7 @@ endif
 
 call plug#begin(g:vimSource)
 
-Plug 'Einenlum/yaml-revealer', { 'for': ['yaml'] }
+" Plug 'Einenlum/yaml-revealer', { 'for': ['yaml'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
@@ -231,7 +231,7 @@ let g:ale_linters = {
 \   'go': ['golangci-lint', 'golint'],
 \   'javascript': ['eslint'],
 \   'perl': ['perlcritic'],
-\   'python': ['pylint'],
+\   'python': ['flake8', 'pylint'],
 \}
 
 " rust.vim
