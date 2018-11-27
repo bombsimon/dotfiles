@@ -54,9 +54,10 @@ filetype plugin indent on
 " Set omnifunc for autocomplete specifically for java files
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-" Syntax
+" Syntax and custom behaviour
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.make set filetype=make
+autocmd FileType yaml setl sw=2 sts=2 et
 
 syntax on            " Needed for mac OS
 set autochdir        " Set working directory to current file
@@ -236,11 +237,5 @@ let g:ale_linters = {
 
 " rust.vim
 let g:rustfmt_autosave = 1
-
-" Use brew location for python if macOS
-if glob('/usr/local/bin/python2')
-    let g:python3_host_prog='/usr/local/bin/python3'
-    let g:python2_host_prog='/usr/local/bin/python2'
-endif
 
 " vim: set ts=2 sw=2 et:
