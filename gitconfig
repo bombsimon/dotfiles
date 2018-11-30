@@ -21,6 +21,8 @@
     pager = less -R
     editor = nvim
     excludesfile = ~/.gitignore
+[fetch]
+    prune = true
 [push]
     default = tracking
 [pager]
