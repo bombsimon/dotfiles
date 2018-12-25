@@ -5,6 +5,9 @@
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [ -f /etc/bash_completion ]           && . /etc/bash_completion
 
+# Source RVM
+[ -f "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
+
 # Try to use colors no matter what
 export CLICOLOR=1;
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
@@ -26,8 +29,6 @@ export VISUAL="nvim"
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
 
-export GEM_PATH="$HOME/.rvm/gems/ruby-2.4.0"
-
 unset MANPATH
 mpath="$(manpath)"
 export NPM_PACKAGES="$HOME/npm-packages"
@@ -37,13 +38,13 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 GOPATHS="$GOPATH/bin:$GOROOT/bin"
 LOCALPATHS="$HOME/bin:/usr/local/bin"
-NPMPATHS="$NPM_PACKAGES/bin"
+NPMPATHS="$NPM_PACKAGES/bin:./node_modules/bin"
 PERLPATHS="$HOME/perl5/perlbrew/bin"
 PYTHONPATHS="/usr/local/opt/python/libexec/bin"
-RUBYPATHS="$HOME/rvm/bin"
-RUSTPATHS="$HOME/cargo/bin"
+RUBYPATHS="$HOME/.rvm/bin"
+RUSTPATHS="$HOME/.cargo/bin"
 
-export PATH="$PYTHONPATHS:$RUSTPATHS:$GOPATHS:$PERLPATHS:$RUBYPATHS:$NPMPATHS:$LOCALPATHS:$PATH"
+export PATH="$PATH:$PYTHONPATHS:$RUSTPATHS:$GOPATHS:$PERLPATHS:$RUBYPATHS:$NPMPATHS:$LOCALPATHS"
 
 function rr {
     if [ -f "/var/run/reboot-required" ]; then

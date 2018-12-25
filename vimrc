@@ -1,9 +1,9 @@
 if has('nvim')
-    let g:vimSource   = '~/.local/share/nvim/plugged'
-    let g:vimDownload = '~/.local/share/nvim/site/autoload/plug.vim'
+  let g:vimSource   = '~/.local/share/nvim/plugged'
+  let g:vimDownload = '~/.local/share/nvim/site/autoload/plug.vim'
 else
-    let g:vimSource   = '~/.vim/plugged'
-    let g:vimDownload = '~/.vim/autoload/plug.vim'
+  let g:vimSource   = '~/.vim/plugged'
+  let g:vimDownload = '~/.vim/autoload/plug.vim'
 endif
 
 if empty(glob(g:vimDownload))
@@ -59,7 +59,7 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.make set filetype=make
 autocmd FileType yaml setl sw=2 sts=2 et
 
-syntax on            " Needed for mac OS
+syntax on            " Enable syntax highlighting
 set autochdir        " Set working directory to current file
 set autoindent       " Auto indent
 set background=dark  " Use dark background
@@ -82,7 +82,7 @@ set showcmd          " Show command
 set t_Co=256         " Enable 256 colors
 set tabstop=4        " Tab stop 4
 set tags=tags;       " Set tags path
-set termguicolors    " Use real colors from colorscheme
+set termguicolors    " Use 'true color' in terminal
 
 " This will not work nice with macOS since I only access one register
 if !has('macunix')
@@ -137,6 +137,7 @@ inoremap <silent><expr><C-e> deoplete#mappings#manual_complete()
 
 " Denite mappings for quick searches
 nnoremap <C-f> :<C-u>Denite file_rec<CR>
+nnoremap <C-x> :<C-u>Denite file_rec:~<CR>
 nnoremap <leader>b :<C-u>Denite buffer<CR>
 nnoremap <leader>f :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
 nnoremap <leader>F :<C-u>Denite grep:. -mode=normal<CR>
@@ -154,8 +155,8 @@ if exists('*denite#custom#var')
   call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
   call denite#custom#var('grep', 'separator', ['--'])
   call denite#custom#var('grep', 'final_opts', [])
-  call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-  call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+  call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
 endif
 
 " defx
@@ -225,9 +226,11 @@ let g:ale_python_black_options = '--line-length 79'
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'go': ['goimports', 'gofmt'],
+\   'javascript': ['eslint'],
+\   'json': ['jq'],
 \   'perl': ['perltidy'],
 \   'python': ['black'],
-\   'json': ['jq'],
+\   'ruby': ['rubocop'],
 \}
 
 let g:ale_linters = {
@@ -239,5 +242,10 @@ let g:ale_linters = {
 
 " rust.vim
 let g:rustfmt_autosave = 1
+if has('macunix')
+  let g:rust_clip_command = 'pbcopy'
+else
+  let g:rust_clip_command = 'xclip -selection clipboard'
+endif
 
 " vim: set ts=2 sw=2 et:
