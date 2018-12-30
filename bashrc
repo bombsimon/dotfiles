@@ -55,9 +55,15 @@ function rr {
 }
 
 function container_ip {
-    CONTAINER="$1"
+    docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "$1"
+}
 
-    docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "$CONTAINER"
+function weather {
+    if perldoc -l ojo > /dev/null 2>&1; then
+        perl -Mojo -E 'binmode(STDOUT, "encoding(UTF-8)"); say g("http://wttr.in/stockholm?T")->dom->at("pre")->text'
+    else
+        echo "Cannot fetch weather, install ojo (Mojolicious)"
+    fi
 }
 
 function parse_git_branch {
@@ -114,14 +120,6 @@ function bash_prompt {
     # extra backslash in front of \$ to make bash colorize the prompt
 
     PS1="${AC}→ ${R}\\W${Y}$(parse_git_branch)${NONE} "
-}
-
-function weather {
-    if perldoc -l ojo > /dev/null 2>&1; then
-        perl -Mojo -E 'binmode(STDOUT, "encoding(UTF-8)"); say g("http://wttr.in/stockholm?T")->dom->at("pre")->text'
-    else
-        echo "Cannot fetch weather, install ojo (Mojolicious)"
-    fi
 }
 
 PROMPT_COMMAND=bash_prompt
