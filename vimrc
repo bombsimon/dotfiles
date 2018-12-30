@@ -13,7 +13,7 @@ endif
 
 call plug#begin(g:vimSource)
 
-" Plug 'Einenlum/yaml-revealer', { 'for': ['yaml'] }
+Plug 'dag/vim-fish', { 'for': ['fish'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
