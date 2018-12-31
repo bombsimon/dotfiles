@@ -11,10 +11,9 @@ alias lr    "ls -lrth"
 alias vi    "nvim"
 alias vim   "nvim"
 
-set -U LESS     "-+F"
-set -U EDITOR   nvim
-set -U VISUAL   nvim
-
+set -x EDITOR   nvim
+set -x VISUAL   nvim
+set -x LESS     "-+F"
 set -x GOROOT   /usr/local/go
 set -x GOPATH   $HOME/go
 
