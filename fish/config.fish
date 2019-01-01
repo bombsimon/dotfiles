@@ -6,24 +6,26 @@ end
 # Setup RVM - https://rvm.io/integration/fish
 rvm default
 
-alias l     "ls -lh"
-alias lr    "ls -lrth"
-alias vi    "nvim"
-alias vim   "nvim"
+alias l            "ls -lh"
+alias lr           "ls -lrth"
+alias vi           "nvim"
+alias vim          "nvim"
 
-set -x EDITOR   nvim
-set -x VISUAL   nvim
-set -x LESS     "-+F"
-set -x GOROOT   /usr/local/go
-set -x GOPATH   $HOME/go
+set -x LC_CTYPE     en_US.UTF-8
+set -x LC_ALL       en_US.UTF-8
+set -x EDITOR       nvim
+set -x VISUAL       nvim
+set -x LESS         -+F
+set -x GOROOT       /usr/local/go
+set -x GOPATH       $HOME/go
 
-set GOPATHS         "$GOPATH/bin:$GOROOT/bin"
-set LOCALPATHS      "$HOME/bin:/usr/local/bin"
-set NPMPATHS        "$NPM_PACKAGES/bin:./node_modules/bin"
-set PERLPATHS       "$HOME/perl5/perlbrew/bin"
-set PYTHONPATHS     "/usr/local/opt/python/libexec/bin"
-set RUBYPATHS       "$HOME/.rvm/bin"
-set RUSTPATHS       "$HOME/.cargo/bin"
+set GOPATHS         $GOPATH/bin:$GOROOT/bin
+set LOCALPATHS      $HOME/bin:/usr/local/bin
+set NPMPATHS        $NPM_PACKAGES/bin:./node_modules/bin
+set PERLPATHS       $HOME/perl5/perlbrew/bin
+set PYTHONPATHS     /usr/local/opt/python/libexec/bin
+set RUBYPATHS       $HOME/.rvm/bin
+set RUSTPATHS       $HOME/.cargo/bin
 
 set -x PATH $PATH $GOPATHS $LOCALPATHS $NPMPATHS $PERLPATHS $PYTHONPATHS $RUBYPATHS $RUSTPATHS
 
