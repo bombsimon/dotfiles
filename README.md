@@ -37,3 +37,5 @@ here (and also saved in `iterm/profiles.json`.
 
 The colors from the base16 theme is also used for tmux as seen in
 `tmux.conf.local`.
+
+![screenshot](https://raw.githubusercontent.com/bombsimon/dotfiles/master/img/screenshot01.png)
