@@ -13,9 +13,11 @@ endif
 
 call plug#begin(g:vimSource)
 
-Plug 'dag/vim-fish', { 'for': ['fish'] }
+Plug 'bombsimon/vim-golsp', { 'for': ['golsp'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
+Plug 'buoto/gotests-vim'
+Plug 'dag/vim-fish', { 'for': ['fish'] }
 Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
 Plug 'elmcast/elm-vim', { 'for': ['elm'] }
 Plug 'fatih/vim-go', { 'for': ['go'] }
@@ -41,6 +43,7 @@ if has('nvim')
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
+  Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 endif
 
 call plug#end()
@@ -60,6 +63,7 @@ autocmd BufRead,BufNewFile *.make set filetype=make
 autocmd FileType yaml setl sw=2 sts=2 et
 
 syntax on            " Enable syntax highlighting
+set shell=/bin/bash  " Always use bash as shell - fish makes startup slow!
 set autochdir        " Set working directory to current file
 set autoindent       " Auto indent
 set background=dark  " Use dark background
@@ -196,9 +200,15 @@ endfunction
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#go#source_importer = 0
+let g:deoplete#sources#go#unimported_packages = 1
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
 call deoplete#custom#option({
-\   'min_pattern_length': 2,
+\ 'auto_complete_delay': 20,
+\ 'smart_case': v:true,
+\ 'min_pattern_length': 2,
 \})
 
 " vim-airline
@@ -212,10 +222,18 @@ let g:go_gocode_propose_source = 0
 let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 0
 let g:go_metalinter_autosave = 0
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
 
 " ale
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
+let g:ale_sign_warning = '⚠'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 let g:ale_fix_on_save = 1
 let g:ale_go_golangci_lint_package = 1
