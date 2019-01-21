@@ -15,8 +15,9 @@ export LS_OPTIONS='--color=auto'
 
 alias l="ls -lh"
 alias lr="ls -lrth"
-alias vi="nvim"
-alias vim="nvim"
+[ "$(nvim -v)" ] && alias vi="nvim"
+[ "$(nvim -v)" ] && alias vim="nvim"
+[ "$(bat --version)" ] alias cat="bat"
 
 export HISTCONTROL="ignoreboth"
 export HISTSIZE=1000

@@ -10,6 +10,7 @@ alias l            "ls -lh"
 alias lr           "ls -lrth"
 alias vi           "nvim"
 alias vim          "nvim"
+alias cat          "bat"
 
 set -x LC_CTYPE     en_US.UTF-8
 set -x LC_ALL       en_US.UTF-8
@@ -27,7 +28,7 @@ set PYTHONPATHS     /usr/local/opt/python/libexec/bin
 set RUBYPATHS       $HOME/.rvm/bin
 set RUSTPATHS       $HOME/.cargo/bin
 
-set -x PATH $PATH $GOPATHS $LOCALPATHS $NPMPATHS $PERLPATHS $PYTHONPATHS $RUBYPATHS $RUSTPATHS
+set -x PATH $PYTHONPATHS $GOPATHS $LOCALPATHS $NPMPATHS $PERLPATHS $RUBYPATHS $RUSTPATHS $PATH
 
 function weather --description 'Show current weather'
     perldoc -l ojo > /dev/null 2>&1
