@@ -87,6 +87,7 @@ set t_Co=256         " Enable 256 colors
 set tabstop=4        " Tab stop 4
 set tags=tags;       " Set tags path
 set termguicolors    " Use 'true color' in terminal
+set textwidth=80     " Set textwidth to 80 for wrapping
 
 " This will not work nice with macOS since I only access one register
 if !has('macunix')

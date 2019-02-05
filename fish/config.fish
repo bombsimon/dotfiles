@@ -1,6 +1,6 @@
 # Source perlbrew if installed
 if test -e $HOME/perl5/perlbrew/etc/perlbrew.fish
-    . $HOME/perl5/perlbrew/etc/perlbrew.fish
+    source $HOME/perl5/perlbrew/etc/perlbrew.fish
 end
 
 # Setup RVM - https://rvm.io/integration/fish
@@ -10,7 +10,6 @@ alias l            "ls -lh"
 alias lr           "ls -lrth"
 alias vi           "nvim"
 alias vim          "nvim"
-alias cat          "bat"
 
 set -x LC_CTYPE     en_US.UTF-8
 set -x LC_ALL       en_US.UTF-8
@@ -41,4 +40,8 @@ end
 
 function container_ip --description 'Get IP for a docker container'
     docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "$argv"
+end
+
+if test -e $HOME/.config/fish/config.work.fish
+    source $HOME/.config/fish/config.work.fish
 end

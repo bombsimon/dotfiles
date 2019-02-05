@@ -7,7 +7,7 @@ function parse_git_branch
 
     if test -n "$git_status"
         echo (set_color $fish_git_dirty_color)"[$branch] "(set_color normal)
-  else
+    else
       echo (set_color $fish_git_not_dirty_color)"[$branch] "(set_color normal)
   end
 end

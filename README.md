@@ -23,9 +23,13 @@ cd ~/git/dotfiles && make all
 To auto run `tmux` and start the **same** session as always (default 'main'
 session) configure the terminal to auto run the following command in the shell
 when started:
-```
+
+```sh
 tmux new-session -A -s main
 ```
+
+When shell is changed (i.e `chsh -s /usr/local/bin/fish`), the tmux server must
+be restarted with `tmux kill-server` for changes to take effect.
 
 ### Color palette
 

@@ -17,7 +17,6 @@ alias l="ls -lh"
 alias lr="ls -lrth"
 [ "$(nvim -v)" ] && alias vi="nvim"
 [ "$(nvim -v)" ] && alias vim="nvim"
-[ "$(bat --version)" ] alias cat="bat"
 
 export HISTCONTROL="ignoreboth"
 export HISTSIZE=1000
