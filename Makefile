@@ -41,6 +41,8 @@ mac:
 	sudo curl -sL https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o $(BASH_COMP_D)/docker
 	sudo curl -sL https://raw.githubusercontent.com/docker/compose/$(COMPLETE_DOCKER_COMPOSE)/contrib/completion/bash/docker-compose -o $(BASH_COMP_D)/docker-compose
 	sudo curl -sL https://raw.githubusercontent.com/docker/machine/$(COMPLETE_DOCKER_MACHINE)/contrib/completion/bash/docker-machine.bash -o $(BASH_COMP_D)/docker-machine
+	defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
+	defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
 source:
 	[ -f $(SOURCEFILE) ]            || touch $(SOURCEFILE)

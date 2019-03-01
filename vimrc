@@ -16,13 +16,13 @@ call plug#begin(g:vimSource)
 Plug 'bombsimon/vim-golsp', { 'for': ['golsp'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
-Plug 'buoto/gotests-vim'
+Plug 'buoto/gotests-vim', { 'on': [ 'GoTests', 'GoTestsAll' ], 'for': ['go'] }
 Plug 'dag/vim-fish', { 'for': ['fish'] }
 Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
 Plug 'elmcast/elm-vim', { 'for': ['elm'] }
 Plug 'fatih/vim-go', { 'for': ['go'] }
-Plug 'godlygeek/tabular'
-Plug 'majutsushi/tagbar'
+Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
@@ -137,7 +137,7 @@ nnoremap <C-k> :resize +5<CR>
 nnoremap <leader>gd :tag <C-R><C-W><CR>
 nnoremap <leader>ggd :ptag <C-R><C-W><CR>
 
-" Show autocomplete from deplete
+" Show autocomplete from deplete, toggle deoplete
 inoremap <silent><expr><C-e> deoplete#mappings#manual_complete()
 
 " Denite mappings for quick searches
@@ -218,11 +218,11 @@ let g:airline_powerline_fonts = 1 " Prepatched fonts: https://github.com/powerli
 let g:airline#extensions#tabline#enabled = 1
 
 " vim-go
-let g:go_gocode_unimported_packages = 1
-let g:go_gocode_propose_source = 0
-let g:go_fmt_command = "goimports"
+let g:go_def_mode='godef'
 let g:go_fmt_autosave = 0
-let g:go_metalinter_autosave = 0
+let g:go_fmt_command = "goimports"
+let g:go_gocode_propose_source = 0
+let g:go_gocode_unimported_packages = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
@@ -231,16 +231,17 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
+let g:go_metalinter_autosave = 0
 
 " ale
+let g:ale_fix_on_save = 1
+let g:ale_go_gofmt_options = '-s'
+let g:ale_go_golangci_lint_options = '--fast --config ~/.golangci.yml'
+let g:ale_go_golangci_lint_package = 1
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+let g:ale_python_black_options = '--line-length 79'
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '⚠'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-let g:ale_fix_on_save = 1
-let g:ale_go_golangci_lint_package = 1
-let g:ale_go_golangci_lint_options = '--fast --config ~/.golangci.yml'
-let g:ale_go_gofmt_options = '-s'
-let g:ale_python_black_options = '--line-length 79'
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],

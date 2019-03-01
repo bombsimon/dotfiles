@@ -18,7 +18,7 @@
 [color]
     ui = auto
 [core]
-    pager = bat --pager=\"less -R\" --paging=always
+    pager = less -R
     editor = nvim
     excludesfile = ~/.gitignore
 [fetch]

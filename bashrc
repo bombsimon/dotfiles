@@ -5,9 +5,6 @@
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [ -f /etc/bash_completion ]           && . /etc/bash_completion
 
-# Source RVM
-[ -f "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
-
 # Try to use colors no matter what
 export CLICOLOR=1;
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
@@ -29,11 +26,6 @@ export VISUAL="nvim"
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
 
-unset MANPATH
-mpath="$(manpath)"
-export NPM_PACKAGES="$HOME/npm-packages"
-export MANPATH="$NPM_PACKAGES/share/man:$mpath"
-
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 GOPATHS="$GOPATH/bin:$GOROOT/bin"
@@ -44,7 +36,13 @@ PYTHONPATHS="/usr/local/opt/python/libexec/bin"
 RUBYPATHS="$HOME/.rvm/bin"
 RUSTPATHS="$HOME/.cargo/bin"
 
-export PATH="$PATH:$PYTHONPATHS:$RUSTPATHS:$GOPATHS:$PERLPATHS:$RUBYPATHS:$NPMPATHS:$LOCALPATHS"
+# Keg-only formulas refusin to link for macOS-provided software.
+BREWPATHS="/usr/local/opt/curl/bin"
+
+export PATH="$PYTHONPATHS:$RUSTPATHS:$GOPATHS:$PERLPATHS:$RUBYPATHS:$NPMPATHS:$LOCALPATHS:$BREWPATHS:$PATH"
+
+# Source RVM last to make it apper first in PATH
+[ -f "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
 
 function rr {
     if [ -f "/var/run/reboot-required" ]; then
