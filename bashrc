@@ -25,6 +25,7 @@ export VISUAL="nvim"
 
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
+export GO111MODULE="auto"
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 

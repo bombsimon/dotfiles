@@ -13,9 +13,9 @@ endif
 
 call plug#begin(g:vimSource)
 
-Plug 'bombsimon/vim-golsp', { 'for': ['golsp'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
+Plug 'bombsimon/vim-golsp', { 'for': ['golsp'] }
 Plug 'buoto/gotests-vim', { 'on': [ 'GoTests', 'GoTestsAll' ], 'for': ['go'] }
 Plug 'dag/vim-fish', { 'for': ['fish'] }
 Plug 'elixir-editors/vim-elixir', { 'for': ['elixir'] }
@@ -26,6 +26,7 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() } }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
 Plug 'tpope/vim-commentary'
@@ -41,8 +42,6 @@ endif
 if has('nvim')
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
   Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 endif
 
@@ -137,9 +136,6 @@ nnoremap <C-k> :resize +5<CR>
 nnoremap <leader>gd :tag <C-R><C-W><CR>
 nnoremap <leader>ggd :ptag <C-R><C-W><CR>
 
-" Show autocomplete from deplete, toggle deoplete
-inoremap <silent><expr><C-e> deoplete#mappings#manual_complete()
-
 " Denite mappings for quick searches
 nnoremap <C-f> :<C-u>Denite file_rec<CR>
 nnoremap <C-x> :<C-u>Denite file_rec:~<CR>
@@ -199,28 +195,19 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> k line('.') == 1 ? 'G' : 'k'
 endfunction
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#go#source_importer = 0
-let g:deoplete#sources#go#unimported_packages = 1
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-
-call deoplete#custom#option({
-\ 'auto_complete_delay': 20,
-\ 'smart_case': v:true,
-\ 'min_pattern_length': 2,
-\})
-
 " vim-airline
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1 " Prepatched fonts: https://github.com/powerline/fonts.git
 let g:airline#extensions#tabline#enabled = 1
 
+" vim-coc
+call coc#add_extension('coc-gocode', 'coc-json', 'coc-yaml', 'coc-rls')
+
 " vim-go
 let g:go_def_mode='godef'
 let g:go_fmt_autosave = 0
 let g:go_fmt_command = "goimports"
+let g:go_gocode_propose_source = 0
 let g:go_gocode_propose_source = 0
 let g:go_gocode_unimported_packages = 1
 let g:go_highlight_build_constraints = 1
