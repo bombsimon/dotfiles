@@ -23,6 +23,7 @@ Plug 'elmcast/elm-vim', { 'for': ['elm'] }
 Plug 'fatih/vim-go', { 'for': ['go'] }
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'mgedmin/python-imports.vim'
 Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
@@ -145,6 +146,9 @@ nnoremap <leader>F :<C-u>Denite grep:. -mode=normal<CR>
 
 " Tagbar toggle
 nnoremap <leader>t :TagbarToggle<CR>
+
+" import python module under cursor
+nnoremap <leader>i :ImportName<CR>
 
 " denite
 " use ripgrep for file/rec, and grep,
