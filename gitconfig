@@ -1,6 +1,7 @@
 [user]
     name = Simon Sawert
     email = simon@sawert.se
+	signingkey = 9FDB4E07D9DACC91
 [alias]
     co = checkout
     as = commit -a --amend --no-edit
@@ -29,5 +30,7 @@
     default = tracking
 [pager]
     branch = false
+[commit]
+    gpgsign = true
 
 # vim: set ft=gitconfig:

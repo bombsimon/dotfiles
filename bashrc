@@ -5,10 +5,16 @@
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [ -f /etc/bash_completion ]           && . /etc/bash_completion
 
+# Enable globstar for bash
+shopt -s globstar
+
 # Try to use colors no matter what
 export CLICOLOR=1;
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
 export LS_OPTIONS='--color=auto'
+
+# Support GPG signing
+export GPG_TTY=$(tty)
 
 alias l="ls -lh"
 alias lr="ls -lrth"
