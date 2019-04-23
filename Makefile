@@ -23,6 +23,7 @@ dirs:
 
 links: dirs
 	[ -f $(VIMFILE) ]                                || ln -s $(PWD)/vimrc $(VIMFILE)
+	[ -f ~/.ideavimrc ]                              || ln -s $(PWD)/ideavimrc ~/.ideavimrc
 	[ -f ~/.gitconfig ]                              || ln -s $(PWD)/gitconfig ~/.gitconfig
 	[ -f ~/.gitignore ]                              || ln -s $(PWD)/gitignore ~/.gitignore
 	[ -f ~/.ripgreprc ]                              || ln -s $(PWD)/ripgreprc ~/.ripgreprc
@@ -52,6 +53,7 @@ source:
 clean:
 	rm -f ~/.vimrc
 	rm -f ~/.config/nvim/init.vim
+	rm -f ~/.ideavimrc
 	rm -f ~/.gitconfig
 	rm -f ~/.gitignore
 	rm -f ~/.ripgreprc
