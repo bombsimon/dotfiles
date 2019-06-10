@@ -23,7 +23,6 @@ Plug 'elmcast/elm-vim', { 'for': ['elm'] }
 Plug 'fatih/vim-go', { 'for': ['go'] }
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'mgedmin/python-imports.vim'
 Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
 Plug 'mxw/vim-jsx', { 'for': ['javascript'] }
@@ -38,12 +37,6 @@ Plug 'w0rp/ale'
 
 if executable('ctags')
   Plug 'ludovicchabant/vim-gutentags'
-endif
-
-if has('nvim')
-  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 endif
 
 call plug#end()
@@ -205,7 +198,18 @@ let g:airline_powerline_fonts = 1 " Prepatched fonts: https://github.com/powerli
 let g:airline#extensions#tabline#enabled = 1
 
 " vim-coc
-call coc#add_extension('coc-gocode', 'coc-json', 'coc-yaml', 'coc-rls')
+call coc#add_extension('coc-gocode', 'coc-json', 'coc-yaml', 'coc-rls', 'coc-python')
+
+function s:setup_coc() abort
+  call coc#config('coc.preferences', {
+    \ 'diagnostic.displayByAle': 1,
+    \ 'diagnostic.triggerSignatureHelp': 0,
+    \ })
+endfunction
+
+if exists('g:did_coc_loaded')
+  call s:setup_coc()
+endif
 
 " vim-go
 let g:go_def_mode='godef'
