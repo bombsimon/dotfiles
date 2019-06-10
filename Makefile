@@ -24,6 +24,7 @@ dirs:
 links: dirs
 	[ -f $(VIMFILE) ]                                || ln -s $(PWD)/vimrc $(VIMFILE)
 	[ -f ~/.ideavimrc ]                              || ln -s $(PWD)/ideavimrc ~/.ideavimrc
+	[ -f ~/.golangci.yml ]                           || ln -s $(PWD)/golangci.yml ~/.golangci.yml
 	[ -f ~/.gitconfig ]                              || ln -s $(PWD)/gitconfig ~/.gitconfig
 	[ -f ~/.gitignore ]                              || ln -s $(PWD)/gitignore ~/.gitignore
 	[ -f ~/.ripgreprc ]                              || ln -s $(PWD)/ripgreprc ~/.ripgreprc
