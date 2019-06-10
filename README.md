@@ -16,6 +16,36 @@ git clone git@github.com:bombsimon/dotfiles.git ~/git/dotfiles
 cd ~/git/dotfiles && make all
 ```
 
+## Prerequisites
+
+Most of the things used is setup with Brew, however the configuration should
+also work under other Linux. The setup for
+[`coc.vim`](https://github.com/neoclide/coc.nvim) is the one which is most
+special so remmber to read the installation notes. All required Python
+dependencies can be installed by running `pip install --upgrade -r
+requirements.txt`
+
+### vim/neovim
+
+As seen in [`vimrc`](vimrc) there are a few fixers and linters applied. For
+other things such as auto installing
+[vim-plug](https://github.com/junegunn/vim-plug) toos like
+[curl](https://curl.haxx.se/) is required. The list below shows all dependencies
+used.
+
+* [Black](https://github.com/python/black)
+* [ctags](https://ctags.io/)
+* [curl](https://curl.haxx.se/)
+* [eslint](https://eslint.org/)
+* [flake8](http://flake8.pycqa.org/en/latest/)
+* [golangci-lint](https://github.com/golangci/golangci-lint)
+* [jq](https://stedolan.github.io/jq/)
+* [nodejs](https://nodejs.org/en/)
+* [perltidy](https://metacpan.org/pod/perltidy)
+* [pylint](https://www.pylint.org/)
+* [rubocop](https://github.com/rubocop-hq/rubocop)
+* [yarn](https://yarnpkg.com/en/)
+
 ## Other configuration
 
 ### tmux
