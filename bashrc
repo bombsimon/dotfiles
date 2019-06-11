@@ -113,6 +113,9 @@ function bash_prompt {
     local BGC="\[\033[46m\]"
     local BGW="\[\033[47m\]"
 
+    # Prompt prefix
+    local PP="${PROMPT_PREFIX:-}"
+
     # Arrow color
     local AC=$EMY
     [ "${EXITSTATUS}" -ne 0 ] && AC=$EMR
@@ -124,7 +127,7 @@ function bash_prompt {
     # Without colors: PS1="[\u@\h \${NEW_PWD}]\\$ "
     # extra backslash in front of \$ to make bash colorize the prompt
 
-    PS1="${AC}→ ${R}\\W${Y}$(parse_git_branch)${NONE} "
+    PS1="${PP}${AC}→ ${R}\\W${Y}$(parse_git_branch)${NONE} "
 }
 
 PROMPT_COMMAND=bash_prompt
