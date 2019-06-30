@@ -36,3 +36,6 @@ set-option -g mouse off
 
 bind-key -n C-S-Left swap-window -t -1
 bind-key -n C-S-Right swap-window -t +1
+
+# Let tmux know we support true colors
+set-option -sa terminal-overrides ",xterm*:Tc"
