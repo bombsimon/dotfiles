@@ -1,0 +1,43 @@
+# Wrapping
+-l=111                           # Max line width
+
+# Comments
+--fixed-position-side-comment=32
+--indent-block-comments
+--minimum-space-to-comment=1
+
+# Indentation
+-ci=2                           # Continuation indent
+-cti=0                          # No extra indentation for closing brackets
+-i=2                            # Indent level
+-nolc                           # Don't outdent long comments
+
+# Line breaks
+--block-brace-vertical-tightness=0
+--break-before-all-operators
+--comma-arrow-breakpoints=0
+--opening-brace-always-on-right
+--vertical-tightness-closing=0
+--vertical-tightness=0
+-nbl                            # Opening brace on same line
+-ole=unix                       # Unix line-endings
+
+# Blank lines
+--noblanks-before-comments
+--blank-lines-before-packages=1
+--blank-lines-before-subs=1
+--maximum-consecutive-blank-lines=1
+
+# Horizontal space
+--block-brace-tightness=0
+--brace-tightness=1
+--nospace-for-semicolon
+--nospace-terminal-semicolon
+--paren-tightness=0
+--square-bracket-tightness=1
+--tight-secret-operators
+--trim-pod
+
+# Misc.
+--add-semicolons
+--add-whitespace
