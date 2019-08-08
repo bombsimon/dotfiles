@@ -7,10 +7,10 @@
 --minimum-space-to-comment=1
 
 # Indentation
--ci=2                           # Continuation indent
--cti=0                          # No extra indentation for closing brackets
--i=2                            # Indent level
--nolc                           # Don't outdent long comments
+--continuation-indentation=2
+--closing-token-indentation=0
+--indent-columns=4
+--nooutdent-long-comments
 
 # Line breaks
 --block-brace-vertical-tightness=0
@@ -41,3 +41,5 @@
 # Misc.
 --add-semicolons
 --add-whitespace
+--check-syntax
+--nocuddled-else

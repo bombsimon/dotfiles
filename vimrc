@@ -198,7 +198,13 @@ let g:airline_powerline_fonts = 1 " Prepatched fonts: https://github.com/powerli
 let g:airline#extensions#tabline#enabled = 1
 
 " vim-coc
-call coc#add_extension('coc-gocode', 'coc-json', 'coc-yaml', 'coc-rls', 'coc-python')
+call coc#add_extension(
+  \ 'coc-gocode',
+  \ 'coc-json',
+  \ 'coc-yaml',
+  \ 'coc-rls',
+  \ 'coc-python'
+\ )
 
 function s:setup_coc() abort
   call coc#config('coc.preferences', {
@@ -230,18 +236,24 @@ let g:go_metalinter_autosave = 0
 
 " ale
 let g:ale_fix_on_save = 1
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '⚠'
+
 let g:ale_go_gofmt_options = '-s'
 let g:ale_go_golangci_lint_options = '--fast --config ~/.golangci.yml'
 let g:ale_go_golangci_lint_package = 1
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+
 let g:ale_python_black_options = '--line-length 79'
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '⚠'
+" Configure flake8 according to black recommendation.
+" https://github.com/PyCQA/flake8-bugbear#opinionated-warnings
+" https://github.com/psf/black/blob/master/.flake8
+let g:ale_python_flake8_options = '--ignore="E203,E266,E501,W503"'
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'go': ['goimports', 'gofmt'],
-\   'javascript': ['eslint'],
+\   'javascript': ['prettier', 'eslint'],
 \   'json': ['jq'],
 \   'perl': ['perltidy'],
 \   'python': ['black'],
