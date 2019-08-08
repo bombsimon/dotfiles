@@ -32,6 +32,7 @@ links: dirs
 	[ -f ~/.my.cnf ]                                 || ln -s $(PWD)/my.cnf ~/.my.cnf
 	[ -f ~/.tmux.conf ]                              || ln -s $(PWD)/gpakosz.tmux/.tmux.conf ~/.tmux.conf
 	[ -f ~/.tmux.conf.local ]                        || cp $(PWD)/gpakosz.tmux/.tmux.conf.local ~/.tmux.conf.local && cat $(PWD)/tmux.conf.local >> ~/.tmux.conf.local
+	[ -f ~/.config/nvim/coc-settings.json ]          || ln -s $(PWD)/coc-settings.json ~/.config/nvim/coc-settings.json
 	[ -f ~/.config/i3/config ]                       || ln -s $(PWD)/i3/config ~/.config/i3/config
 	[ -f ~/.config/i3status/config ]                 || ln -s $(PWD)/i3status/config ~/.config/i3status/config
 	[ -f ~/.config/fish/config.fish ]                || ln -s $(PWD)/fish/config.fish ~/.config/fish/config.fish
@@ -61,6 +62,7 @@ clean:
 	rm -f ~/.tmux.conf
 	rm -f ~/.tmux.conf.local
 	rm -f ~/.sqliterc
+	rm -f ~/.config/nvim/coc-settings.json
 	rm -f ~/.config/i3/config
 	rm -f ~/.config/i3status/config
 	rm -f ~/.config/fish/config.fish
