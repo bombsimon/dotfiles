@@ -6,7 +6,7 @@
 [ -f /etc/bash_completion ]           && . /etc/bash_completion
 
 # Enable globstar for bash (if supported)
-[ $(shopt | grep globstar) ] && shopt -s globstar
+[ "$(shopt | grep globstar)" ] && shopt -s globstar
 
 # Try to use colors no matter what
 export CLICOLOR=1;
