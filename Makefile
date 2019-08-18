@@ -1,73 +1,75 @@
-VIMFILE                ?= ~/.config/nvim/init.vim
+BASH_COMPLETION        ?= /etc/bash_completion
+COMPLETE_DOCKER_COMPOSE = 1.22.0
+COMPLETE_DOCKER_MACHINE = v0.14.0
+CONFIG_DIRECTORIES      = fish/functions i3 i3status nvim
+INSTALL_BREW            =
 SOURCEFILE             ?= ~/.bashrc
-BASH_COMP              ?= /etc/bash_completion
-
-ifeq ($(shell which nvim),)
-    VIMFILE = ~/.vimrc
-endif
+SYMBOLIC_LINKS          = config/nvim/init.vim config/nvim/coc-settings.json \
+							gitconfig gitignore golangci.yml ideavimrc \
+							my.cnf perlcriticrc perltidyrc ripgreprc sqliterc \
+							config/i3/config config/i3status/config \
+							config/fish/config.fish \
+							config/fish/functions/fish_prompt.fish
 
 ifeq ($(shell uname -s),Darwin)
-    SOURCEFILE = ~/.profile
-    BASH_COMP  = $(shell brew --prefix)/etc/bash_completion
+    BASH_COMPLETION     = $(shell brew --prefix)$(BASH_COMPLETION)
+    SOURCEFILE          = ~/.profile
+
+ifeq (,$(shell which brew))
+    INSTALL_BREW        = 1
 endif
 
-BASH_COMP_D ?= $(BASH_COMP).d/
-COMPLETE_DOCKER_COMPOSE = "1.22.0"
-COMPLETE_DOCKER_MACHINE = "v0.14.0"
+endif
+
+BASH_COMPLETION_D      ?= $(BASH_COMPLETION).d
+
+ifdef INSTALL_BREW
+mac: brew
+endif
+
+bash_completion:
+	sudo curl -sL https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker \
+		-o $(BASH_COMPLETION_D)/docker
+	sudo curl -sL https://raw.githubusercontent.com/docker/compose/$(COMPLETE_DOCKER_COMPOSE)/contrib/completion/bash/docker-compose \
+		-o $(BASH_COMPLETION_D)/docker-compose
+	sudo curl -sL https://raw.githubusercontent.com/docker/machine/$(COMPLETE_DOCKER_MACHINE)/contrib/completion/bash/docker-machine.bash \
+		-o $(BASH_COMPLETION_D)/docker-machine
+
+brew:
+	@echo "Installing Brew (https://brew.sh)"
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+clean:
+	@echo "Removing all symbolic links"
+	@$(foreach s,$(SYMBOLIC_LINKS), rm -f ~/.$(s);)
+	@rm -f ~/.tmux.conf*
 
 dirs:
-	mkdir -p ~/.config/nvim
-	mkdir -p ~/.config/fish/functions
-	mkdir -p ~/.config/i3
-	mkdir -p ~/.config/i3status
+	@echo "Creating required directories (if not exist)"
+	@$(foreach d,$(CONFIG_DIRECTORIES), mkdir -p ~/.config/$(d);)
 
-links: dirs
-	[ -f $(VIMFILE) ]                                || ln -s $(PWD)/vimrc $(VIMFILE)
-	[ -f ~/.ideavimrc ]                              || ln -s $(PWD)/ideavimrc ~/.ideavimrc
-	[ -f ~/.golangci.yml ]                           || ln -s $(PWD)/golangci.yml ~/.golangci.yml
-	[ -f ~/.gitconfig ]                              || ln -s $(PWD)/gitconfig ~/.gitconfig
-	[ -f ~/.gitignore ]                              || ln -s $(PWD)/gitignore ~/.gitignore
-	[ -f ~/.ripgreprc ]                              || ln -s $(PWD)/ripgreprc ~/.ripgreprc
-	[ -f ~/.sqliterc ]                               || ln -s $(PWD)/sqliterc ~/.sqliterc
-	[ -f ~/.my.cnf ]                                 || ln -s $(PWD)/my.cnf ~/.my.cnf
-	[ -f ~/.tmux.conf ]                              || ln -s $(PWD)/gpakosz.tmux/.tmux.conf ~/.tmux.conf
-	[ -f ~/.tmux.conf.local ]                        || cp $(PWD)/gpakosz.tmux/.tmux.conf.local ~/.tmux.conf.local && cat $(PWD)/tmux.conf.local >> ~/.tmux.conf.local
-	[ -f ~/.config/nvim/coc-settings.json ]          || ln -s $(PWD)/coc-settings.json ~/.config/nvim/coc-settings.json
-	[ -f ~/.config/i3/config ]                       || ln -s $(PWD)/i3/config ~/.config/i3/config
-	[ -f ~/.config/i3status/config ]                 || ln -s $(PWD)/i3status/config ~/.config/i3status/config
-	[ -f ~/.config/fish/config.fish ]                || ln -s $(PWD)/fish/config.fish ~/.config/fish/config.fish
-	[ -f ~/.config/fish/functions/fish_prompt.fish ] || ln -s $(PWD)/fish/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
+links: dirs tmux
+	@echo "Creating symbolic links for all config files"
+	@$(foreach s,$(SYMBOLIC_LINKS), test -f ~/.$(s) || ln -s $(PWD)/$(s) ~/.$(s);)
 
 mac:
+	@echo "Configuring macOS"
 	xcode-select --install
 	brew bundle
-	sudo curl -sL https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o $(BASH_COMP_D)/docker
-	sudo curl -sL https://raw.githubusercontent.com/docker/compose/$(COMPLETE_DOCKER_COMPOSE)/contrib/completion/bash/docker-compose -o $(BASH_COMP_D)/docker-compose
-	sudo curl -sL https://raw.githubusercontent.com/docker/machine/$(COMPLETE_DOCKER_MACHINE)/contrib/completion/bash/docker-machine.bash -o $(BASH_COMP_D)/docker-machine
 	defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
 	defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
 source:
-	[ -f $(SOURCEFILE) ]            || touch $(SOURCEFILE)
-	grep dotfiles $(SOURCEFILE)     || echo "[ -f $(HOME)/git/dotfiles/bashrc ] && . $(HOME)/git/dotfiles/bashrc" >> $(SOURCEFILE)
-	grep $(BASH_COMP) $(SOURCEFILE) || echo "[ -f $(BASH_COMP) ] && . $(BASH_COMP)" >> $(SOURCEFILE)
+	@echo "Adding bashrc and bash completions to be sourced"
+	[ -f $(SOURCEFILE) ]                  || touch $(SOURCEFILE)
+	grep dotfiles $(SOURCEFILE)           || echo "[ -f $(HOME)/git/dotfiles/bashrc ] && . $(HOME)/git/dotfiles/bashrc" >> $(SOURCEFILE)
+	grep $(BASH_COMPLETION) $(SOURCEFILE) || echo "[ -f $(BASH_COMPLETION) ] && . $(BASH_COMPLETION)" >> $(SOURCEFILE)
 
-clean:
-	rm -f ~/.vimrc
-	rm -f ~/.config/nvim/init.vim
-	rm -f ~/.ideavimrc
-	rm -f ~/.gitconfig
-	rm -f ~/.gitignore
-	rm -f ~/.ripgreprc
-	rm -f ~/.tmux.conf
-	rm -f ~/.tmux.conf.local
-	rm -f ~/.sqliterc
-	rm -f ~/.config/nvim/coc-settings.json
-	rm -f ~/.config/i3/config
-	rm -f ~/.config/i3status/config
-	rm -f ~/.config/fish/config.fish
-	rm -f ~/.config/fish/functions/functions.fish
+tmux:
+	@echo "Symlinking and configuring tmux"
+	@$(shell [ -f ~/.tmux.conf ]       || ln -s $(PWD)/gpakosz.tmux/.tmux.conf ~/.tmux.conf)
+	@$(shell [ -f ~/.tmux.conf.local ] || cp $(PWD)/gpakosz.tmux/.tmux.conf.local ~/.tmux.conf.local && cat $(PWD)/tmux.conf.local >> ~/.tmux.conf.local)
 
-.PHONY: all dirs links mac source clean
+.PHONY: bash_completion brew clean dirs links mac source clean
 
 # vim: set ts=4 sw=4 noexpandtab:
