@@ -19,13 +19,13 @@ export GPG_TTY=$(tty)
 alias l="ls -lh"
 alias lr="ls -lrth"
 
-[ "$(nvim -v)" ] && alias vi="nvim"
-[ "$(nvim -v)" ] && alias vim="nvim"
+[ "$(nvim -v 2> /dev/null)" ] && alias vi="nvim"
+[ "$(nvim -v 2> /dev/null)" ] && alias vim="nvim"
 
-[ "$(python3 --version)" ] && alias python='python3'
-[ "$(python3 --version)" ] && alias pip='pip3'
+[ "$(python3 --version 2> /dev/null)" ] && alias python='python3'
+[ "$(python3 --version 2> /dev/null)" ] && alias pip='pip3'
 
-[ "$(npm --version)" ] && PATH="$PATH:$(npm bin)"
+[ "$(npm --version 2> /dev/null)" ] && PATH="$PATH:$(npm bin)"
 
 export NPM_PACKAGES="$HOME/.npm"
 export NPM_CONFIG_PREFIX="$NPM_PACKAGES"
