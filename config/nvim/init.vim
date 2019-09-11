@@ -217,6 +217,9 @@ if exists('g:did_coc_loaded')
   call s:setup_coc()
 endif
 
+" tags
+let g:gutentags_ctags_exclude=["node_modules"]
+
 " vim-go
 let g:go_def_mode='godef'
 let g:go_fmt_autosave = 0
