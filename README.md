@@ -13,8 +13,61 @@ mkdir -p ~/git
 git clone git@github.com:bombsimon/dotfiles.git ~/git/dotfiles
 
 # Install
-cd ~/git/dotfiles && make all
+cd ~/git/dotfiles && make \
+    links \
+    source \
+    bash_completion
 ```
+
+### New Computer Flow
+
+When installing a completely new computer, not everything in this repository
+will be set up. I don't like `brew cask` for graphical applications so for now I
+download them manually. Maybe I'll try `cask` in the future.
+
+* Setup computer accounts
+  * Sign in with AppleID
+  * Enable Google account
+  * Enable Outlook Exchange Account
+* Edit keyboard shortcuts
+  * Spotlight - `^`+`[Space]`
+  * Change save vs. copy screenshot, i.e. `⇧`+`⌘`+`3` 🔄 `⇧`+`^`+`⌘`+`3`
+  * Map `Caps Lock`to `Esc`
+  * In the shortcuts menu, set `Full Keyborad Access` to `All controls` to support tabbing between buttons
+  * Under `Accessability`, enable scroll gesture to zoom
+* Install non-brew applications
+  * [1Password](https://1password.com/downloads/mac/)
+  * [Discord](https://discordapp.com/download)
+  * [Docker for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac)
+  * [Dropbox](https://www.dropbox.com/)
+  * [GoLand](https://www.jetbrains.com/go/?fromMenu)
+  * [Go](https://golang.org/dl/)
+  * [Google Backup and Sync](https://www.google.com/drive/download/backup-and-sync/)
+  * [Google Chrome](https://www.google.com/chrome/)
+  * [IntelliJ](https://www.jetbrains.com/idea/download/#section=mac)
+  * [Java JDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-5295953.html)
+  * [Spotify](https://www.spotify.com/se/download/mac/)
+  * [Xcode](https://developer.apple.com/xcode/)
+  * [iStat Menus](https://bjango.com/mac/istatmenus/)
+  * [iTerm2](https://www.iterm2.com/downloads.html)
+* Setup iTerm2
+  * Install [Powerline fonts](https://github.com/powerline/fonts)
+  * Import profile from `dotfiles`
+* Setup GitHub settings
+  * Import (or create) GPG key; `gpg --import gpg-key.asc`
+  * Create new SSH-key and upload to GitHub; `ssh-keygen -t ECDSA`
+  * Configure `~/.ssh/config`
+
+```sh
+Host github.com
+  HostName github.com
+  Port 22
+  User git
+  IdentityFile ~/.ssh/<github-ssh-key>
+  IdentitiesOnly yes
+  ForwardAgent yes
+```
+* Continue with Makefile for final setup!
 
 ## Prerequisites
 
@@ -25,9 +78,9 @@ special so remmber to read the installation notes. All required Python
 dependencies can be installed by running `pip install --upgrade -r
 requirements.txt`
 
-### vim/neovim
+### neovim
 
-As seen in [`vimrc`](vimrc) there are a few fixers and linters applied. For
+As seen in [`neovim config`](config/nvim/init.vim) there are a few fixers and linters applied. For
 other things such as auto installing
 [vim-plug](https://github.com/junegunn/vim-plug) toos like
 [curl](https://curl.haxx.se/) is required. The list below shows all dependencies
@@ -41,11 +94,24 @@ used.
 * [golangci-lint](https://github.com/golangci/golangci-lint)
 * [jq](https://stedolan.github.io/jq/)
 * [nodejs](https://nodejs.org/en/)
-* [perltidy](https://metacpan.org/pod/perltidy)
+* [perltidy](https://metacpan.org/pod/perltidy)*
 * [pylint](https://www.pylint.org/)
-* [rubocop](https://github.com/rubocop-hq/rubocop)
+* [rubocop](https://github.com/rubocop-hq/rubocop)**
 * [yarn](https://yarnpkg.com/en/)
 
+*\* Should be installed with [Perlbrw](https://perlbrew.pl/)*
+
+```sh
+\curl -L https://install.perlbrew.pl | bash
+perlbrew install perl-5.30.0
+perlbrew install-cpanm
+```
+
+*\*\* Should be installed with [RVM](https://rvm.io)*
+
+```sh
+\curl -sSL https://get.rvm.io | bash -s stable --rails
+```
 ## Other configuration
 
 ### tmux
@@ -73,3 +139,12 @@ The colors from the base16 theme is also used for tmux as seen in
 `tmux.conf.local`.
 
 ![screenshot](https://raw.githubusercontent.com/bombsimon/dotfiles/master/img/screenshot01.png)
+
+### macOS defaults
+
+Some variables used by macOS is set by writing defaults. For example, if the maximum key repeat available to set from the system preferences, a way to set them even lower would be by writing defaults.
+
+```sh
+defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
+defaults write -g KeyRepeat -int 1         # normal minimum is 2 (30 ms)
+```
