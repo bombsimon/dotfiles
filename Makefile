@@ -1,9 +1,9 @@
-BASH_COMPLETION        ?= /etc/bash_completion
+BASH_COMPLETION         = /etc/bash_completion
 COMPLETE_DOCKER_COMPOSE = 1.22.0
 COMPLETE_DOCKER_MACHINE = v0.14.0
 CONFIG_DIRECTORIES      = fish/functions i3 i3status nvim
 INSTALL_BREW            =
-SOURCEFILE             ?= ~/.bashrc
+SOURCEFILE              = ~/.bashrc
 SYMBOLIC_LINKS          = config/nvim/init.vim config/nvim/coc-settings.json \
 							gitconfig gitignore golangci.yml ideavimrc \
 							my.cnf perlcriticrc perltidyrc ripgreprc sqliterc \
@@ -12,16 +12,16 @@ SYMBOLIC_LINKS          = config/nvim/init.vim config/nvim/coc-settings.json \
 							config/fish/functions/fish_prompt.fish
 
 ifeq ($(shell uname -s),Darwin)
-    BASH_COMPLETION     = $(shell brew --prefix)$(BASH_COMPLETION)
-    SOURCEFILE          = ~/.profile
+	BASH_COMPLETION    := $(shell brew --prefix)$(BASH_COMPLETION)
+	SOURCEFILE          = ~/.profile
 
 ifeq (,$(shell which brew))
-    INSTALL_BREW        = 1
+	INSTALL_BREW        = 1
 endif
 
 endif
 
-BASH_COMPLETION_D      ?= $(BASH_COMPLETION).d
+BASH_COMPLETION_D       = $(BASH_COMPLETION).d
 
 ifdef INSTALL_BREW
 mac: brew
@@ -56,14 +56,12 @@ mac:
 	@echo "Configuring macOS"
 	xcode-select --install
 	brew bundle
-	defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
-	defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
 source:
 	@echo "Adding bashrc and bash completions to be sourced"
-	[ -f $(SOURCEFILE) ]                  || touch $(SOURCEFILE)
-	grep dotfiles $(SOURCEFILE)           || echo "[ -f $(HOME)/git/dotfiles/bashrc ] && . $(HOME)/git/dotfiles/bashrc" >> $(SOURCEFILE)
-	grep $(BASH_COMPLETION) $(SOURCEFILE) || echo "[ -f $(BASH_COMPLETION) ] && . $(BASH_COMPLETION)" >> $(SOURCEFILE)
+	@shell([ -f $(SOURCEFILE) ]                  || touch $(SOURCEFILE))
+	@shell(rep dotfiles $(SOURCEFILE)           || echo "[ -f $(HOME)/git/dotfiles/bashrc ] && . $(HOME)/git/dotfiles/bashrc" >> $(SOURCEFILE))
+	@shell(rep $(BASH_COMPLETION) $(SOURCEFILE) || echo "[ -f $(BASH_COMPLETION) ] && . $(BASH_COMPLETION)" >> $(SOURCEFILE))
 
 tmux:
 	@echo "Symlinking and configuring tmux"
