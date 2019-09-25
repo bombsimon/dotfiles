@@ -59,9 +59,10 @@ mac:
 
 source:
 	@echo "Adding bashrc and bash completions to be sourced"
-	@shell([ -f $(SOURCEFILE) ]                  || touch $(SOURCEFILE))
-	@shell(rep dotfiles $(SOURCEFILE)           || echo "[ -f $(HOME)/git/dotfiles/bashrc ] && . $(HOME)/git/dotfiles/bashrc" >> $(SOURCEFILE))
-	@shell(rep $(BASH_COMPLETION) $(SOURCEFILE) || echo "[ -f $(BASH_COMPLETION) ] && . $(BASH_COMPLETION)" >> $(SOURCEFILE))
+	mkdir -p $(HOME)/.bin
+	[ -f $(SOURCEFILE) ]                 || touch $(SOURCEFILE)
+	rep dotfiles $(SOURCEFILE)           || echo "[ -f $(HOME)/git/dotfiles/bashrc ] && . $(HOME)/git/dotfiles/bashrc" >> $(SOURCEFILE)
+	rep $(BASH_COMPLETION) $(SOURCEFILE) || echo "[ -f $(BASH_COMPLETION) ] && . $(BASH_COMPLETION)" >> $(SOURCEFILE)
 
 tmux:
 	@echo "Symlinking and configuring tmux"
