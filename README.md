@@ -33,6 +33,7 @@ download them manually. Maybe I'll try `cask` in the future.
   * Spotlight - `^`+`[Space]`
   * Change save vs. copy screenshot, i.e. `⇧`+`⌘`+`3` 🔄 `⇧`+`^`+`⌘`+`3`
   * Map `Caps Lock`to `Esc`
+  * Disable `^`+`Arrows` for Mission Control (used for tmux)
   * In the shortcuts menu, set `Full Keyborad Access` to `All controls` to support tabbing between buttons
   * Under `Accessability`, enable scroll gesture to zoom
 * Install non-brew applications
@@ -44,6 +45,7 @@ download them manually. Maybe I'll try `cask` in the future.
   * [Go](https://golang.org/dl/)
   * [Google Backup and Sync](https://www.google.com/drive/download/backup-and-sync/)
   * [Google Chrome](https://www.google.com/chrome/)
+  * [Haskell (ghcup)](https://www.haskell.org/ghcup/)
   * [IntelliJ](https://www.jetbrains.com/idea/download/#section=mac)
   * [Java JDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-5295953.html)
   * [Spotify](https://www.spotify.com/se/download/mac/)
@@ -51,7 +53,7 @@ download them manually. Maybe I'll try `cask` in the future.
   * [iStat Menus](https://bjango.com/mac/istatmenus/)
   * [iTerm2](https://www.iterm2.com/downloads.html)
 * Setup iTerm2
-  * Install [Powerline fonts](https://github.com/powerline/fonts)
+  * Optionally install [Powerline fonts](https://github.com/powerline/fonts) if not going to use [Fira Code](https://github.com/tonsky/FiraCode).
   * Import profile from `dotfiles`
 * Setup GitHub settings
   * Import (or create) GPG key; `gpg --import gpg-key.asc`
@@ -80,8 +82,8 @@ requirements.txt`
 
 ### neovim
 
-As seen in [`neovim config`](config/nvim/init.vim) there are a few fixers and linters applied. For
-other things such as auto installing
+As seen in [`neovim config`](config/nvim/init.vim) there are a few fixers and
+linters applied. For other things such as auto installing
 [vim-plug](https://github.com/junegunn/vim-plug) toos like
 [curl](https://curl.haxx.se/) is required. The list below shows all dependencies
 used.
@@ -129,7 +131,7 @@ be restarted with `tmux kill-server` for changes to take effect.
 
 ### Color palette
 
-As seen in `vimrc` the current theme used is
+As seen in neovim config the current theme used is
 [Gruvbox](https://github.com/morhetz/gruvbox). For iTerm2 i use the
 `base16-default-dark-256` from
 [base16-iterm2](https://github.com/martinlindhe/base16-iterm2) repository found
@@ -138,11 +140,13 @@ here (and also saved in `iterm/profiles.json`.
 The colors from the base16 theme is also used for tmux as seen in
 `tmux.conf.local`.
 
-![screenshot](https://raw.githubusercontent.com/bombsimon/dotfiles/master/img/screenshot01.png)
+![screenshot](img/screenshot02.png)
 
 ### macOS defaults
 
-Some variables used by macOS is set by writing defaults. For example, if the maximum key repeat available to set from the system preferences, a way to set them even lower would be by writing defaults.
+Some variables used by macOS is set by writing defaults. For example, if the
+maximum key repeat available to set from the system preferences, a way to set
+them even lower would be by writing defaults.
 
 ```sh
 defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
