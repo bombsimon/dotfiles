@@ -5,6 +5,9 @@
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [ -f /etc/bash_completion ]           && . /etc/bash_completion
 
+# Source ghcup for Haskell
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env"
+
 # Enable globstar for bash (if supported)
 [ "$(shopt | grep globstar)" ] && shopt -s globstar
 
@@ -12,6 +15,7 @@
 export CLICOLOR=1;
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
 export LS_OPTIONS='--color=auto'
+export COLORTERM=truecolor
 
 # Support GPG signing
 export GPG_TTY=$(tty)
@@ -45,20 +49,38 @@ export GO111MODULE="auto"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 GOPATHS="$GOPATH/bin:$GOROOT/bin"
-LOCALPATHS="$HOME/bin:/usr/local/bin"
+LOCALPATHS="$HOME/bin:$HOME/.bin:$HOMEE/.local/bin:/usr/local/bin"
 NPMPATHS="$NPM_PACKAGES/bin"
 PERLPATHS="$HOME/perl5/perlbrew/bin"
 PYTHONPATHS="/usr/local/opt/python/libexec/bin"
 RUBYPATHS="$HOME/.rvm/bin"
 RUSTPATHS="$HOME/.cargo/bin"
+CIQPATHS="$HOME/.connectiq-sdk/bin"
 
 # Keg-only formulas refusin to link for macOS-provided software.
 BREWPATHS="/usr/local/opt/curl/bin"
 
-export PATH="$PYTHONPATHS:$RUSTPATHS:$GOPATHS:$PERLPATHS:$RUBYPATHS:$NPMPATHS:$LOCALPATHS:$BREWPATHS:$PATH"
+export PATH="$CIQPATHS:$PYTHONPATHS:$RUSTPATHS:$GOPATHS:$PERLPATHS:$RUBYPATHS:$NPMPATHS:$LOCALPATHS:$BREWPATHS:$PATH"
 
 # Source RVM last to make it apper first in PATH
 [ -f "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
+
+function java8 {
+    _rm_and_link_java
+}
+
+function java12 {
+    _rm_and_link_java "jdk-12.0.2.jdk"
+}
+
+function _rm_and_link_java {
+    rm -f "$HOME/.bin/java"
+    rm -f "$HOME/.bin/javac"
+    JAVA_VERSION=${1:-jdk1.8.0_221.jdk}
+
+    ln -s "/Library/Java/JavaVirtualMachines/${JAVA_VERSION}/Contents/Home/bin/java" "$HOME/.bin/java"
+    ln -s "/Library/Java/JavaVirtualMachines/${JAVA_VERSION}/Contents/Home/bin/javac" "$HOME/.bin/javac"
+}
 
 function rr {
     if [ -f "/var/run/reboot-required" ]; then
