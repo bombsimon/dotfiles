@@ -1,5 +1,6 @@
 black
 flake8
 pylint
-python-language-server
 pynvim
+python-language-server
+virtualenv
