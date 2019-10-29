@@ -53,7 +53,7 @@ export GO111MODULE="auto"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 GOPATHS="$GOPATH/bin:$GOROOT/bin"
-LOCALPATHS="$HOME/bin:$HOME/.bin:$HOMEE/.local/bin:/usr/local/bin"
+LOCALPATHS="$HOME/bin:$HOME/.bin:$HOME/.local/bin:/usr/local/bin"
 NPMPATHS="$NPM_PACKAGES/bin"
 PERLPATHS="$HOME/perl5/perlbrew/bin"
 PYTHONPATHS="/usr/local/opt/python/libexec/bin"
