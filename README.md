@@ -116,6 +116,18 @@ perlbrew install-cpanm
 ```
 ## Other configuration
 
+## Bash
+
+Since macOS 10.15 the default shell is `zsh`. Either way the bash version
+installed on macOS has been old since forever. To use the latest version (after
+intalling bash with `homebrew`) we have to add the shell to existing ones and
+change our default.
+
+```sh
+sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+chsh -s /usr/local/bin/bash
+```
+
 ### tmux
 
 To auto run `tmux` and start the **same** session as always (default 'main'

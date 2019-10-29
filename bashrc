@@ -11,6 +11,10 @@
 # Enable globstar for bash (if supported)
 [ "$(shopt | grep globstar)" ] && shopt -s globstar
 
+# Silence Apple prompting they're now using zsh (if you for some reason isn't
+# running a separate installation of bash > 3.x)
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # Try to use colors no matter what
 export CLICOLOR=1;
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
