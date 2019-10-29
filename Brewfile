@@ -59,3 +59,4 @@ brew "yarn"
 brew "zlib"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 cask "font-fira-code"
+cask "font-firacode-nerd-font-mono"
