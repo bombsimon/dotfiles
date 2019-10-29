@@ -16,10 +16,6 @@ run:
   # include test files or not, default is true
   tests: true
 
-  # list of build tags, all linters use it. Default is empty list.
-  # build-tags:
-  #   - mytag
-
   # which dirs to skip: they won't be analyzed;
   # can use regexp here: generated.*, regexp is applied on full path;
   # default value is empty list, but next dirs are always skipped independently
@@ -36,15 +32,16 @@ run:
 
 # output configuration options
 output:
-  # colored-line-number|line-number|json|tab|checkstyle, default is
+  # colored-line-number|line-number|json|tab|checkstyle|code-climate, default is
   # "colored-line-number"
   format: colored-line-number
 
   # print lines of code with issue, default is true
-  print-issued-lines: true
+  print-issued-lines: false
 
   # print linter name in the end of issue text, default is true
   print-linter-name: true
+
 
 # all available settings of specific linters
 linters-settings:
@@ -57,6 +54,7 @@ linters-settings:
     # strconv.Atoi(numStr)`; default is false: such cases aren't reported by
     # default.
     check-blank: false
+
   govet:
     # report about shadowed variables
     check-shadowing: true
@@ -67,18 +65,12 @@ linters-settings:
     # simplify code: gofmt with `-s` option, true by default
     simplify: true
   goimports:
-  # put imports beginning with prefix after 3rd-party packages;
-  # it's a comma-separated list of prefixes
-  # local-prefixes: github.com/bombsimon/...
-  gocyclo:
+    # put imports beginning with prefix after 3rd-party packages;
+    # it's a comma-separated list of prefixes
+    # local-prefixes: github.com/org/project
+  gocognit:
     # minimal code complexity to report, 30 by default (but we recommend 10-20)
     min-complexity: 10
-  maligned:
-    # print struct with more effective memory layout or not, false by default
-    suggest-new: true
-  dupl:
-    # tokens count to trigger issue, 150 by default
-    threshold: 150
   goconst:
     # minimal length of string constant, 3 by default
     min-len: 3
@@ -95,13 +87,6 @@ linters-settings:
     # Setting locale to US will correct the British spelling of 'colour' to
     # 'color'.
     locale: US
-  lll:
-    # max line length, lines longer will be reported. Default is 120.
-    # '\t' is counted as 1 character by default, and can be changed with the
-    # tab-width option
-    line-length: 120
-    # tab width in spaces. Default to 1.
-    tab-width: 1
   unused:
     # treat code as a program (not a library) and report unused exported
     # identifiers; default is false. XXX: if you enable this setting, unused
@@ -111,52 +96,54 @@ linters-settings:
     # file.
     check-exported: false
   unparam:
-    # call graph construction algorithm (cha, rta). In general, use cha for
-    # libraries, and rta for programs with main packages. Default is cha.
-    algo: cha
-
     # Inspect exported functions, default is false. Set to true if no external
     # program/library imports your code. XXX: if you enable this setting,
     # unparam will report a lot of false-positives in text editors: if it's
-    # called for subdir of a project it can't find external interfaces. All
-    # text editor integrations with golangci-lint call it on a directory with
-    # the changed file.
+    # called for subdir of a project it can't find external interfaces. All text
+    # editor integrations with golangci-lint call it on a directory with the
+    # changed file.
     check-exported: false
-  nakedret:
-    # make an issue if func has more lines of code than this setting and it has
-    # naked returns; default is 30
-    max-func-lines: 30
-  prealloc:
-    # XXX: we don't recommend using this linter before doing performance
-    # profiling. For most programs usage of prealloc will be a premature
-    # optimization.
+  gocritic:
+    # Enable multiple checks by tags, run `GL_DEBUG=gocritic golangci-lint run`
+    # to see all tags and checks. Empty list by default. See
+    # https://github.com/go-critic/go-critic#usage -> section "Tags".
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+  dogsled:
+    # checks assignments with too many blank identifiers; default is 2
+    max-blank-identifiers: 2
 
-    # Report preallocation suggestions only on simple loops that have no
-    # returns/breaks/continues/gotos in them. True by default.
-    simple: true
-    # Report preallocation suggestions on range loops, true by default
-    range-loops: true
-    # Report preallocation suggestions on for loops, false by default
-    for-loops: false
+  whitespace:
+    multi-if: false
+    multi-func: false
+  wsl:
+    # If true append is only allowed to be cuddled if appending value is
+    # matching variables, fields or types on line above. Default is true.
+    strict-append: true
+    # Allow calls and assignments to be cuddled as long as the lines have any
+    # matching variables, fields or types. Default is true.
+    allow-assign-and-call: false
+    # Allow multiline assignments to be cuddled. Default is true.
+    allow-multiline-assign: false
 
 linters:
-  # enable:
-  #  - megacheck
-  #  - govet
   enable-all: true
   disable:
     - dupl
+    - funlen
     - gocyclo
+    - godox
     - lll
     - maligned
     - nakedret
     - prealloc
     - scopelint
-  disable-all: false
-  # presets:
-  #   - bugs
-  #   - unused
   fast: false
+
 
 issues:
   # List of regexps of issue texts to exclude, empty list by default.
@@ -177,7 +164,7 @@ issues:
   exclude-use-default: true
 
   # Maximum issues count per one linter. Set to 0 to disable. Default is 50.
-  max-per-linter: 0
+  max-issues-per-linter: 0
 
   # Maximum count of issues with the same text. Set to 0 to disable. Default is
   # 3.
@@ -190,11 +177,5 @@ issues:
   # of integration: much better don't allow issues in new code.
   # Default is false.
   new: false
-
-  # Show only new issues created after git revision `REV`
-  # new-from-rev: REV
-
-  # Show only new issues created in git patch with set file path.
-  # new-from-patch: path/to/patch/file
 
 # vim: set sw=2 ts=2 et:
