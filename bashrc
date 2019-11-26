@@ -66,6 +66,9 @@ BREWPATHS="/usr/local/opt/curl/bin"
 
 export PATH="$CIQPATHS:$PYTHONPATHS:$RUSTPATHS:$GOPATHS:$PERLPATHS:$RUBYPATHS:$NPMPATHS:$LOCALPATHS:$BREWPATHS:$PATH"
 
+# Init pyenv
+eval "$(pyenv init -)"
+
 # Source RVM last to make it apper first in PATH
 [ -f "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
 
