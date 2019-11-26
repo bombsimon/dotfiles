@@ -4,6 +4,9 @@
 # Source ghcup for Haskell
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env"
 
+# Fix bindkeys (^A, ^E)
+bindkey -e
+
 # Try to use colors no matter what
 export CLICOLOR=1;
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
