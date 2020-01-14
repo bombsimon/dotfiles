@@ -13,6 +13,7 @@ endif
 
 call plug#begin(g:vimSource)
 
+Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': ['java'] }
 Plug 'bombsimon/vim-golsp', { 'for': ['golsp'] }
