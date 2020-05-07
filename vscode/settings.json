@@ -1,0 +1,58 @@
+{
+    // General options
+    "editor.fontFamily": "Fira Code, Menlo, monospace",
+    "editor.fontLigatures": true,
+    "editor.formatOnSave": true,
+    "editor.minimap.maxColumn": 80,
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "files.autoSave": "afterDelay",
+    "problems.showCurrentInStatus": true,
+    "workbench.colorTheme": "Gruvbox Dark Medium",
+    //
+    // C/C++
+    "cmake.mingwSearchDirs": [
+        "C:\\Program Files\\MinGW"
+    ],
+    //
+    // Go
+    "go.autocompleteUnimportedPackages": true,
+    "go.formatTool": "goimports",
+    "go.formatFlags": [
+        "-s"
+    ],
+    "go.lintOnSave": "package",
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+        "--fast"
+    ],
+    "go.useLanguageServer": true,
+    //
+    // Python
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length=79"
+    ],
+    "python.jediEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.linting.pylintEnabled": true,
+    //
+    // Markdown
+    "[markdown]": {
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wordWrapColumn": 80
+    },
+    //
+    // Vim
+    "vim.autoindent": true,
+    "vim.hlsearch": true,
+    "vim.ignorecase": true,
+    "vim.incsearch": true,
+    "vim.leader": "<space>",
+    "vim.showcmd": true,
+    "vim.textwidth": 80,
+}
