@@ -1,3 +1,6 @@
+# Fix bindkeys (^A, ^E)
+bindkey -e
+
 # Remove ruby_prompt_info used in many zsh themes
 function ruby_prompt_info { echo '' }
 
@@ -44,3 +47,8 @@ function prompt {
 
     PROMPT="${PP}${AC}-> ${R}%1~${Y}\$vcs_info_msg_0_${NONE} "
 }
+
+# Override theme prompt for oh-my-zsh
+# PROMPT='╭─ %{$terminfo[bold]$fg[blue]%}%~ %{$reset_color%}$(git_prompt_info)$(virtualenv_prompt_info)
+# ╰─%B$%b '
+prompt

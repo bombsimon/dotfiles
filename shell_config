@@ -13,10 +13,6 @@ if [ -f "${HOME}/google-cloud-sdk/path.$(basename ${SHELL}).inc" ]; then . "${HO
 # The next line enables shell command completion for gcloud.
 if [ -f "${HOME}/google-cloud-sdk/completion.$(basename ${SHELL}).inc" ]; then . "${HOME}/google-cloud-sdk/completion.$(basename ${SHELL}).inc"; fi
 
-
-# Fix bindkeys (^A, ^E)
-bindkey -e
-
 # Try to use colors no matter what
 export CLICOLOR=1;
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
@@ -26,11 +22,17 @@ export COLORTERM=truecolor
 # Support GPG signing
 export GPG_TTY=$(tty)
 
-alias l="ls -lh"
-alias lr="ls -lrth"
+if [ "$(exa -v 2> /dev/null)" ]; then
+    alias l="exa -lh"
+    alias lr="exa -lh --sort newest"
+else
+    alias l="ls -lh"
+    alias lr="ls -lrth"
+fi
 
-[ "$(nvim -v 2> /dev/null)" ] && alias vi="nvim"
-[ "$(nvim -v 2> /dev/null)" ] && alias vim="nvim"
+[ "$(nvim -v 2> /dev/null)" ] && \
+    alias vi="nvim" && \
+    alias vim="nvim"
 
 [ "$(npm --version 2> /dev/null)" ] && PATH="$PATH:$(npm bin)"
 
@@ -65,7 +67,7 @@ BREWPATHS="/usr/local/opt/curl/bin"
 export PATH="$CIQPATHS:$PYTHONPATHS:$RUSTPATHS:$GOPATHS:$PERLPATHS:$RUBYPATHS:$NPMPATHS:$LOCALPATHS:$BREWPATHS:$PATH"
 
 # Init pyenv
-eval "$(pyenv init -)"
+[ "$(pyenv -v 2> /dev/null)" ] && eval "$(pyenv init -)"
 
 # Source RVM last to make it apper first in PATH
 [ -f "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
