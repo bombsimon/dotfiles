@@ -155,6 +155,21 @@ let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1 " Prepatched fonts: https://github.com/powerline/fonts.git
 let g:airline#extensions#tabline#enabled = 1
 
+" signify
+nnoremap <leader>sd :SignifyDiff<cr>
+nnoremap <leader>sp :SignifyHunkDiff<cr>
+nnoremap <leader>su :SignifyHunkUndo<cr>
+
+" hunk jumping
+nmap <leader>sj <plug>(signify-next-hunk)
+nmap <leader>sk <plug>(signify-prev-hunk)
+
+" hunk text object
+omap ic <plug>(signify-motion-inner-pending)
+xmap ic <plug>(signify-motion-inner-visual)
+omap ac <plug>(signify-motion-outer-pending)
+xmap ac <plug>(signify-motion-outer-visual)
+
 " vim-coc
 call coc#add_extension(
   \ 'coc-go',
