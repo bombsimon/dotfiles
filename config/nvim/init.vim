@@ -21,6 +21,7 @@ Plug 'elmcast/elm-vim'
 Plug 'elzr/vim-json' " Needed to use indentLine but don't conceal JSON quotes
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'godlygeek/tabular'
+Plug 'google/vim-jsonnet'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
@@ -176,7 +177,8 @@ call coc#add_extension(
   \ 'coc-json',
   \ 'coc-yaml',
   \ 'coc-rls',
-  \ 'coc-python'
+  \ 'coc-python',
+  \ 'coc-rust-analyzer'
 \ )
 
 " vim-go
