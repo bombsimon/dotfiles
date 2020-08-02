@@ -98,7 +98,7 @@ zsh-plugins: $(HOME)/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting $(HOME)/.
 .PHONY: oh-my-zsh
 oh-my-zsh: zsh-plugins ## Install oh-my-zsh and belonging plugins, update oh-my-zsh config
 	@$(SED) -i 's/ZSH_THEME=".\+"/ZSH_THEME="$(OH_MY_ZSH_THEME)"/' ~/.$(SHELLRC)
-	@$(SED) -i 's/plugins=(git)/plugins=(git docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)/' $(SOURCEFILE)
+	@$(SED) -i 's/plugins=(git)/plugins=(git docker docker-compose kubectl zsh-autosuggestions zsh-syntax-highlighting)/' $(SOURCEFILE)
 	@grep "Custom config" $(HOME)/.$(SHELLRC) > /dev/null || \
 		(echo "" >> $(HOME)/.$(SHELLRC) && \
 		echo "# Custom config" >> $(HOME)/.$(SHELLRC) && \
