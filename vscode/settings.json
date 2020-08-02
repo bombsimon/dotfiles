@@ -55,4 +55,5 @@
     "vim.leader": "<space>",
     "vim.showcmd": true,
     "vim.textwidth": 80,
+    "window.zoomLevel": 0,
 }
