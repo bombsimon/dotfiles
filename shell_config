@@ -72,15 +72,22 @@ export PATH="$CIQPATHS:$PYTHONPATHS:$RUSTPATHS:$GOPATHS:$PERLPATHS:$RUBYPATHS:$N
 # Source RVM last to make it apper first in PATH
 [ -f "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
 
-function java8 {
-    _rm_and_link_java
-}
+function set-java-version {
+    case "$1" in
+        8)
+            version="jdk1.8.0_221.jdk"
+            ;;
+        12)
+            version="jdk-12.0.2.jdk"
+            ;;
+        14)
+            version="jdk-14.0.1.jdk"
+            ;;
+        *)
+            version="jdk-14.0.1.jdk"
+            ;;
+    esac
 
-function java12 {
-    _rm_and_link_java "jdk-12.0.2.jdk"
-}
-
-function _rm_and_link_java {
     rm -f "$HOME/.bin/java"
     rm -f "$HOME/.bin/javac"
     JAVA_VERSION=${1:-jdk1.8.0_221.jdk}
@@ -98,13 +105,11 @@ function rr {
 }
 
 function container_ip {
-    docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "$1"
+    docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "${1:-}"
 }
 
 function weather {
-    if perldoc -l ojo > /dev/null 2>&1; then
-        perl -Mojo -E 'binmode(STDOUT, "encoding(UTF-8)"); say g("http://wttr.in/stockholm?T")->dom->at("pre")->text'
-    else
-        echo "Cannot fetch weather, install ojo (Mojolicious)"
-    fi
+    curl "http://wttr.in/${1:-stockholm}"
 }
+
+# vim: set ft=zsh:
