@@ -47,8 +47,10 @@ download them manually. Maybe I'll try `cask` in the future.
   * [Google Chrome](https://www.google.com/chrome/)
   * [Haskell (ghcup)](https://www.haskell.org/ghcup/)
   * [IntelliJ](https://www.jetbrains.com/idea/download/#section=mac)
-  * [Java JDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-5295953.html)
+  * [Java JDK](https://www.oracle.com/java/technologies/javase-downloads.html)
+  * [Slack](https://slack.com/intl/en-se/)
   * [Spotify](https://www.spotify.com/se/download/mac/)
+  * [VS Code](https://code.visualstudio.com/)
   * [Xcode](https://developer.apple.com/xcode/)
   * [iStat Menus](https://bjango.com/mac/istatmenus/)
   * [iTerm2](https://www.iterm2.com/downloads.html)
@@ -96,24 +98,35 @@ used.
 * [golangci-lint](https://github.com/golangci/golangci-lint)
 * [jq](https://stedolan.github.io/jq/)
 * [nodejs](https://nodejs.org/en/)
-* [perltidy](https://metacpan.org/pod/perltidy)*
+* [perltidy](https://metacpan.org/pod/perltidy)<sup>1</sup>
 * [pylint](https://www.pylint.org/)
-* [rubocop](https://github.com/rubocop-hq/rubocop)**
+* [rubocop](https://github.com/rubocop-hq/rubocop)<sup>2</sup>
+* [rust-anayzer](https://github.com/rust-analyzer/rust-analyzer)<sup>3</sup>
 * [yarn](https://yarnpkg.com/en/)
 
-*\* Should be installed with [Perlbrw](https://perlbrew.pl/)*
+<sup>1</sup> Should be installed with [Perlbrw](https://perlbrew.pl/)*
 
 ```sh
-\curl -L https://install.perlbrew.pl | bash
+$ curl -L https://install.perlbrew.pl | bash
 perlbrew install perl-5.30.0
 perlbrew install-cpanm
 ```
 
-*\*\* Should be installed with [RVM](https://rvm.io)*
+<sup>2</sup> Should be installed with [RVM](https://rvm.io)*
 
 ```sh
-\curl -sSL https://get.rvm.io | bash -s stable --rails
+$ curl -sSL https://get.rvm.io | bash -s stable --rails
 ```
+
+<sup>3</sup> Should be by [coc](https://github.com/neoclide/coc.nvim)*, but if not:
+
+```sh
+$ curl -L \
+https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-mac \
+-o ~/.bin/rust-analyzer
+$ chmod +x ~/.bin/rust-analyzer
+```
+
 ## Other configuration
 
 ## Bash
@@ -153,14 +166,3 @@ The colors from the base16 theme is also used for tmux as seen in
 `tmux.conf.local`.
 
 ![screenshot](img/screenshot02.png)
-
-### macOS defaults
-
-Some variables used by macOS is set by writing defaults. For example, if the
-maximum key repeat available to set from the system preferences, a way to set
-them even lower would be by writing defaults.
-
-```sh
-defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
-defaults write -g KeyRepeat -int 1         # normal minimum is 2 (30 ms)
-```
