@@ -38,6 +38,8 @@
   branch = false
 [push]
   default = tracking
+[pull]
+  rebase = false
 
 [url "git@bitbucket.org:"]
   insteadOf = https://bitbucket.org/
