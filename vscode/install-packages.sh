@@ -9,6 +9,7 @@ packages="
   dbaeumer.vscode-eslint
   eamodio.gitlens
   esbenp.prettier-vscode
+  golang.go
   hoovercj.haskell-linter
   jdinhlife.gruvbox
   justusadam.language-haskell
