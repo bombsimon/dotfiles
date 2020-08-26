@@ -15,6 +15,7 @@ call plug#begin(g:vimSource)
 
 Plug 'Yggdroot/indentLine'
 Plug 'buoto/gotests-vim'
+Plug 'cappyzawa/starlark.vim'
 Plug 'dag/vim-fish'
 Plug 'elixir-editors/vim-elixir'
 Plug 'elmcast/elm-vim'
@@ -29,6 +30,7 @@ Plug 'mxw/vim-jsx'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() } }
 Plug 'ollykel/v-vim'
 Plug 'pangloss/vim-javascript'
+Plug 'pechorin/any-jump.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -44,39 +46,38 @@ silent! colorscheme gruvbox
 " filetype detection:ON  plugin:ON  indent:ON
 filetype plugin indent on
 
-" Set omnifunc for autocomplete specifically for java files
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
 " Syntax and custom behaviour
-autocmd BufRead,BufNewFile *.make set filetype=make
-autocmd FileType yaml setl sw=2 sts=2 et
+autocmd BufRead,BufNewFile *.make set  filetype=make
+autocmd FileType           yaml   setl sw=2 sts=2 et
+autocmd FileType           java   setl omnifunc=javacomplete#Complete
 
-syntax on            " Enable syntax highlighting
-set shell=/bin/bash  " Always use bash as shell - fish makes startup slow!
-set autochdir        " Set working directory to current file
-set autoindent       " Auto indent
-set background=dark  " Use dark background
-set copyindent       " Use existing indents for new indents
-set expandtab        " Expand tabs
-set hlsearch         " Highlight serached text
-set ignorecase       " Search case insensitive
-set incsearch        " Complete searches
-set laststatus=2     " Always show status bar
-set linebreak        " Break words while wrapping at 'breakat'
-set modeline         " Enable modline
-set modelines=3      " Look at max 3 lines
-set nojoinspaces     " Only one space when joining lines
-set nowrap           " Don't wrap lines
-set number           " Show line numbers
-set pastetoggle=<F2> " Enable paste toggle in insert mode
-set ruler            " Show the line number on the bar
-set shiftwidth=4     " Shift width 4
-set showcmd          " Show command
-set t_Co=256         " Enable 256 colors
-set tabstop=4        " Tab stop 4
-set tags=tags;       " Set tags path
-set termguicolors    " Use 'true color' in terminal
-set textwidth=80     " Set textwidth to 80 for wrapping
+syntax on                 " Enable syntax highlighting
+set shell=/bin/bash       " Always use bash as shell - fish makes startup slow!
+set autochdir             " Set working directory to current file
+set autoindent            " Auto indent
+set background=dark       " Use dark background
+set copyindent            " Use existing indents for new indents
+set expandtab             " Expand tabs to spaces
+set hlsearch              " Highlight serached text
+set ignorecase            " Search case insensitive
+set incsearch             " Complete searches
+set laststatus=2          " Always show status bar
+set linebreak             " Break words while wrapping at 'breakat'
+set modeline              " Enable modline
+set modelines=3           " Look at max 3 lines
+set nojoinspaces          " Only one space when joining lines
+set nowrap                " Don't wrap lines
+set number                " Show line numbers
+set pastetoggle=<F2>      " Enable paste toggle in insert mode
+set ruler                 " Show the line number on the bar
+set shiftwidth=4          " Shift width 4
+set showcmd               " Show command
+set spell spelllang=en_us " Help me spell
+set t_Co=256              " Enable 256 colors
+set tabstop=4             " Tab stop 4
+set tags=tags;            " Set tags path
+set termguicolors         " Use 'true color' in terminal
+set textwidth=80          " Set textwidth to 80 for wrapping
 
 " This will not work nice with macOS since I only access one register
 if !has('macunix')
@@ -151,6 +152,10 @@ nnoremap <leader>. :Lexplore<CR>
 " Don't conceal quotes
 let g:vim_json_syntax_conceal = 0
 
+" indentLine
+" Ignore markdown files.
+let g:indentLine_fileTypeExclude = ['markdown']
+
 " vim-airline
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1 " Prepatched fonts: https://github.com/powerline/fonts.git
@@ -176,9 +181,8 @@ call coc#add_extension(
   \ 'coc-go',
   \ 'coc-json',
   \ 'coc-yaml',
-  \ 'coc-rls',
+  \ 'coc-rust-analyzer',
   \ 'coc-python',
-  \ 'coc-rust-analyzer'
 \ )
 
 " vim-go
