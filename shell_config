@@ -7,6 +7,9 @@
 # Source ghcup for Haskell
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env"
 
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "${HOME}/google-cloud-sdk/path.$(basename ${SHELL}).inc" ]; then . "${HOME}/google-cloud-sdk/path.$(basename ${SHELL}).inc"; fi
 
@@ -110,6 +113,12 @@ function container_ip {
 
 function weather {
     curl "http://wttr.in/${1:-stockholm}"
+}
+
+function print-start-stop() {
+    echo >&2 "Starting command $1 at $(date)"
+    $@
+    echo >&2 "Done at $(date)"
 }
 
 # vim: set ft=zsh:

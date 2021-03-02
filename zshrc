@@ -52,3 +52,5 @@ function prompt {
 # PROMPT='╭─ %{$terminfo[bold]$fg[blue]%}%~ %{$reset_color%}$(git_prompt_info)$(virtualenv_prompt_info)
 # ╰─%B$%b '
 prompt
+
+[ "$(starhsip --version 2> /dev/null)" ] && eval "$(starhsip init zsh)"

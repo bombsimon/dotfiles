@@ -1,6 +1,7 @@
 # Source bash completions
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [ -f /etc/bash_completion ]           && . /etc/bash_completion
+[ -f ~/.fzf.bash ]                    && . ~/.fzf.bash
 
 # Enable globstar for bash (if supported)
 [ "$(shopt | grep globstar)" ] && shopt -s globstar

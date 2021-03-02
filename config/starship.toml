@@ -1,0 +1,21 @@
+[kubernetes]
+format = 'on [⛵ $context \($namespace\)](dimmed green) '
+disabled = false
+
+[kubernetes.context_aliases]
+docker-desktop                                            = "local"
+
+[gcloud]
+format = "[$symbol $active]($style) "
+style = "bold yellow"
+
+[git_status]
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+
+[golang]
+format = "via [🐹 $version](bold cyan) "
+
+[line_break]
+disabled = false

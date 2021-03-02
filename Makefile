@@ -12,7 +12,8 @@ SYMBOLIC_LINKS          = config/nvim/init.vim config/nvim/coc-settings.json \
 							my.cnf perlcriticrc perltidyrc ripgreprc sqliterc \
 							config/i3/config config/i3status/config \
 							config/fish/config.fish \
-							config/fish/functions/fish_prompt.fish
+							config/fish/functions/fish_prompt.fish \
+							config/starship.toml
 
 ifeq ($(shell uname -s),Darwin)
 	BASH_COMPLETION    := $(shell brew --prefix)$(BASH_COMPLETION)

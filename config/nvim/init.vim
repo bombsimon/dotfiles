@@ -16,20 +16,24 @@ call plug#begin(g:vimSource)
 Plug 'Yggdroot/indentLine'
 Plug 'buoto/gotests-vim'
 Plug 'cappyzawa/starlark.vim'
+Plug 'cespare/vim-toml'
 Plug 'dag/vim-fish'
 Plug 'elixir-editors/vim-elixir'
 Plug 'elmcast/elm-vim'
 Plug 'elzr/vim-json' " Needed to use indentLine but don't conceal JSON quotes
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'gleam-lang/gleam.vim'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-jsonnet'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
 Plug 'mxw/vim-jsx'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() } }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ollykel/v-vim'
 Plug 'pangloss/vim-javascript'
+Plug 'pearofducks/ansible-vim'
 Plug 'pechorin/any-jump.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-commentary'
@@ -52,8 +56,6 @@ autocmd FileType           yaml   setl sw=2 sts=2 et
 autocmd FileType           java   setl omnifunc=javacomplete#Complete
 
 syntax on                 " Enable syntax highlighting
-set shell=/bin/bash       " Always use bash as shell - fish makes startup slow!
-set autochdir             " Set working directory to current file
 set autoindent            " Auto indent
 set background=dark       " Use dark background
 set copyindent            " Use existing indents for new indents
@@ -65,11 +67,14 @@ set laststatus=2          " Always show status bar
 set linebreak             " Break words while wrapping at 'breakat'
 set modeline              " Enable modline
 set modelines=3           " Look at max 3 lines
+set noautochdir           " DO NOT Set working directory to current file
 set nojoinspaces          " Only one space when joining lines
 set nowrap                " Don't wrap lines
 set number                " Show line numbers
 set pastetoggle=<F2>      " Enable paste toggle in insert mode
+set rtp+=~/.fzf           " Add fzf to runtime path
 set ruler                 " Show the line number on the bar
+set shell=/bin/zsh        " Set explicit shell
 set shiftwidth=4          " Shift width 4
 set showcmd               " Show command
 set spell spelllang=en_us " Help me spell
@@ -78,6 +83,10 @@ set tabstop=4             " Tab stop 4
 set tags=tags;            " Set tags path
 set termguicolors         " Use 'true color' in terminal
 set textwidth=80          " Set textwidth to 80 for wrapping
+set grepprg=rg\
+  \ --vimgrep\
+  \ --no-heading
+
 
 " This will not work nice with macOS since I only access one register
 if !has('macunix')
@@ -130,12 +139,32 @@ nnoremap <leader>ggd :ptag <C-R><C-W><CR>
 " Tagbar toggle
 nnoremap <leader>t :TagbarToggle<CR>
 
-" import python module under cursor
-nnoremap <leader>i :ImportName<CR>
+" Move to current directory (local buffer only or all buffers)
+nnoremap <leader>cd :lcd %:p:h<CR>
+nnoremap <leader>cc :cd %:p:h<CR>
+
+" fzf
+" Make colors match colorscheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " coc mappings
 nmap <silent> <C-p> :call CocActionAsync('doHover')<CR>
-nmap <silent> gd <Plug>(coc-type-definition)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Set explorer style
@@ -211,6 +240,14 @@ else
 endif
 
 " ale
+function! FormaV(buffer) abort
+  return {
+  \   'command': 'v fmt -'
+  \}
+endfunction
+
+execute ale#fix#registry#Add('vfmt', 'FormatV', ['v'], 'v fmt for vlang')
+
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
@@ -236,6 +273,7 @@ let g:ale_fixers = {
 \   'perl': ['perltidy'],
 \   'python': ['black'],
 \   'ruby': ['rubocop'],
+\   'v': ['vfmt'],
 \}
 
 let g:ale_linters = {
