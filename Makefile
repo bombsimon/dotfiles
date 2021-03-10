@@ -1,7 +1,4 @@
-SED                    ?= gsed
-BASH_COMPLETION         = /etc/bash_completion
-COMPLETE_DOCKER_COMPOSE = 1.25.0
-COMPLETE_DOCKER_MACHINE = v0.16.0
+SED                    ?= sed # Set to gsed for Darwin
 SHELL_NAME             ?= zsh
 OH_MY_ZSH_THEME         = bira
 SHELLRC                 = $(SHELL_NAME)rc
@@ -15,12 +12,6 @@ SYMBOLIC_LINKS          = config/nvim/init.vim config/nvim/coc-settings.json \
 							config/fish/functions/fish_prompt.fish \
 							config/starship.toml
 
-ifeq ($(shell uname -s),Darwin)
-	BASH_COMPLETION    := $(shell brew --prefix)$(BASH_COMPLETION)
-endif
-
-BASH_COMPLETION_D       = $(BASH_COMPLETION).d
-
 .PHONY: help
 help: ## Show this help text
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
@@ -28,27 +19,8 @@ help: ## Show this help text
 		| awk 'BEGIN {FS = ":.*?## "}; \
 		{printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-$(BASH_COMPLETION_D)/docker:
-	@sudo curl -sL \
-		https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker \
-		-o $(BASH_COMPLETION_D)/docker
-
-$(BASH_COMPLETION_D)/docker-compose:
-	@sudo curl -sL \
-		https://raw.githubusercontent.com/docker/compose/$(COMPLETE_DOCKER_COMPOSE)/contrib/completion/bash/docker-compose \
-		-o $(BASH_COMPLETION_D)/docker-compose
-
-$(BASH_COMPLETION_D)/docker-machine:
-	@sudo curl -sL \
-		https://raw.githubusercontent.com/docker/machine/$(COMPLETE_DOCKER_MACHINE)/contrib/completion/bash/docker-machine.bash \
-		-o $(BASH_COMPLETION_D)/docker-machine
-
-.PHONY: bash-completion
-bash-completion: $(BASH_COMPLETION_D)/docker $(BASH_COMPLETION_D)/docker-compose $(BASH_COMPLETION_D)/docker-machine ## Install bash completion for docker, docker-compose and add it to the shell config file
-	@grep $(BASH_COMPLETION) $(SOURCEFILE) || echo "\n[ -f $(BASH_COMPLETION) ] && . $(BASH_COMPLETION)" >> $(SOURCEFILE)
-
 .PHONY: mostly-clean
-mostly-clean: ## Remove all symbolig links, remove tmux config, uninstall oh-my-zsh
+mostly-clean: ## Remove all symbolic links, remove tmux config
 	@$(foreach s,$(SYMBOLIC_LINKS), rm -f ~/.$(s);)
 	@rm -f ~/.tmux.conf*
 	@$(SED) -i '\#dotfiles#d' $(SOURCEFILE)
@@ -58,26 +30,21 @@ mostly-clean: ## Remove all symbolig links, remove tmux config, uninstall oh-my-
 clean: mostly-clean ## Remove everything and uninstall oh-my-zsh
 	@uninstall_oh_my_zsh
 
-.PHONY: create-source
-create-source: ## Create a source file for the shell (bashrc or zshrc)
-	@cp shell_config $(HOME)/.$(SHELLRC)
-	@cat $(SHELLRC) >> $(HOME)/.$(SHELLRC)
-
 .PHONY: dirs
-dirs: ## Create requirerd directories for configuration
+dirs: ## Create required directories for configuration
 	@$(foreach d,$(CONFIG_DIRECTORIES), mkdir -p ~/.config/$(d);)
 
 .PHONY: links
 links: dirs tmux ## Create symlinks for all configuration files
 	@$(foreach s,$(SYMBOLIC_LINKS), test -f ~/.$(s) || ln -s $(PWD)/$(s) ~/.$(s);)
 
-/usr/local/bin/brew: ## Install brerw
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
 .PHONY: mac
 mac: /usr/local/bin/brew ## Setup basic macOS applications
 	@xcode-select --install
 	@brew bundle
+
+/usr/local/bin/brew:
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 $(HOME)/.pyenv:
 	@curl https://pyenv.run | bash
@@ -97,19 +64,12 @@ $(HOME)/.oh-my-zsh/custom//plugins/zsh-autosuggestions: $(HOME)/.oh-my-zsh ## oh
 zsh-plugins: $(HOME)/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting $(HOME)/.oh-my-zsh/custom//plugins/zsh-autosuggestions ## Install oh-my-zsh plugins
 
 .PHONY: oh-my-zsh
-oh-my-zsh: zsh-plugins ## Install oh-my-zsh and belonging plugins, update oh-my-zsh config
-	@$(SED) -i 's/ZSH_THEME=".\+"/ZSH_THEME="$(OH_MY_ZSH_THEME)"/' ~/.$(SHELLRC)
-	@$(SED) -i 's/plugins=(git)/plugins=(git docker docker-compose kubectl zsh-autosuggestions zsh-syntax-highlighting)/' $(SOURCEFILE)
-	@grep "Custom config" $(HOME)/.$(SHELLRC) > /dev/null || \
-		(echo "" >> $(HOME)/.$(SHELLRC) && \
-		echo "# Custom config" >> $(HOME)/.$(SHELLRC) && \
-		cat shell_config >> $(HOME)/.$(SHELLRC) && \
+oh-my-zsh: zsh-plugins $(HOME)/.oh-my-zsh ## Install oh-my-zsh and belonging plugins, update oh-my-zsh config
+	@$(SED) -i 's/^ZSH_THEME=".\+"/ZSH_THEME="$(OH_MY_ZSH_THEME)"/' ~/.$(SHELLRC)
+	@$(SED) -i 's/^plugins=(.\+)/plugins=(git docker docker-compose kubectl zsh-autosuggestions zsh-syntax-highlighting)/' $(SOURCEFILE)
+	@grep "dotfiles/shellrc" $(HOME)/.$(SHELLRC) > /dev/null || \
 		echo "" >> $(HOME)/.$(SHELLRC) && \
-		cat zshrc >> $(HOME)/.$(SHELLRC)
-
-.PHONY: source
-source: create-source ## Create directories used in source file
-	@mkdir -p $(HOME)/.bin # Used in PATH
+		echo ". ~/git/dotfiles/shellrc" >> $(HOME)/.$(SHELLRC)
 
 $(HOME)/.tmux.conf:
 	@$(shell [ -f ~/.tmux.conf ] || ln -s $(PWD)/gpakosz.tmux/.tmux.conf ~/.tmux.conf)
