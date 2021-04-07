@@ -78,6 +78,7 @@ $(HOME)/.tmux.conf.local:
 	@$(shell [ -f ~/.tmux.conf.local ] || cp $(PWD)/gpakosz.tmux/.tmux.conf.local ~/.tmux.conf.local)
 
 .PHONY: tmux
+# TODO: This is broken - will append multiple times
 tmux: $(HOME)/.tmux.conf $(HOME)/.tmux.conf.local ## Seup tmux config
 	$(shell cat $(PWD)/tmux.conf.local >> ~/.tmux.conf.local)
 

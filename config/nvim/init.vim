@@ -13,6 +13,7 @@ endif
 
 call plug#begin(g:vimSource)
 
+Plug 'PProvost/vim-ps1'
 Plug 'Yggdroot/indentLine'
 Plug 'buoto/gotests-vim'
 Plug 'cappyzawa/starlark.vim'
@@ -89,9 +90,9 @@ set grepprg=rg\
 
 
 " This will not work nice with macOS since I only access one register
-" if !has('macunix')
-"   set clipboard=unnamed " Set vim clipboard to to X clipboard
-" endif
+if !has('macunix')
+  set clipboard=unnamed " Set vim clipboard to to X clipboard
+endif
 
 let mapleader="\<space>"
 
