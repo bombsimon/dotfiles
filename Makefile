@@ -7,6 +7,7 @@ CONFIG_DIRECTORIES      = fish/functions i3 i3status nvim
 SYMBOLIC_LINKS          = config/nvim/init.vim config/nvim/coc-settings.json \
 							gitconfig gitignore golangci.yml ideavimrc \
 							my.cnf perlcriticrc perltidyrc ripgreprc sqliterc \
+							alacritty.yaml \
 							config/i3/config config/i3status/config \
 							config/fish/config.fish \
 							config/fish/functions/fish_prompt.fish \

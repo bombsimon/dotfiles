@@ -1,0 +1,27 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# Full reference: https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+env:
+  TERM: xterm-256color
+
+window:
+  dimensions:
+    columns: 250
+    lines: 70
+
+  padding:
+    x: 0
+    y: 0
+
+  dynamic_padding: false
+
+  decorations: full
+  title: Alacritty
+
+font:
+  normal:
+    family: Fira Code
+
+    style: Retina
+
+  size: 11.0
