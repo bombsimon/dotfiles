@@ -27,6 +27,7 @@ Plug 'gleam-lang/gleam.vim'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-jsonnet'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'knsh15/vim-github-link'
 Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
