@@ -27,6 +27,7 @@ Plug 'gleam-lang/gleam.vim'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-jsonnet'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
@@ -36,7 +37,9 @@ Plug 'ollykel/v-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'pearofducks/ansible-vim'
 Plug 'pechorin/any-jump.vim'
+Plug 'preservim/nerdtree'
 Plug 'rust-lang/rust.vim'
+Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
@@ -145,21 +148,26 @@ nnoremap <leader>cd :lcd %:p:h<CR>
 nnoremap <leader>cc :cd %:p:h<CR>
 
 " fzf
-" Make colors match colorscheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+nmap <leader>f [fzf-p]
+xmap <leader>f [fzf-p]
+
+nnoremap <silent> [fzf-p]f     :<C-u>FzfPreviewProjectFiles<CR>
+
+nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResourcesRpc project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatusRpc<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>FzfPreviewGitActionsRpc<CR>
+nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffersRpc<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffersRpc<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResourcesRpc buffer project_mru<CR>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumpsRpc<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChangesRpc<CR>
+nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrepRpc<Space>
+xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrepRpc<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTagsRpc<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFixRpc<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationListRpc<CR>
 
 " coc mappings
 nmap <silent> <C-p> :call CocActionAsync('doHover')<CR>
@@ -170,13 +178,14 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Set explorer style
 let g:netrw_altv = 1         " Change to right splitting
-let g:netrw_banner = 0       " Disable banner
-let g:netrw_browse_split = 4 " Open files in last active window
-let g:netrw_liststyle = 3    " List style as a tree
-let g:netrw_menu = 0         " Disable menu
+let g:netrw_banner = 1       " Enable banner
+let g:netrw_browse_split = 0 " Open files in same window
+let g:netrw_liststyle = 0    " List style as default
+let g:netrw_menu = 1         " Enable menu
 let g:netrw_winsize = 20     " Use 20 columns for the netrw window
 
-nnoremap <leader>. :Lexplore<CR>
+nnoremap <leader>. :NERDTreeToggle<CR>
+nnoremap <leader>, :NERDTreeFocus<CR>
 
 " vim-json
 " Don't conceal quotes
