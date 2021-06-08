@@ -37,9 +37,6 @@
 [commit]
   gpgsign = true
 
-[credential]
-  helper = osxkeychain
-
 [diff]
   colorMoved = true
 
