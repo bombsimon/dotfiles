@@ -91,6 +91,9 @@ $BREWPATHS:\
 $PATH"
 
 # Init pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
 [ "$(pyenv -v 2> /dev/null)" ] && eval "$(pyenv init -)"
 
 # Quickly switch between JDK versions by only specifying major version.
