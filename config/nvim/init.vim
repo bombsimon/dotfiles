@@ -56,9 +56,11 @@ silent! colorscheme gruvbox
 filetype plugin indent on
 
 " Syntax and custom behaviour
-autocmd BufRead,BufNewFile *.make set  filetype=make
-autocmd FileType           yaml   setl sw=2 sts=2 et
-autocmd FileType           java   setl omnifunc=javacomplete#Complete
+augroup filetypedetect
+  autocmd BufRead,BufNewFile *.make set  filetype=make
+  autocmd FileType           yaml   setl sw=2 sts=2 et
+  autocmd FileType           java   setl omnifunc=javacomplete#Complete
+augroup END
 
 syntax on                 " Enable syntax highlighting
 set autoindent            " Auto indent
@@ -284,7 +286,8 @@ let g:ale_fixers = {
 \   'perl': ['perltidy'],
 \   'python': ['black'],
 \   'ruby': ['rubocop'],
-\   'v': ['vfmt'],
+\   'vlang': ['vfmt'],
+\   'starlark': ['buildifier'],
 \}
 
 let g:ale_linters = {
