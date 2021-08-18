@@ -13,6 +13,7 @@ endif
 
 call plug#begin(g:vimSource)
 
+Plug 'ray-x/material_plus.nvim'
 Plug 'PProvost/vim-ps1'
 Plug 'Yggdroot/indentLine'
 Plug 'buoto/gotests-vim'
@@ -27,7 +28,6 @@ Plug 'gleam-lang/gleam.vim'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-jsonnet'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'knsh15/vim-github-link'
 Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
@@ -48,9 +48,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 
 call plug#end()
-
-" Set the schema for vim - silently if not yet installed
-silent! colorscheme gruvbox
 
 " filetype detection:ON  plugin:ON  indent:ON
 filetype plugin indent on
@@ -94,6 +91,16 @@ set grepprg=rg\
   \ --vimgrep\
   \ --no-heading
 
+" Configure Material theme
+let g:material_style_fix = v:true
+let g:material_italic_comments = v:true
+let g:material_italic_string = v:true
+let g:material_style = "mariana"
+
+" Set the schema for vim - silently if not yet installed
+" Set it after we change syntax and other things since those changes affect the
+" colorscheme and might issue print statements.
+silent! colorscheme material
 
 " This will not work nice with macOS since I only access one register
 if !has('macunix')
