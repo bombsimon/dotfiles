@@ -9,6 +9,7 @@
 [alias]
   s           = status
   as          = commit -a --amend --no-edit
+  bv          = branch -vv
   co          = checkout
   pf          = push --force-with-lease
   ls          = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
