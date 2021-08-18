@@ -145,6 +145,7 @@ linters:
   disable:
     - dupl
     - funlen
+    - forbidigo
     - gci
     - gocognit
     - gocyclo
