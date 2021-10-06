@@ -283,7 +283,7 @@ let g:ale_python_black_options = '--line-length 79'
 " https://github.com/psf/black/blob/master/.flake8
 let g:ale_python_flake8_options = '--ignore="E203,E266,E501,W503"'
 
-let g:rust_cargo_use_clippy = 1
+let g:ale_rust_cargo_use_clippy = 1
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
