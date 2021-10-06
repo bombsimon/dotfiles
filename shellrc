@@ -94,7 +94,7 @@ $PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
-[ "$(pyenv -v 2> /dev/null)" ] && eval "$(pyenv init -)"
+[ "$(pyenv -v 2> /dev/null)" ] && eval "$(pyenv init -)" || true
 
 # Quickly switch between JDK versions by only specifying major version.
 function set-java-version {
@@ -273,7 +273,7 @@ function __zshrc {
     # zsh_prompt
 
     [ -f ~/.fzf.zsh ]                        && . ~/.fzf.zsh
-    [ "$(starhsip --version 2> /dev/null)" ] && eval "$(starhsip init zsh)"
+    [ "$(starhsip --version 2> /dev/null)" ] && eval "$(starhsip init zsh)" || true
 }
 
 function __bashrc {
