@@ -3,7 +3,7 @@ SHELL_NAME             ?= zsh
 OH_MY_ZSH_THEME         = bira
 SHELLRC                 = $(SHELL_NAME)rc
 SOURCEFILE              = ~/.$(SHELLRC)
-CONFIG_DIRECTORIES      = fish/functions i3 i3status nvim
+CONFIG_DIRECTORIES      = fish/functions i3 i3status nvim bat
 SYMBOLIC_LINKS          = config/nvim/init.vim config/nvim/coc-settings.json \
 							gitconfig gitignore golangci.yml ideavimrc \
 							my.cnf perlcriticrc perltidyrc ripgreprc sqliterc \
@@ -11,6 +11,7 @@ SYMBOLIC_LINKS          = config/nvim/init.vim config/nvim/coc-settings.json \
 							config/i3/config config/i3status/config \
 							config/fish/config.fish \
 							config/fish/functions/fish_prompt.fish \
+							config/bat/config \
 							config/starship.toml
 
 .PHONY: help
