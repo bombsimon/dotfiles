@@ -1,36 +1,36 @@
 #!/bin/sh
 
 packages="
-  0x9ef.vscode-vlang
-  alanz.vscode-hie-server
-  archaeron.vscode-tabularize
-  cfgweb.vscode-perl
+  asvetliakov.vscode-neovim
+  bazelbuild.vscode-bazel
+  bierner.markdown-preview-github-styles
+  cheshirekow.cmake-format
   davidanson.vscode-markdownlint
   dbaeumer.vscode-eslint
   eamodio.gitlens
+  elixir-lsp.elixir-ls
+  elmtooling.elm-ls-vscode
   esbenp.prettier-vscode
   golang.go
+  haskell.haskell
+  heptio.jsonnet
   hoovercj.haskell-linter
   jdinhlife.gruvbox
-  justusadam.language-haskell
-  kraih.mojolicious
-  mjmcloug.vscode-elixir
-  mohsen1.prettify-json
+  mads-hartmann.bash-ide-vscode
+  mblode.pretty-formatter
   ms-python.python
   ms-vscode.cmake-tools
-  ms-vscode.cpptools
-  ms-vscode.go
-  rebornix.ruby
   redhat.java
+  redhat.vscode-yaml
   rust-lang.rust
-  sbrink.elm
+  sainnhe.gruvbox-material
   sfodje.perlcritic
+  sfodje.perltidy
   shardulm94.trailing-spaces
-  technosophos.vscode-make
   timonwong.shellcheck
   twxs.cmake
-  vscjava.vscode-java-debug
-  vscodevim.vim
+  vlanguage.vscode-vlang
+  wayou.vscode-todo-highlight
 "
 
 for pkg in $packages; do
