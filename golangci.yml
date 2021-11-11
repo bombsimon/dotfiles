@@ -157,6 +157,7 @@ linters:
     - nakedret
     - nlreturn
     - prealloc
+    - paralleltest
     - scopelint
   fast: false
 
