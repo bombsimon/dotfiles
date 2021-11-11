@@ -3,6 +3,7 @@
   "diagnostic.enableSign": true,
   "go.goplsOptions": {
     "directoryFilters": [
+      "-bazel-bin",
       "-bazel-out",
       "-bazel-src",
       "-bazel-bin"

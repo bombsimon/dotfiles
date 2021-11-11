@@ -195,7 +195,7 @@ let g:netrw_menu = 1         " Enable menu
 let g:netrw_winsize = 20     " Use 20 columns for the netrw window
 
 nnoremap <leader>. :NERDTreeToggle<CR>
-nnoremap <leader>, :NERDTreeFocus<CR>
+nnoremap <leader>, :NERDTreeFind<CR>
 
 " vim-json
 " Don't conceal quotes
