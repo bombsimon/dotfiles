@@ -1,5 +1,18 @@
 {
   // General options
+  "workbench.colorTheme": "Material Theme",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.tree.indent": 20,
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.colorCustomizations": {
+    "[Material Theme]": {
+      "editor.findMatchHighlightBackground": "#449b9b",
+      "editorIndentGuide.activeBackground": "#8bd5eb",
+      "sideBar.border": "#4c6470",
+      "terminal.background": "#303e46",
+      "tree.indentGuidesStroke": "#4c6470",
+    },
+  },
   "editor.fontFamily": "Fira Code, Menlo, monospace",
   "editor.fontLigatures": true,
   "editor.formatOnSave": true,
@@ -8,9 +21,9 @@
     80,
     120
   ],
+  "files.insertFinalNewline": true,
   "files.autoSave": "afterDelay",
   "problems.showCurrentInStatus": true,
-  "workbench.colorTheme": "Gruvbox Dark Medium",
   //
   "cmake.mingwSearchDirs": [
     "C:\\Program Files\\MinGW"
@@ -37,7 +50,7 @@
   "python.linting.flake8Enabled": true,
   "python.linting.lintOnSave": true,
   "python.linting.pylintEnabled": true,
-  "python.languageServer": "Microsoft",
+  "python.languageServer": "Default",
   //
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
@@ -60,8 +73,9 @@
   // Neovim
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   // Bazel
-  "bazel.buildifierExecutable": "~/go/bin/buildifier",
+  "bazel.buildifierExecutable": "/home/simon/go/bin/buildifier",
   "bazel.buildifierFixOnFormat": true,
   //
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+  "cmake.configureOnOpen": true,
 }
