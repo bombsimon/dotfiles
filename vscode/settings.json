@@ -24,6 +24,7 @@
   "files.insertFinalNewline": true,
   "files.autoSave": "afterDelay",
   "problems.showCurrentInStatus": true,
+  "editor.autoClosingBrackets": "never",
   //
   "cmake.mingwSearchDirs": [
     "C:\\Program Files\\MinGW"
@@ -73,7 +74,7 @@
   // Neovim
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   // Bazel
-  "bazel.buildifierExecutable": "/home/simon/go/bin/buildifier",
+  "bazel.buildifierExecutable": "${env:HOME}/go/bin/buildifier",
   "bazel.buildifierFixOnFormat": true,
   //
   "redhat.telemetry.enabled": false,
