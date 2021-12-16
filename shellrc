@@ -52,8 +52,8 @@ export LESS="-+F"
 export EDITOR="nvim"
 export VISUAL="nvim"
 
-[ -d "/usr/local/go" ] && export GOROOT="/usr/local/go" # Darwin
-[ -d "/usr/lib/go" ]   && export GOROOT="/usr/lib/go"   # Linux
+[ -e "/usr/local/go" ] && export GOROOT="/usr/local/go" # Darwin
+[ -e "/usr/lib/go" ]   && export GOROOT="/usr/lib/go"   # Linux
 export GOPATH="$HOME/go"
 export GO111MODULE="auto"
 
@@ -78,7 +78,7 @@ RUSTPATHS="$HOME/.cargo/bin"
 CIQPATHS="$HOME/.connectiq-sdk/bin"
 
 # Keg-only formulas refusing to link for macOS-provided software.
-BREWPATHS="/usr/local/opt/curl/bin"
+BREWPATHS="/usr/local/opt/curl/bin:/opt/homebrew/bin:/opt/homebrew/opt/coreutils/bin"
 
 export PATH="$CIQPATHS:\
 $RUSTPATHS:\
@@ -94,7 +94,8 @@ $PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
-[ "$(pyenv -v 2> /dev/null)" ] && eval "$(pyenv init -)" || true
+[ "$(pyenv -v 2> /dev/null)" ] && eval "$(pyenv init --path)" || true
+[ "$(pyenv -v 2> /dev/null)" ] && eval "$(pyenv init -)"      || true
 
 # Quickly switch between JDK versions by only specifying major version.
 function set-java-version {

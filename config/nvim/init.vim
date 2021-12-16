@@ -206,7 +206,7 @@ let g:vim_json_syntax_conceal = 0
 let g:indentLine_fileTypeExclude = ['markdown']
 
 " vim-airline
-let g:airline_theme='gruvbox'
+let g:airline_theme='base16_default_dark'
 let g:airline_powerline_fonts = 1 " Prepatched fonts: https://github.com/powerline/fonts.git
 let g:airline#extensions#tabline#enabled = 1
 

@@ -34,8 +34,9 @@ download them manually. Maybe I'll try `cask` in the future.
   * Change save vs. copy screenshot, i.e. `⇧`+`⌘`+`3` 🔄 `⇧`+`^`+`⌘`+`3`
   * Map `Caps Lock`to `Esc`
   * Disable `^`+`Arrows` for Mission Control (used for tmux)
-  * In the shortcuts menu, set `Full Keyborad Access` to `All controls` to support tabbing between buttons
-  * Under `Accessability`, enable scroll gesture to zoom
+  * Under `Keyboard` -> `Shortcuts`, select "Use keyboard navigation to move
+    focus between controls" to support tabbing between buttons
+  * Under `Accessability` -> `Zoom`, enable scroll gesture to zoom
 * Install non-brew applications
   * [1Password](https://1password.com/downloads/mac/)
   * [Discord](https://discordapp.com/download)
@@ -108,7 +109,7 @@ used.
 
 ```sh
 $ curl -L https://install.perlbrew.pl | bash
-perlbrew install perl-5.30.0
+perlbrew install -Dusethreads perl-5.30.0
 perlbrew install-cpanm
 ```
 
