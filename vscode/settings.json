@@ -1,5 +1,6 @@
 {
   // General options
+  "redhat.telemetry.enabled": false,
   "workbench.colorTheme": "Material Theme",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.tree.indent": 20,
@@ -9,6 +10,7 @@
       "editor.findMatchHighlightBackground": "#449b9b",
       "editorIndentGuide.activeBackground": "#8bd5eb",
       "sideBar.border": "#4c6470",
+      "panel.border": "#4c6470",
       "terminal.background": "#303e46",
       "tree.indentGuidesStroke": "#4c6470",
     },
@@ -29,6 +31,7 @@
   "cmake.mingwSearchDirs": [
     "C:\\Program Files\\MinGW"
   ],
+  "cmake.configureOnOpen": true,
   //
   "go.autocompleteUnimportedPackages": true,
   "go.formatTool": "goimports",
@@ -73,10 +76,13 @@
   },
   // Neovim
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+  "vscode-neovim.neovimInitVimPaths.darwin": "/Users/simon.sawert/.config/nvim/init.vim",
+  "vscode-neovim.neovimInitVimPaths.linux": "/home/simon/.config/nvim/init.vim",
   // Bazel
   "bazel.buildifierExecutable": "${env:HOME}/go/bin/buildifier",
   "bazel.buildifierFixOnFormat": true,
   //
-  "redhat.telemetry.enabled": false,
-  "cmake.configureOnOpen": true,
+  "haskell.formattingProvider": "brittany",
+  "rust.clippy_preference": "on",
 }

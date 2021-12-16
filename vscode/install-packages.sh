@@ -18,6 +18,7 @@ packages="
   heptio.jsonnet
   hoovercj.haskell-linter
   mads-hartmann.bash-ide-vscode
+  matklad.rust-analyzer
   mblode.pretty-formatter
   ms-python.python
   ms-vscode.cmake-tools
