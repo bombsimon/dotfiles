@@ -41,9 +41,6 @@ fi
     alias vi="nvim" && \
     alias vim="nvim"
 
-export NPM_PACKAGES="$HOME/.npm"
-export NPM_CONFIG_PREFIX="$NPM_PACKAGES"
-
 export HISTCONTROL="ignoreboth"
 export HISTSIZE=1000
 export HISTFILESIZE=2000
@@ -71,7 +68,6 @@ alias fzff="fzf --height 100% --preview 'bat --style=numbers --color=always --li
 
 GOPATHS="$GOPATH/bin:$GOROOT/bin"
 LOCALPATHS="$HOME/bin:$HOME/.bin:$HOME/.local/bin:/usr/local/bin"
-NPMPATHS="$NPM_PACKAGES/bin"
 PERLPATHS="$HOME/perl5/perlbrew/bin"
 RUBYPATHS="$HOME/.rvm/bin"
 RUSTPATHS="$HOME/.cargo/bin"
@@ -85,7 +81,6 @@ $RUSTPATHS:\
 $GOPATHS:\
 $PERLPATHS:\
 $RUBYPATHS:\
-$NPMPATHS:\
 $LOCALPATHS:\
 $BREWPATHS:\
 $PATH"
