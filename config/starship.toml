@@ -3,7 +3,7 @@ format = 'on [⛵ $context \($namespace\)](dimmed green) '
 disabled = false
 
 [kubernetes.context_aliases]
-docker-desktop                                            = "local"
+docker-desktop = "local"
 
 [gcloud]
 format = "[$symbol $active]($style) "
