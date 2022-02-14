@@ -41,6 +41,8 @@ fi
     alias vi="nvim" && \
     alias vim="nvim"
 
+alias glogin='gcloud auth login --update-adc'
+
 export HISTCONTROL="ignoreboth"
 export HISTSIZE=1000
 export HISTFILESIZE=2000
@@ -72,6 +74,8 @@ PERLPATHS="$HOME/perl5/perlbrew/bin"
 RUBYPATHS="$HOME/.rvm/bin"
 RUSTPATHS="$HOME/.cargo/bin"
 CIQPATHS="$HOME/.connectiq-sdk/bin"
+JENVPATHS="$HOME/.jenv/bin"
+LLVMPATHS="$(brew --prefix)/opt/llvm/bin"
 
 # Keg-only formulas refusing to link for macOS-provided software.
 BREWPATHS="/usr/local/opt/curl/bin:/opt/homebrew/bin:/opt/homebrew/opt/coreutils/bin"
@@ -83,7 +87,12 @@ $PERLPATHS:\
 $RUBYPATHS:\
 $LOCALPATHS:\
 $BREWPATHS:\
+$JENVPATHS:\
+$LLVMPATHS:\
 $PATH"
+
+# Init jenv
+[ "$(jenv -v 2> /dev/null)" ] && eval "$(jenv init -)" || true
 
 # Init pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -145,13 +154,6 @@ function print-start-stop {
     echo >&2 "Starting command $1 at $(date)"
     $@
     echo >&2 "Done at $(date)"
-}
-
-# Re-authenticate gcloud by running both auth login and application-default
-# login in the background to do them async.
-function glogin {
-    gcloud auth application-default login &
-    gcloud auth login &
 }
 
 # Remove ruby_prompt_info used in many zsh themes
