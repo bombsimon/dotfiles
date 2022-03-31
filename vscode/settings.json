@@ -2,7 +2,9 @@
   // General options
   "files.insertFinalNewline": true,
   "redhat.telemetry.enabled": false,
-  //
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
   "editor.formatOnSave": true,
   "editor.autoClosingBrackets": "never",
   "files.autoSave": "afterDelay",
@@ -79,10 +81,20 @@
   "rust-client.engine": "rust-analyzer",
   "rust.clippy_preference": "on",
   //
-  "bazel.buildifierExecutable": "${env:HOME}/go/bin/buildifier",
+  // Does not work when trying to expand ${env:HOME}
+  "bazel.buildifierExecutable": "/Users/simon.sawert/go/bin/buildifier",
   "bazel.buildifierFixOnFormat": true,
   //
   "haskell.formattingProvider": "brittany",
+  //
+  "Lua.telemetry.enable": false,
+  "Lua.diagnostics.globals": [
+    "playdate",
+    "import"
+  ],
+  "Lua.workspace.library": [
+    "${env:HOME}/Developer/PlaydateSDK/CoreLibs"
+  ],
   //
   //
   "[markdown]": {
@@ -94,5 +106,5 @@
   },
   "[proto3]": {
     "editor.defaultFormatter": "xaver.clang-format"
-  },
+  }
 }
