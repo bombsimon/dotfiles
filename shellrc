@@ -75,7 +75,6 @@ RUBYPATHS="$HOME/.rvm/bin"
 RUSTPATHS="$HOME/.cargo/bin"
 CIQPATHS="$HOME/.connectiq-sdk/bin"
 JENVPATHS="$HOME/.jenv/bin"
-LLVMPATHS="$(brew --prefix)/opt/llvm/bin"
 
 # Keg-only formulas refusing to link for macOS-provided software.
 BREWPATHS="/usr/local/opt/curl/bin:/opt/homebrew/bin:/opt/homebrew/opt/coreutils/bin"
@@ -88,8 +87,16 @@ $RUBYPATHS:\
 $LOCALPATHS:\
 $BREWPATHS:\
 $JENVPATHS:\
-$LLVMPATHS:\
 $PATH"
+
+# We must add paths depending on brew after first updating PATH but it's only
+# needed if we're on macOS/Darwin.
+if [ "$(uname -s)" = "Darwin" ]; then
+  LLVMPATHS="$(brew --prefix)/opt/llvm/bin"
+  export PATH="$LLVMPATHS:$PATH"
+fi
+
+export PLAYDATE_SDK_PATH="$HOME/Developer/PlaydateSDK"
 
 # Init jenv
 [ "$(jenv -v 2> /dev/null)" ] && eval "$(jenv init -)" || true
@@ -100,41 +107,6 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 
 [ "$(pyenv -v 2> /dev/null)" ] && eval "$(pyenv init --path)" || true
 [ "$(pyenv -v 2> /dev/null)" ] && eval "$(pyenv init -)"      || true
-
-# Quickly switch between JDK versions by only specifying major version.
-function set-java-version {
-    case "$1" in
-        8)
-            version="jdk1.8.0_221.jdk"
-            ;;
-        12)
-            version="jdk-12.0.2.jdk"
-            ;;
-        14)
-            version="jdk-14.0.1.jdk"
-            ;;
-        *)
-            version="jdk-14.0.1.jdk"
-            ;;
-    esac
-
-    JAVA_VERSION=${version:-jdk1.8.0_221.jdk}
-
-    rm -f "$HOME/.bin/java"
-    rm -f "$HOME/.bin/javac"
-    ln -s "/Library/Java/JavaVirtualMachines/${JAVA_VERSION}/Contents/Home/bin/java" "$HOME/.bin/java"
-    ln -s "/Library/Java/JavaVirtualMachines/${JAVA_VERSION}/Contents/Home/bin/javac" "$HOME/.bin/javac"
-}
-
-# Check if reboot is required, will only work on OSses that uses the
-# reboot-required file.
-function rr {
-    if [ -f "/var/run/reboot-required" ]; then
-        echo "Reboot required!!";
-    else
-        echo "No reboot needed";
-    fi
-}
 
 # Get the actual IP address of a Docker container.
 function container_ip {
@@ -164,6 +136,11 @@ function parse_git_branch {
     [ "$(which git)" ] || return
 
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
+}
+
+function jqvalid {
+    pattern="${1:-.}"
+    jq -R -r "fromjson? | $pattern"
 }
 
 function zsh_prompt {
