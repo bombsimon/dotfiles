@@ -39,6 +39,7 @@
   gpgsign = true
 
 [diff]
+  tool = vimdiff
   colorMoved = true
 
 [fetch]
