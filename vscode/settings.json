@@ -21,8 +21,8 @@
       "sideBar.border": "#4c6470",
       "panel.border": "#4c6470",
       "terminal.background": "#303e46",
-      "tree.indentGuidesStroke": "#4c6470",
-    },
+      "tree.indentGuidesStroke": "#4c6470"
+    }
   },
   "editor.fontFamily": "Fira Code, Menlo, monospace",
   "editor.fontLigatures": true,
@@ -48,6 +48,9 @@
   "go.lintTool": "golangci-lint",
   "go.lintFlags": [
     "--fast"
+  ],
+  "go.testFlags": [
+    "-v"
   ],
   "go.useLanguageServer": true,
   "go.toolsManagement.autoUpdate": true,
@@ -78,8 +81,7 @@
   "vim.textwidth": 80,
   // Rust
   "rust-analyzer.checkOnSave.command": "clippy",
-  "rust-client.engine": "rust-analyzer",
-  "rust.clippy_preference": "on",
+  "rust-analyzer.inlayHints.enable": false,
   //
   // Does not work when trying to expand ${env:HOME}
   "bazel.buildifierExecutable": "/Users/simon.sawert/go/bin/buildifier",
@@ -95,6 +97,12 @@
   "Lua.workspace.library": [
     "${env:HOME}/Developer/PlaydateSDK/CoreLibs"
   ],
+  "Lua.runtime.nonstandardSymbol": [
+    "+=",
+    "-=",
+    "*=",
+    "/="
+  ],
   //
   //
   "[markdown]": {
@@ -106,5 +114,5 @@
   },
   "[proto3]": {
     "editor.defaultFormatter": "xaver.clang-format"
-  }
+  },
 }
