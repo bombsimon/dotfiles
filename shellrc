@@ -75,6 +75,7 @@ RUBYPATHS="$HOME/.rvm/bin"
 RUSTPATHS="$HOME/.cargo/bin"
 CIQPATHS="$HOME/.connectiq-sdk/bin"
 JENVPATHS="$HOME/.jenv/bin"
+RANCHER_DESKTOP_PATHS="$HOME/.rd/bin"
 
 # Keg-only formulas refusing to link for macOS-provided software.
 BREWPATHS="/usr/local/opt/curl/bin:/opt/homebrew/bin:/opt/homebrew/opt/coreutils/bin"
@@ -87,6 +88,7 @@ $RUBYPATHS:\
 $LOCALPATHS:\
 $BREWPATHS:\
 $JENVPATHS:\
+$RANCHER_DESKTOP_PATHS:\
 $PATH"
 
 # We must add paths depending on brew after first updating PATH but it's only
