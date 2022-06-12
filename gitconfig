@@ -29,7 +29,6 @@
 [core]
   pager = less -R
   editor = nvim
-  u
   excludesfile = ~/.gitignore
 
 [color]
