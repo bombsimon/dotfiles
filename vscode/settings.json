@@ -55,6 +55,7 @@
   "go.useLanguageServer": true,
   "go.toolsManagement.autoUpdate": true,
   //
+  "python.terminal.activateEnvironment": false,
   "python.formatting.provider": "black",
   "python.formatting.blackArgs": [
     "--line-length=79"
@@ -115,4 +116,7 @@
   "[proto3]": {
     "editor.defaultFormatter": "xaver.clang-format"
   },
+  "gitlens.currentLine.enabled": true,
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.recentChange.enabled": false,
 }
