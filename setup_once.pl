@@ -36,6 +36,11 @@ sub ssh_config {
     return if -f $ssh_config_file;
 
     my $ssh_config = <<"EOF";
+Host *
+  ForwardAgent no
+  IdentitiesOnly yes
+  AddKeysToAgent yes
+
 Host github.com
   HostName github.com
 
@@ -46,9 +51,6 @@ Host gist.github.com github.com
   Port 22
   User git
   IdentityFile ~/.ssh/github
-  IdentitiesOnly yes
-  ForwardAgent yes
-  AddKeysToAgent yes
 EOF
 
     open my $fh, ">>", $ssh_config_file || croak "Could not open file for writing: $!";
@@ -70,7 +72,7 @@ sub macos_reload_settings {
 sub macos_key_repeat {
     # More keys can be found here: https://mths.be/macos
     my @cmds = (
-        # Enable key repeat and set it's speed
+        # Enable key repeat and set its speed
         "defaults write com.apple.Accessibility KeyRepeatDelay -float 0.5",
         "defaults write com.apple.Accessibility KeyRepeatInterval -float 0.083333333",
         "defaults write NSGlobalDomain KeyRepeat -int 2",
