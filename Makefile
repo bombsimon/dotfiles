@@ -46,12 +46,16 @@ $(HOME)/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting: $(HOME)/.oh-my-zsh ##
 	@git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
 		$${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-$(HOME)/.oh-my-zsh/custom//plugins/zsh-autosuggestions: $(HOME)/.oh-my-zsh ## oh-my-zsh plugin
+$(HOME)/.oh-my-zsh/custom/plugins/zsh-autosuggestions: $(HOME)/.oh-my-zsh ## oh-my-zsh plugin
 	@git clone https://github.com/zsh-users/zsh-autosuggestions \
 		$${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
+$(HOME)/.oh-my-zsh/custom/plugins/zsh-fzf-history-search: $(HOME)/.oh-my-zsh ## oh-my-zsh plugin
+	@git clone https://github.com/joshskidmore/zsh-fzf-history-search\
+		$${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-fzf-history-search
+
 .PHONY: zsh-plugins
-zsh-plugins: $(HOME)/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting $(HOME)/.oh-my-zsh/custom//plugins/zsh-autosuggestions ## Install oh-my-zsh plugins
+zsh-plugins: $(HOME)/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting $(HOME)/.oh-my-zsh/custom/plugins/zsh-autosuggestions $(HOME)/.oh-my-zsh/custom/plugins/zsh-fzf-history-search ## Install oh-my-zsh plugins
 
 .PHONY: oh-my-zsh
 oh-my-zsh: zsh-plugins $(HOME)/.oh-my-zsh ## Install oh-my-zsh and belonging plugins, update oh-my-zsh config
