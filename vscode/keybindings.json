@@ -1,0 +1,12 @@
+[
+    {
+        "key": "shift+cmd+m",
+        "command": "workbench.action.closePanel",
+        // "when": "terminalFocus"
+    },
+    {
+        "key": "shift+cmd+m",
+        "command": "workbench.action.toggleMaximizedPanel",
+        "when": "!terminalFocus"
+    },
+]
