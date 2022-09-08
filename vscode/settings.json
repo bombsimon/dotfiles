@@ -54,6 +54,12 @@
   ],
   "go.useLanguageServer": true,
   "go.toolsManagement.autoUpdate": true,
+  "gopls": {
+    "directoryFilters": [
+      "-bazel-*",
+      "-**/node_modules",
+    ],
+  },
   //
   "python.terminal.activateEnvironment": false,
   "python.formatting.provider": "black",
