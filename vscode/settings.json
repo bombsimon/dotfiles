@@ -55,8 +55,11 @@
   "go.useLanguageServer": true,
   "go.toolsManagement.autoUpdate": true,
   "gopls": {
-    "directoryFilters": [
-      "-bazel-*",
+    "build.directoryFilters": [
+      "-bazel-bin",
+      "-bazel-out",
+      "-bazel-src",
+      "-bazel-testlogs",
       "-**/node_modules",
     ],
   },
