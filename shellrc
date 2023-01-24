@@ -21,6 +21,9 @@ export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
 export LS_OPTIONS='--color=auto'
 export COLORTERM=truecolor
 
+# Add our libraries installed with Brew to path
+export LIBRARY_PATH="$(brew --prefix)/lib"
+
 # Support GPG signing for macOS.
 # https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty)
