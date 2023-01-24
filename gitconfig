@@ -17,6 +17,7 @@
   log1        = log --oneline
   latest      = log -1 --pretty=%B
   nosign      = -c commit.gpgsign=false commit
+  reset-hard  = reset --hard @{u}
   branch-name = rev-parse --abbrev-ref HEAD
   pushup      = "!git push -u origin $(git branch-name)"
   standup     = "!git log --since yesterday --author $(git config user.email) --pretty=short"
@@ -46,6 +47,7 @@
 
 [init]
   defaultBranch = main
+  templatedir = ~/.git-templates
 
 [pager]
   branch = false

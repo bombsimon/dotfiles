@@ -38,6 +38,7 @@ dirs: ## Create required directories for configuration
 .PHONY: links
 links: dirs tmux ## Create symlinks for all configuration files
 	@$(foreach s,$(SYMBOLIC_LINKS), test -f ~/.$(s) || ln -s $(PWD)/$(s) ~/.$(s);)
+	@ln -s git-templates ~/.git-templates
 
 $(HOME)/.oh-my-zsh: ## Install oh-my-zsh
 	@sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
