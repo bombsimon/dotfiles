@@ -28,6 +28,7 @@ Plug 'gleam-lang/gleam.vim'
 Plug 'godlygeek/tabular'
 Plug 'google/vim-jsonnet'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'jvirtanen/vim-hcl'
 Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
@@ -42,6 +43,7 @@ Plug 'preservim/nerdtree'
 Plug 'rust-lang/rust.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -71,6 +73,7 @@ set laststatus=2          " Always show status bar
 set linebreak             " Break words while wrapping at 'breakat'
 set modeline              " Enable modline
 set modelines=3           " Look at max 3 lines
+set mouse=                " Turn of mouse mode
 set noautochdir           " DO NOT Set working directory to current file
 set nojoinspaces          " Only one space when joining lines
 set nowrap                " Don't wrap lines
@@ -112,7 +115,7 @@ let mapleader="\<space>"
 " Only show cursor and colorcolumn in active windows when using splits
 augroup CursorLineOnlyInActiveWindow
   autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline colorcolumn=80
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline colorcolumn=80,120
   autocmd WinLeave * setlocal nocursorline colorcolumn=
 augroup END
 
@@ -183,8 +186,9 @@ nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationListRpc<CR>
 nmap <silent> <C-p> :call CocActionAsync('doHover')<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> rr <Plug>(coc-rename)
 
 " Set explorer style
 let g:netrw_altv = 1         " Change to right splitting
