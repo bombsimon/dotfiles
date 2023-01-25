@@ -106,13 +106,15 @@ null_ls.setup({
     null_ls.builtins.formatting.black.with({
       extra_args = { "--line-length=79" },
     }),
+    null_ls.builtins.formatting.jq,
     null_ls.builtins.formatting.shfmt,
     null_ls.builtins.formatting.trim_whitespace,
-    null_ls.builtins.formatting.jq,
 
-    null_ls.builtins.diagnostics.jsonlint,
     null_ls.builtins.diagnostics.eslint,
+    null_ls.builtins.diagnostics.jsonlint,
+    null_ls.builtins.diagnostics.markdownlint,
     null_ls.builtins.diagnostics.shellcheck,
+    null_ls.builtins.diagnostics.yamllint,
 
     -- Go
     null_ls.builtins.formatting.goimports,
@@ -135,6 +137,7 @@ mason_null_ls.setup({
     -- "rust-analyzer",
     "shellcheck",
     "stylua",
+    "yamllint",
   },
 })
 
