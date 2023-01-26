@@ -21,9 +21,6 @@ export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
 export LS_OPTIONS='--color=auto'
 export COLORTERM=truecolor
 
-# Add our libraries installed with Brew to path
-export LIBRARY_PATH="$(brew --prefix)/lib"
-
 # Support GPG signing for macOS.
 # https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty)
@@ -99,6 +96,8 @@ $PATH"
 if [ "$(uname -s)" = "Darwin" ]; then
   LLVMPATHS="$(brew --prefix)/opt/llvm/bin"
   export PATH="$LLVMPATHS:$PATH"
+
+  export LIBRARY_PATH="$(brew --prefix)/lib"
 fi
 
 export PLAYDATE_SDK_PATH="$HOME/Developer/PlaydateSDK"
