@@ -89,6 +89,14 @@ local servers = {
       },
     },
   },
+  sumneko_lua_playdate = {
+    Lua = {
+      runtime = { nonstandardSymbol = { "+=", "-=", "*=", "/=" } },
+      workspace = {
+        library = { os.getenv("HOME") .. "/Developer/PlaydateSDK/CoreLibs/" },
+      },
+    },
+  },
 }
 
 null_ls.setup({
@@ -141,13 +149,25 @@ mason_null_ls.setup({
   },
 })
 
+local path = require("plenary.path")
+local exists = function(name)
+  return path:new(vim.fn.getcwd() .. "/" .. name):exists()
+end
+
 mason_lsp_config.setup()
 mason_lsp_config.setup_handlers({
   function(server_name)
+    local settings = servers[server_name]
+
+    -- Load custom settings for Playdate projects
+    if server_name == "sumneko_lua" and exists("Source/main.lua") then
+      settings = servers["sumneko_lua_playdate"]
+    end
+
     require("lspconfig")[server_name].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = servers[server_name],
+      settings = settings,
     })
   end,
 })
