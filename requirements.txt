@@ -1,6 +1,0 @@
-black
-flake8
-pylint
-pynvim
-python-language-server
-virtualenv
