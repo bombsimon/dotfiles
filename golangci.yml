@@ -37,22 +37,36 @@ linters-settings:
 linters:
   enable-all: true
   disable:
+    - cyclop
+    - deadcode
     - dupl
+    - dupword
+    - exhaustivestruct
+    - exhaustruct
     - forbidigo
     - funlen
     - gci
     - gocognit
     - gocyclo
     - godox
+    - golint
     - gomnd
+    - ifshort
     - interfacer
     - lll
+    - maintidx
     - maligned
     - nakedret
+    - nestif
     - nlreturn
+    - nosnakecase
     - paralleltest
     - prealloc
     - scopelint
+    - structcheck
+    - testpackage
+    - varcheck
+    - varnamelen
   fast: false
 
 
