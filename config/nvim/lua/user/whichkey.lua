@@ -44,6 +44,7 @@ local mappings = {
     [","] = { "<cmd>NvimTreeFindFile<cr>", "Find current file" },
     ["."] = { "<cmd>NvimTreeToggle<cr>", "Toggle file tree" },
     ["?"] = { "<cmd>WhichKey<cr>", "Halp!?" },
+    ["c"] = { "<cmd>tabclose<CR>", "Close tab (and all panes)" },
     ["cc"] = { "<cmd>cd %:p:h<CR>", "Change dir for all buffers" },
     ["cd"] = { "<cmd>lcd %:p:h<cr>", "Change dir for this buffer" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },

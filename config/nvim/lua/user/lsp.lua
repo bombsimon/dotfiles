@@ -89,6 +89,13 @@ local servers = {
       },
     },
   },
+  sumneko_lua = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
   sumneko_lua_playdate = {
     Lua = {
       runtime = { nonstandardSymbol = { "+=", "-=", "*=", "/=" } },
@@ -127,7 +134,9 @@ null_ls.setup({
     -- Go
     null_ls.builtins.formatting.goimports,
     null_ls.builtins.formatting.gofumpt,
-    null_ls.builtins.diagnostics.golangci_lint,
+    null_ls.builtins.diagnostics.golangci_lint.with({
+      extra_args = { "--fast=false" },
+    }),
   },
 })
 
@@ -142,7 +151,6 @@ mason_null_ls.setup({
     "jq",
     "markdownlint",
     "misspell",
-    -- "rust-analyzer",
     "shellcheck",
     "stylua",
     "yamllint",

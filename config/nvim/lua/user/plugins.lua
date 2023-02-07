@@ -38,15 +38,18 @@ packer.init({
 })
 
 packer.startup(function(use)
-  -- stylua: ignore start
-  use { "wbthomason/packer.nvim" }   -- packet manager for plugins
-  use { "ray-x/starry.nvim" }        -- colorscheme to use 'miranda_lighter"
-  use { "echasnovski/mini.align" }   -- tabularize/align
-  use { "sheerun/vim-polyglot" }     -- language packs for all the things
-  use { "folke/which-key.nvim" }     -- help to show key bindings
-  use { 'lewis6991/gitsigns.nvim' }  -- git tools
-  use { "simrat39/rust-tools.nvim" } -- rust improvement
-  -- stylua: ignore end
+  use({ "echasnovski/mini.align" }) -- tabularize/align
+  use({ "folke/which-key.nvim" }) -- help to show key bindings
+  use({ "lewis6991/gitsigns.nvim" }) -- git tools
+  use({ "ray-x/starry.nvim" }) -- colorscheme to use 'miranda_lighter"
+  use({ "sheerun/vim-polyglot" }) -- language packs for all the things
+  use({ "simrat39/rust-tools.nvim" }) -- rust improvement
+  use({ "wbthomason/packer.nvim" }) -- packet manager for plugins
+
+  use({
+    "ruifm/gitlinker.nvim",
+    requires = "nvim-lua/plenary.nvim",
+  }) -- copy remote url
 
   use({
     "nvim-telescope/telescope.nvim",
@@ -89,9 +92,28 @@ packer.startup(function(use)
   end
 end)
 
-require("nvim-tree").setup()
 require("mini.align").setup()
-require("gitsigns").setup()
+require("gitlinker").setup()
+require("gitsigns").setup({
+  current_line_blame = true,
+  current_line_blame_opts = {
+    delay = 200,
+  },
+})
+require("nvim-tree").setup({
+  view = {
+    mappings = {
+      list = {
+        { key = "q", action = "dir_up" },
+      },
+    },
+  },
+  tab = {
+    sync = {
+      open = true,
+    },
+  },
+})
 require("trouble").setup({
   mode = "workspace_diagnostics",
   auto_close = true,
