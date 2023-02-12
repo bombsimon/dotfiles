@@ -91,7 +91,7 @@ symlink:
 
 # Setup SSH config by configuring standard hosts
 @ssh-config:
-    [ -e ~/.ssh/config ] || echo {{ssh_config}} > ~/.ssh/config
+    [ -e ~/.ssh/config ] || echo "{{ssh_config}}" > ~/.ssh/config
 
 
 # Setup and install zsh
