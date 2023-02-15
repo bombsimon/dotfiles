@@ -23,7 +23,8 @@ local function setup_autocmds(_, bufnr)
   vim.api.nvim_create_autocmd({ "CursorHold" }, {
     callback = function()
       local notify = vim.notify
-      vim.notify = function(_, _) end
+      vim.notify = function(_, _)
+      end
 
       vim.lsp.buf.clear_references()
       vim.lsp.buf.document_highlight()
@@ -39,7 +40,8 @@ local function setup_autocmds(_, bufnr)
   vim.api.nvim_create_autocmd({ "CursorHoldI" }, {
     callback = function()
       local notify = vim.notify
-      vim.notify = function(_, _) end
+      vim.notify = function(_, _)
+      end
 
       vim.lsp.buf.clear_references()
 
@@ -61,9 +63,6 @@ local function setup_keybinds(_, bufnr)
   vim.keymap.set("i", "<C-q>", vim.lsp.buf.signature_help, opts)
   vim.keymap.set("n", "<C-q>", vim.lsp.buf.hover, opts)
   vim.keymap.set("n", "<leader>q", rust_tools.hover_actions.hover_actions, opts)
-
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 end
 
 local function on_attach(client, bufnr)
@@ -91,6 +90,13 @@ local servers = {
   },
   sumneko_lua = {
     Lua = {
+      format = {
+        enable = true,
+        defaultConfig = {
+          indent_style = "space",
+          indent_size = "2",
+        },
+      },
       diagnostics = {
         globals = { "vim" },
       },
@@ -110,14 +116,6 @@ null_ls.setup({
   debug = false,
   on_attach = on_attach,
   sources = {
-    null_ls.builtins.formatting.stylua.with({
-      extra_args = {
-        "--indent-type",
-        "Spaces",
-        "--indent-width",
-        "2",
-      },
-    }),
     null_ls.builtins.formatting.black.with({
       extra_args = { "--line-length=79" },
     }),
@@ -128,6 +126,7 @@ null_ls.setup({
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.jsonlint,
     null_ls.builtins.diagnostics.markdownlint,
+    null_ls.builtins.diagnostics.misspell,
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.diagnostics.yamllint,
 

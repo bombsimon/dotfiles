@@ -15,7 +15,7 @@ cmp.setup({
     end,
   },
   mapping = {
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-x>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-d>"] = cmp.mapping.scroll_docs(4),

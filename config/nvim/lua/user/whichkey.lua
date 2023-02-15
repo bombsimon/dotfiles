@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 -- i can't let go of shift
 vim.api.nvim_create_user_command("W", "w", {})
 vim.api.nvim_create_user_command("Wa", "wa", {})
@@ -18,13 +16,14 @@ local opts = {
 
 local setup = {
   plugins = {
+    registers = false,
     spelling = {
       enabled = true,
       suggestions = 20,
     },
     presets = {
       operators = false,
-      motions = false,
+      motions = true,
       text_objects = true,
       windows = true,
       nav = true,
@@ -40,22 +39,28 @@ local setup = {
 }
 
 local mappings = {
+  ["g"] = {
+    ["d"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto definition" },
+    ["i"] = { "<cmd>Telescope lsp_implementations<cr>", "Show implementations" },
+    ["r"] = { "<cmd>Telescope lsp_references<cr>", "Show references" },
+  },
+
   ["<leader>"] = {
     [","] = { "<cmd>NvimTreeFindFile<cr>", "Find current file" },
-    ["."] = { "<cmd>NvimTreeToggle<cr>", "Toggle file tree" },
+    ["."] = { "<cmd>NvimTreeFocus<cr>", "Toggle file tree" },
     ["?"] = { "<cmd>WhichKey<cr>", "Halp!?" },
-    ["c"] = { "<cmd>tabclose<CR>", "Close tab (and all panes)" },
-    ["cc"] = { "<cmd>cd %:p:h<CR>", "Change dir for all buffers" },
+    ["c"] = { "<cmd>tabclose<cr>", "Close tab (and all panes)" },
+    ["cc"] = { "<cmd>cd %:p:h<cr>", "Change dir for all buffers" },
     ["cd"] = { "<cmd>lcd %:p:h<cr>", "Change dir for this buffer" },
-    ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-    ["n"] = { "<cmd>tabnext<CR>", "Next tab" },
-    ["N"] = { "<cmd>tabprevious<CR>", "Previous tab" },
-    ["t"] = { "<cmd>TroubleToggle<CR>", "Show problems" },
+    ["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
+    ["n"] = { "<cmd>tabnext<cr>", "Next tab" },
+    ["N"] = { "<cmd>tabprevious<cr>", "Previous tab" },
+    ["t"] = { "<cmd>TroubleToggle<cr>", "Show problems" },
 
     f = {
       name = "Files and buffers",
       ["b"] = {
-        "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+        "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes'))<cr>",
         "Buffers",
       },
       ["f"] = {
@@ -102,7 +107,7 @@ local mappings = {
       i = { "<cmd>LspInfo<cr>", "Info" },
       I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
       j = {
-        "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+        "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>",
         "Next Diagnostic",
       },
       k = {
@@ -139,6 +144,7 @@ local mappings = {
       k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
       C = { "<cmd>Telescope commands<cr>", "Commands" },
     },
+    v = { "<cmd>WhichKey '' v<cr>", "Show visual maps" },
   },
 }
 
