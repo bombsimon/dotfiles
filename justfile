@@ -15,6 +15,7 @@ symlinks := "\
     perltidyrc \
     ripgreprc \
     sqliterc \
+    tmux.conf \
 "
 
 zsh_plugins := "\
@@ -75,9 +76,7 @@ symlink:
 
 # Configure tmux
 @tmux:
-    [ -e ~/.tmux.conf ]       || ln -s $(pwd)/gpakosz.tmux/.tmux.conf ~/.tmux.conf
-    [ -e ~/.tmux.conf.local ] || cp $(pwd)/gpakosz.tmux/.tmux.conf.local ~/.tmux.conf.local && \
-        cat $(pwd)/tmux.conf.local >> ~/.tmux.conf.local
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 
 # Link VS Code configuration
@@ -99,13 +98,10 @@ oh-my-zsh:
     #!/usr/bin/env sh
     set -eu
 
-    if [ -e ~/.oh-my-zsh ]; then
-        echo "oh-my-zsh already installed"
-        exit 0
+    if [ ! -e ~/.oh-my-zsh ]; then
+        echo "Installing oh-my-zsh"
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     fi
-
-    # Install ZSH
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
     # Link custom shell file
     if ! grep shellrc ~/.zshrc > /dev/null; then
@@ -113,7 +109,11 @@ oh-my-zsh:
     fi
 
     # Set theme
-    gsed -i 's/^ZSH_THEME=.\+/ZSH_THEME="{{zsh_theme}}"/' ~/.zshrc
+    if [ ! -e $ZSH/themes/nord-extended ]; then
+        git clone https://github.com/fxbrit/nord-extended $ZSH/themes/nord-extended
+    fi
+
+    gsed -i 's,^ZSH_THEME=.\+,ZSH_THEME="{{zsh_theme}}",' ~/.zshrc
 
     # Set plugins
     plugins=""
@@ -126,14 +126,7 @@ oh-my-zsh:
         plugins="$plugins $name"
     done
 
-
     gsed -i "s/^plugins=(.\+)/plugins=($plugins)/" ~/.zshrc
-
-    # Link custom shell file
-    if !grep shellrc ~/.zshrc; then
-        printf "\n. ~/.git/dotfiles/shellrc\n" >> ~/.zshrc
-    fi
-
 
 # Install zsh plugins
 oh-my-zsh-plugins: oh-my-zsh

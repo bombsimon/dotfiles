@@ -140,7 +140,7 @@ function print-start-stop {
 # Remove ruby_prompt_info used in many zsh themes
 function ruby_prompt_info { echo '' }
 
-# Get teh current git branch - if in a git repository.
+# Get the current git branch - if in a git repository.
 function parse_git_branch {
     [ "$(which git)" ] || return
 
@@ -252,8 +252,12 @@ function __zshrc {
     bindkey -e
 
     # Override theme prompt for oh-my-zsh
-    # PROMPT='╭─ %{$terminfo[bold]$fg[blue]%}%~ %{$reset_color%}$(git_prompt_info)$(virtualenv_prompt_info)
-    # ╰─%B$%b '
+    ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[white]%} on %{$fg_bold[yellow]%}\xee\x82\xa0 "
+    ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_bold[yellow]%}"
+    ZSH_THEME_GIT_PROMPT_DIRTY=" %{$reset_color%}%{$fg_bold[red]%}*%{$reset_color%}"
+    ZSH_THEME_GIT_PROMPT_CLEAN=""
+    PROMPT='%{$fg_bold[green]%}%3c%{$reset_color%}$(git_prompt_info)
+%{$fg_bold[white]%}› %{$reset_color%}'
     # zsh_prompt
 
     [ -f ~/.fzf.zsh ]                        && . ~/.fzf.zsh
