@@ -44,11 +44,11 @@ local mappings = {
     ["i"] = { "<cmd>Telescope lsp_implementations<cr>", "Show implementations" },
     ["r"] = { "<cmd>Telescope lsp_references<cr>", "Show references" },
   },
-
   ["<leader>"] = {
     [","] = { "<cmd>NvimTreeFindFile<cr>", "Find current file" },
     ["."] = { "<cmd>NvimTreeFocus<cr>", "Toggle file tree" },
     ["?"] = { "<cmd>WhichKey<cr>", "Halp!?" },
+    ["a"] = { "<cmd>AerialToggle!<cr>", "Toggle Aerial" },
     ["c"] = { "<cmd>tabclose<cr>", "Close tab (and all panes)" },
     ["cc"] = { "<cmd>cd %:p:h<cr>", "Change dir for all buffers" },
     ["cd"] = { "<cmd>lcd %:p:h<cr>", "Change dir for this buffer" },

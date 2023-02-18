@@ -42,6 +42,8 @@ packer.startup(function(use)
   use({ "folke/which-key.nvim" }) -- help to show key bindings
   use({ "lewis6991/gitsigns.nvim" }) -- git tools
   use({ "ray-x/starry.nvim" }) -- colorscheme to use 'miranda_lighter"
+  use({ "arcticicestudio/nord-vim" }) -- colorscheme 'nord'
+
   use({ "sheerun/vim-polyglot" }) -- language packs for all the things
   use({ "simrat39/rust-tools.nvim" }) -- rust improvement
   use({ "wbthomason/packer.nvim" }) -- packet manager for plugins
@@ -71,6 +73,10 @@ packer.startup(function(use)
     requires = "nvim-tree/nvim-web-devicons",
   }) -- diagnostics and error reporting
 
+  use({
+    'stevearc/aerial.nvim',
+  }) -- work with symbols
+
   -- lsp
   use({ "williamboman/mason.nvim" }) -- simple to use language server installer
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
@@ -94,12 +100,26 @@ end)
 
 require("mini.align").setup()
 require("gitlinker").setup()
+
+require('aerial').setup({
+  layout = {
+    placement = "edge",
+    default_direction = "prefer_right",
+  },
+  attach_mode = "global",
+  on_attach = function(bufnr)
+    vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
+    vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
+  end
+})
+
 require("gitsigns").setup({
   current_line_blame = true,
   current_line_blame_opts = {
     delay = 200,
   },
 })
+
 require("nvim-tree").setup({
   view = {
     mappings = {
@@ -114,6 +134,7 @@ require("nvim-tree").setup({
     },
   },
 })
+
 require("trouble").setup({
   mode = "workspace_diagnostics",
   auto_close = true,
