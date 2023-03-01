@@ -98,6 +98,12 @@ oh-my-zsh:
     #!/usr/bin/env sh
     set -eu
 
+    if [ "$(uname -s)" = "Darwin" ]; then
+        sed="gsed"
+    else
+        sed="sed"
+    fi
+
     if [ ! -e ~/.oh-my-zsh ]; then
         echo "Installing oh-my-zsh"
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -113,7 +119,7 @@ oh-my-zsh:
         git clone https://github.com/fxbrit/nord-extended $ZSH/themes/nord-extended
     fi
 
-    gsed -i 's,^ZSH_THEME=.\+,ZSH_THEME="{{zsh_theme}}",' ~/.zshrc
+    "$sed" -i 's,^ZSH_THEME=.\+,ZSH_THEME="{{zsh_theme}}",' ~/.zshrc
 
     # Set plugins
     plugins=""
@@ -126,7 +132,7 @@ oh-my-zsh:
         plugins="$plugins $name"
     done
 
-    gsed -i "s/^plugins=(.\+)/plugins=($plugins)/" ~/.zshrc
+    "$sed" -i "s/^plugins=(.\+)/plugins=($plugins)/" ~/.zshrc
 
 # Install zsh plugins
 oh-my-zsh-plugins: oh-my-zsh
