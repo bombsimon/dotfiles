@@ -1,30 +1,26 @@
 # 💻 dotfiles
 
 My personal dotfiles. Combination of configuration for tools used both under
-macOS, Linux and Windows. I use multiple setups depending on my workflow and
-switch over time so the most curated files will be related to my current setup.
+macOS, Linux and Windows.
 
 ## Install
 
 ## Prerequisites
 
-I used to curate a list of dependencies for easy installation and I still
-occastionally dump my `Brewfile`. However, I currently think the best way to
-setup prerequisites such as `node`/`npm`, Python modules, linters etc. is to do
-it manually whenever I setup a new machine. This is less maintenance and will
-ensure it's done the currently suggested way.
+* [just](https://github.com/casey/just)
+
+For `nvim` plugins you need `npm`, `go` and `python`/`pip`.
 
 ## Other configuration
 
 ### Shell
 
-Since Apple made the move from `bash` to `zsh` with macOS 10.15 I switched all
-my terminals in all OSes to use `zsh`. It's just to install in any preferred
-way and change the default shell.
+I use `zsh` in all environments. For OSes where this is not the default shell,
+change with:
 
 ```sh
-sudo bash -c 'echo /path/to/zsh >> /etc/shells'
-chsh -s /path/to/zsh
+sudo bash -c 'echo /usr/bin/zsh >> /etc/shells'
+chsh -s /usr/bin/zsh
 ```
 
 This is also used together with [oh-my-zsh](https://ohmyz.sh/).
@@ -39,18 +35,7 @@ when started:
 tmux new-session -A -s main
 ```
 
-When shell is changed (i.e `chsh -s /usr/local/bin/fish`), the tmux server must
-be restarted with `tmux kill-server` for changes to take effect.
-
 ## Color palette
 
-The current theme used in both vim and VS Code is
-[Material](https://material-theme.site/). For iTerm2 i use the
-`base16-default-dark-256` from
-[base16-iterm2](https://github.com/martinlindhe/base16-iterm2) repository found
-here (and also saved in `iterm/profiles.json`.
-
-The colors from the base16 theme is also used for tmux as seen in
-`tmux.conf.local`.
-
-![screenshot](img/screenshot03.png)
+I'm currently using [nord](https://www.nordtheme.com/) for `nvim`, `tmux` and
+[iTerm2](https://github.com/arcticicestudio/nord-iterm2).
