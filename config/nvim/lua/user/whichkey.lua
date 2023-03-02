@@ -60,14 +60,14 @@ local mappings = {
     f = {
       name = "Files and buffers",
       ["b"] = {
-        "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes'))<cr>",
+        "<cmd>lua require('telescope.builtin').buffers()<cr>",
         "Buffers",
       },
       ["f"] = {
-        "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+        "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown())<cr>",
         "Find files",
       },
-      ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+      ["F"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", "Find Text" },
     },
 
     g = {

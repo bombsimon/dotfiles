@@ -53,6 +53,7 @@ packer.startup(function(use)
     requires = "nvim-lua/plenary.nvim",
   }) -- copy remote url
 
+  use({ "nvim-telescope/telescope-live-grep-args.nvim" }) -- args plugin
   use({
     "nvim-telescope/telescope.nvim",
     tag = "0.1.1",
@@ -143,11 +144,25 @@ require("trouble").setup({
 
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
+local lga_actions = require("telescope-live-grep-args.actions")
 require("telescope").setup({
   defaults = {
+    prompt_prefix = "› ",
+    selection_caret = "› ",
     mappings = {
       i = { ["<c-t>"] = trouble.open_with_trouble },
       n = { ["<c-t>"] = trouble.open_with_trouble },
     },
+  },
+  extensions = {
+    live_grep_args = {
+      auto_quoting = true, -- enable/disable auto-quoting
+      mappings = { -- extend mappings
+        i = {
+          ["<C-k>"] = lga_actions.quote_prompt(),
+          ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+        },
+      },
+    }
   },
 })
