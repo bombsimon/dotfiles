@@ -39,3 +39,5 @@ tmux new-session -A -s main
 
 I'm currently using [nord](https://www.nordtheme.com/) for `nvim`, `tmux` and
 [iTerm2](https://github.com/arcticicestudio/nord-iterm2).
+
+![screenshot](./img/screenshot04.png)
