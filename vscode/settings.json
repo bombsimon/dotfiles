@@ -1,7 +1,6 @@
 {
   // General options
   "files.insertFinalNewline": true,
-  "redhat.telemetry.enabled": false,
   "terminal.integrated.defaultProfile.osx": "zsh",
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmDelete": false,
@@ -9,6 +8,7 @@
   "editor.autoClosingBrackets": "never",
   "files.autoSave": "afterDelay",
   "problems.showCurrentInStatus": true,
+  "debug.allowBreakpointsEverywhere": true,
   // Look and feel
   "workbench.colorTheme": "Material Theme",
   "workbench.iconTheme": "material-icon-theme",
@@ -55,6 +55,7 @@
   "go.useLanguageServer": true,
   "go.toolsManagement.autoUpdate": true,
   "gopls": {
+    "experimentalWorkspaceModule": true,
     "build.directoryFilters": [
       "-bazel-bin",
       "-bazel-out",
@@ -77,10 +78,10 @@
   "python.languageServer": "Default",
   //
   // Neovim - Using this on macOS and Linux
-  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
-  "vscode-neovim.neovimInitVimPaths.darwin": "${env:HOME}/.config/nvim/init.vim",
-  "vscode-neovim.neovimInitVimPaths.linux": "${env:HOME}/.config/nvim/init.vim",
+  "vscode-neovim.neovimInitVimPaths.darwin": "/Users/simon/git/dotfiles/vscode/init.vim",
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "vscode-neovim.neovimInitVimPaths.linux": "/home/simon/.config/nvim/init.vim",
   // Vim - Using this on Windows
   "vim.autoindent": true,
   "vim.hlsearch": true,
@@ -94,7 +95,7 @@
   "rust-analyzer.inlayHints.enable": false,
   //
   // Does not work when trying to expand ${env:HOME}
-  "bazel.buildifierExecutable": "/Users/simon.sawert/go/bin/buildifier",
+  "bazel.buildifierExecutable": "/Users/simon/go/bin/buildifier",
   "bazel.buildifierFixOnFormat": true,
   //
   "haskell.formattingProvider": "brittany",
@@ -123,7 +124,7 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[proto3]": {
-    "editor.defaultFormatter": "xaver.clang-format"
+    "editor.defaultFormatter": "ms-vscode.cpptools"
   },
   "gitlens.currentLine.enabled": true,
   "gitlens.codeLens.authors.enabled": false,
