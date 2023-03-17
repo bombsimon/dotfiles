@@ -86,6 +86,9 @@ local servers = {
       checkOnSave = {
         command = "clippy",
       },
+      cargo = {
+        allFeatures = true,
+      },
     },
   },
   sumneko_lua = {
