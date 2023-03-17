@@ -4,6 +4,8 @@ symlinks := "\
     config/starship.toml \
     config/nvim/init.lua \
     config/nvim/lua \
+    config/nvim/package.json \
+    config/nvim/snippets \
     git-templates \
     gitconfig \
     gitignore \

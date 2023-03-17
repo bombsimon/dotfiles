@@ -47,6 +47,7 @@ packer.startup(function(use)
   use({ "sheerun/vim-polyglot" }) -- language packs for all the things
   use({ "simrat39/rust-tools.nvim" }) -- rust improvement
   use({ "wbthomason/packer.nvim" }) -- packet manager for plugins
+  use({ "L3MON4D3/LuaSnip" }) -- snippets and such
 
   use({
     "ruifm/gitlinker.nvim",
@@ -99,6 +100,7 @@ packer.startup(function(use)
   end
 end)
 
+require("luasnip.loaders.from_vscode").lazy_load()
 require("mini.align").setup()
 require("gitlinker").setup()
 
@@ -123,6 +125,7 @@ require("gitsigns").setup({
 
 require("nvim-tree").setup({
   view = {
+    width = 50,
     mappings = {
       list = {
         { key = "q", action = "dir_up" },

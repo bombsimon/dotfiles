@@ -1,0 +1,7 @@
+{
+  "spew": {
+    "prefix": "spew",
+    "body": "\"github.com/davecgh/go-spew/spew\"",
+    "description": "The Go spew path"
+  }
+}
