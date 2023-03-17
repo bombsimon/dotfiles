@@ -29,9 +29,11 @@ export GPG_TTY=$(tty)
 # alias `l` to long listing format and `lr` to reverse long listing format.
 if [ "$(exa -v 2> /dev/null)" ]; then
     alias l="exa -lh"
+    alias la="exa -la"
     alias lr="exa -lh --sort newest"
 else
     alias l="ls -lh"
+    alias la="ls -la"
     alias lr="ls -lrth"
 fi
 
@@ -150,6 +152,25 @@ function parse_git_branch {
 function jqvalid {
     pattern="${1:-.}"
     jq -R -r "fromjson? | $pattern"
+}
+
+function count_success {
+    delay=${DELAY:-0}
+    command=$@
+    s=0
+    f=0
+
+    printf "| %-10s | %-10s | %-10s |\n" "total" "successful" "failed"
+    while true; do
+        if $@ > /dev/null 2>&1; then
+            ((s++))
+        else
+            ((f++))
+        fi
+
+        printf "\r| %-10d | %-10d | %-10d |" $(($s+$f)) $s $f
+        sleep $delay
+    done
 }
 
 function zsh_prompt {
