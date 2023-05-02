@@ -1,7 +1,7 @@
 [user]
   name = Simon Sawert
   email = simon@sawert.se
-  signingkey = 9FDB4E07D9DACC91
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8qC7S339K4OQ20CMRa1B/M3LcmjOoaVmSDy+z0o+xD
 
 [includeIf "gitdir:~/workspace/"]
   path = .gitconfig.work
@@ -21,10 +21,11 @@
   branch-name = rev-parse --abbrev-ref HEAD
   pushup      = "!git push -u origin $(git branch-name)"
   standup     = "!git log --since yesterday --author $(git config user.email) --pretty=short"
+  gone        = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
   ignore      = "!f() { curl -sL https://www.gitignore.io/api/$@ ;}; f"
   diffignore  = "!f() { b=$1;for e in ${@:2};do x+=(':(exclude)'$e);done;git diff $b -- . ${x[@]}; }; f"
   remote-info = "!for branch in $(git branch -r | egrep -v 'HEAD|develop|stage|master|main'); do \
-    git show --format=\"%<(25)%an %<(15)%ar %s %d\" $branch | head -1; \
+    git show --format=\"%<(45)%an %<(25)%ar %s %d\" $branch | head -1; \
     done"
 
 [core]
@@ -44,6 +45,12 @@
 
 [fetch]
   prune = true
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "op-ssh-sign"
 
 [init]
   defaultBranch = main
