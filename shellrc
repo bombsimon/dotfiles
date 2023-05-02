@@ -61,8 +61,10 @@ export GO111MODULE="auto"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 export FZF_DEFAULT_COMMAND='fd --type f'
-export FZF_DEFAULT_OPTS="--height 40% --layout reverse --info inline \
-  --color 'fg:#f8f8f8,fg+:#d8d8d8,bg:#181818,preview-bg:#383838,border:#d8d8d8'"
+export FZF_DEFAULT_OPTS='--height 50% --pointer  --marker  --layout reverse --info inline --border rounded --multi --cycle
+  --color bg:#2E3440,fg:#ECEFF4,fg+:#E5E9F0,bg+:#3B4252
+  --color border:#D8DEE9,spinner:#D8DEE9,prompt:#D8DEE9
+  --color pointer:#BF616A,query:#E5E9F0,info:#A3BE8C'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
 
