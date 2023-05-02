@@ -150,6 +150,7 @@ local trouble = require("trouble.providers.telescope")
 local lga_actions = require("telescope-live-grep-args.actions")
 require("telescope").setup({
   defaults = {
+    dynamic_preview_title = true,
     prompt_prefix = "› ",
     selection_caret = "› ",
     mappings = {

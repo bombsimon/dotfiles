@@ -119,11 +119,10 @@ null_ls.setup({
   debug = false,
   on_attach = on_attach,
   sources = {
-    null_ls.builtins.formatting.black.with({
-      extra_args = { "--line-length=79" },
-    }),
     null_ls.builtins.formatting.jq,
-    null_ls.builtins.formatting.shfmt,
+    null_ls.builtins.formatting.shfmt.with({
+      extra_args = { "-i 2" },
+    }),
     null_ls.builtins.formatting.trim_whitespace,
 
     null_ls.builtins.diagnostics.eslint,
@@ -132,6 +131,13 @@ null_ls.setup({
     null_ls.builtins.diagnostics.misspell,
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.diagnostics.yamllint,
+
+    -- Python
+    null_ls.builtins.formatting.ruff,
+    null_ls.builtins.formatting.black.with({
+      extra_args = { "--line-length=88" },
+    }),
+    null_ls.builtins.diagnostics.ruff,
 
     -- Go
     null_ls.builtins.formatting.goimports,
@@ -153,6 +159,7 @@ mason_null_ls.setup({
     "jq",
     "markdownlint",
     "misspell",
+    "ruff",
     "shellcheck",
     "stylua",
     "yamllint",
