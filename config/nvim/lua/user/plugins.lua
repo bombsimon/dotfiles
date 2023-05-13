@@ -38,21 +38,21 @@ packer.init({
 })
 
 packer.startup(function(use)
-  use({ "echasnovski/mini.align" }) -- tabularize/align
-  use({ "folke/which-key.nvim" }) -- help to show key bindings
-  use({ "lewis6991/gitsigns.nvim" }) -- git tools
-  use({ "ray-x/starry.nvim" }) -- colorscheme to use 'miranda_lighter"
+  use({ "echasnovski/mini.align" })   -- tabularize/align
+  use({ "folke/which-key.nvim" })     -- help to show key bindings
+  use({ "lewis6991/gitsigns.nvim" })  -- git tools
+  use({ "ray-x/starry.nvim" })        -- colorscheme to use 'miranda_lighter"
   use({ "arcticicestudio/nord-vim" }) -- colorscheme 'nord'
 
-  use({ "sheerun/vim-polyglot" }) -- language packs for all the things
+  use({ "sheerun/vim-polyglot" })     -- language packs for all the things
   use({ "simrat39/rust-tools.nvim" }) -- rust improvement
-  use({ "wbthomason/packer.nvim" }) -- packet manager for plugins
-  use({ "L3MON4D3/LuaSnip" }) -- snippets and such
+  use({ "wbthomason/packer.nvim" })   -- packet manager for plugins
+  use({ "L3MON4D3/LuaSnip" })         -- snippets and such
 
   use({
     "ruifm/gitlinker.nvim",
     requires = "nvim-lua/plenary.nvim",
-  }) -- copy remote url
+  })                                                      -- copy remote url
 
   use({ "nvim-telescope/telescope-live-grep-args.nvim" }) -- args plugin
   use({
@@ -80,11 +80,11 @@ packer.startup(function(use)
   }) -- work with symbols
 
   -- lsp
-  use({ "williamboman/mason.nvim" }) -- simple to use language server installer
-  use({ "neovim/nvim-lspconfig" }) -- enable LSP
+  use({ "williamboman/mason.nvim" })           -- simple to use language server installer
+  use({ "neovim/nvim-lspconfig" })             -- enable LSP
   use({ "williamboman/mason-lspconfig.nvim" }) -- bridge between mason and lspconfig
-  use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
-  use({ "jayp0521/mason-null-ls.nvim" }) -- bridge between mason and null-ls
+  use({ "jose-elias-alvarez/null-ls.nvim" })   -- for formatters and linters
+  use({ "jayp0521/mason-null-ls.nvim" })       -- bridge between mason and null-ls
 
   -- cmp - autocomplete
   use({ "hrsh7th/nvim-cmp" })
@@ -161,7 +161,8 @@ require("telescope").setup({
   extensions = {
     live_grep_args = {
       auto_quoting = true, -- enable/disable auto-quoting
-      mappings = { -- extend mappings
+      mappings = {
+        -- extend mappings
         i = {
           ["<C-k>"] = lga_actions.quote_prompt(),
           ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),

@@ -10,6 +10,12 @@
           "go"
         ],
         "path": "./snippets/go.json"
+      },
+      {
+        "language": [
+          "toml"
+        ],
+        "path": "./snippets/toml.json"
       }
     ]
   }

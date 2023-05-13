@@ -129,4 +129,5 @@
   "gitlens.currentLine.enabled": true,
   "gitlens.codeLens.authors.enabled": false,
   "gitlens.codeLens.recentChange.enabled": false,
+  "monkeyC.developerKeyPath": "/Users/simon/.ciq/developer_key.der",
 }

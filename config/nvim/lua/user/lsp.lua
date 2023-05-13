@@ -12,7 +12,7 @@ local function setup_autocmds(_, bufnr)
   vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()
       pcall(function()
-        vim.lsp.buf.formatting_seq_sync({}, 5000)
+        vim.lsp.buf.format({}, 5000)
       end)
     end,
     buffer = bufnr,
