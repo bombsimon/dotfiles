@@ -133,6 +133,7 @@ null_ls.setup({
     null_ls.builtins.diagnostics.yamllint,
 
     -- Python
+    null_ls.builtins.formatting.isort,
     null_ls.builtins.formatting.ruff,
     null_ls.builtins.formatting.black.with({
       extra_args = { "--line-length=88" },
@@ -155,6 +156,7 @@ mason_null_ls.setup({
     "gofumpt",
     "golangci-lint",
     "gopls",
+    "isort",
     "jsonlint",
     "jq",
     "markdownlint",
