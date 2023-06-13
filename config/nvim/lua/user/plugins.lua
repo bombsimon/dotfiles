@@ -123,22 +123,6 @@ require("gitsigns").setup({
   },
 })
 
-require("nvim-tree").setup({
-  view = {
-    width = 50,
-    mappings = {
-      list = {
-        { key = "q", action = "dir_up" },
-      },
-    },
-  },
-  tab = {
-    sync = {
-      open = true,
-    },
-  },
-})
-
 require("trouble").setup({
   mode = "workspace_diagnostics",
   auto_close = true,
