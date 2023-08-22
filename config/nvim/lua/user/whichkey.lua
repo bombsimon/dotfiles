@@ -67,6 +67,10 @@ local mappings = {
         "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown())<cr>",
         "Find files",
       },
+      ["i"] = {
+        "<cmd>lua require('telescope.builtin').grep_string(require('telescope.themes').get_dropdown())<cr>",
+        "Grep string",
+      },
       ["F"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", "Find Text" },
     },
 

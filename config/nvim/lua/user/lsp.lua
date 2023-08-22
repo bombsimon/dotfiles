@@ -124,6 +124,7 @@ null_ls.setup({
       extra_args = { "-i 2" },
     }),
     null_ls.builtins.formatting.trim_whitespace,
+    null_ls.builtins.formatting.clang_format,
 
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.jsonlint,
@@ -192,11 +193,13 @@ mason_lsp_config.setup_handlers({
 })
 
 rust_tools.setup({
-  inlay_hints = {
-    auto = true,
-  },
-  hover_actions = {
-    auto_focus = true,
+  tools = {
+    inlay_hints = {
+      auto = true,
+    },
+    hover_actions = {
+      auto_focus = true,
+    },
   },
   server = {
     capabilities = capabilities,
