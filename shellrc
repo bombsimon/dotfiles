@@ -49,6 +49,7 @@ export HISTCONTROL="ignoreboth"
 export HISTSIZE=1000
 export HISTFILESIZE=2000
 
+export PAGER="less -R"
 export LESS="-+F"
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -161,16 +162,25 @@ function count_success {
     command=$@
     s=0
     f=0
+    total_time=0
 
-    printf "| %-10s | %-10s | %-10s |\n" "total" "successful" "failed"
+    printf "| %-10s | %-10s | %-10s | %-15s | %-14s\n" "total" "successful" "failed" "last duration" "avg duration"
     while true; do
+        start_time=$(gdate +%s.%N)
+
         if $@ > /dev/null 2>&1; then
             ((s++))
         else
             ((f++))
         fi
 
-        printf "\r| %-10d | %-10d | %-10d |" $(($s+$f)) $s $f
+        end_time=$(gdate +%s.%N)
+        run_time=$(($end_time - $start_time))
+        total_time=$(($total_time + $run_time))
+        total=$(($s+$f))
+        avg_time=$(($total_time / $total))
+
+        printf "\r| %-10d | %-10d | %-10d | %-15.3f | %-15.3f" $total $s $f $run_time $avg_time
         sleep $delay
     done
 }
