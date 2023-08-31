@@ -159,7 +159,7 @@ function jqvalid {
 
 function count_success {
     delay=${DELAY:-0}
-    command=$@
+    failure_log=${FAILURE_LOG:-failure.log}
     s=0
     f=0
     total_time=0
@@ -168,10 +168,16 @@ function count_success {
     while true; do
         start_time=$(gdate +%s.%N)
 
-        if $@ > /dev/null 2>&1; then
+        if output=$($@ 2>&1); then
             ((s++))
         else
             ((f++))
+
+            {
+              echo "--- ATTEMPT $total ($start_time)"
+              echo "$output"
+              echo ""
+            } >> "$failure_log"
         fi
 
         end_time=$(gdate +%s.%N)
