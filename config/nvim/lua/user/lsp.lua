@@ -89,6 +89,9 @@ local servers = {
       cargo = {
         allFeatures = true,
       },
+      procMacro = {
+        enable = true
+      },
     },
   },
   sumneko_lua = {

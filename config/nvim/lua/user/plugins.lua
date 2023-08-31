@@ -38,18 +38,19 @@ packer.init({
 })
 
 packer.startup(function(use)
-  use({ "echasnovski/mini.align" })         -- tabularize/align
-  use({ "folke/which-key.nvim" })           -- help to show key bindings
-  use({ "lewis6991/gitsigns.nvim" })        -- git tools
-  use({ "ray-x/starry.nvim" })              -- colorscheme to use 'miranda_lighter"
-  use({ "arcticicestudio/nord-vim" })       -- colorscheme 'nord'
+  use({ "echasnovski/mini.align" })          -- tabularize/align
+  use({ "folke/which-key.nvim" })            -- help to show key bindings
+  use({ "lewis6991/gitsigns.nvim" })         -- git tools
+  use({ "ray-x/starry.nvim" })               -- colorscheme to use 'miranda_lighter"
+  use({ "arcticicestudio/nord-vim" })        -- colorscheme 'nord'
+  use({ "nvim-treesitter/nvim-treesitter" }) -- parser to help with colors etc
 
-  use({ "sheerun/vim-polyglot" })           -- language packs for all the things
-  use({ "simrat39/rust-tools.nvim" })       -- rust improvement
-  use({ "wbthomason/packer.nvim" })         -- packet manager for plugins
-  use({ "L3MON4D3/LuaSnip" })               -- snippets and such
+  use({ "sheerun/vim-polyglot" })            -- language packs for all the things
+  use({ "simrat39/rust-tools.nvim" })        -- rust improvement
+  use({ "wbthomason/packer.nvim" })          -- packet manager for plugins
+  use({ "L3MON4D3/LuaSnip" })                -- snippets and such
 
-  use({ "weilbith/nvim-code-action-menu" }) -- menu for code actions
+  use({ "weilbith/nvim-code-action-menu" })  -- menu for code actions
 
 
   use({
@@ -157,4 +158,20 @@ require("telescope").setup({
       },
     }
   },
+})
+
+require("nvim-treesitter.configs").setup({
+  ensure_installed = {
+    "go",
+    "javascript",
+    "json",
+    "proto",
+    "python",
+    "rust",
+    "toml",
+    "yaml",
+  },
+  highlight = {
+    enable = true,
+  }
 })
