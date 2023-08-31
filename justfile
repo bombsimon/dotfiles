@@ -51,8 +51,7 @@ Host gist.github.com github.com
   User git
   IdentityFile ~/.ssh/github"
 
-# Show this help text
-help:
+_help:
     @just -l
 
 
