@@ -45,12 +45,19 @@ packer.startup(function(use)
   use({ "arcticicestudio/nord-vim" })        -- colorscheme 'nord'
   use({ "nvim-treesitter/nvim-treesitter" }) -- parser to help with colors etc
 
-  use({ "sheerun/vim-polyglot" })            -- language packs for all the things
-  use({ "simrat39/rust-tools.nvim" })        -- rust improvement
-  use({ "wbthomason/packer.nvim" })          -- packet manager for plugins
-  use({ "L3MON4D3/LuaSnip" })                -- snippets and such
+  use({
+    'akinsho/bufferline.nvim',
+    tag = "*",
+    requires = 'nvim-tree/nvim-web-devicons',
+  }) -- nice tabs
 
-  use({ "weilbith/nvim-code-action-menu" })  -- menu for code actions
+
+  use({ "sheerun/vim-polyglot" })           -- language packs for all the things
+  use({ "simrat39/rust-tools.nvim" })       -- rust improvement
+  use({ "wbthomason/packer.nvim" })         -- packet manager for plugins
+  use({ "L3MON4D3/LuaSnip" })               -- snippets and such
+
+  use({ "weilbith/nvim-code-action-menu" }) -- menu for code actions
 
 
   use({
@@ -173,5 +180,23 @@ require("nvim-treesitter.configs").setup({
   },
   highlight = {
     enable = true,
+  }
+})
+
+require("bufferline").setup({
+  options = {
+    mode = "tabs",
+    separator_style = "padded_slant",
+    show_close_icon = false,
+    show_buffer_close_icons = false,
+    diagnostics = "nvim_lsp",
+    offsets = {
+      {
+        filetype = "NvimTree",
+        text = "File Explorer",
+        text_align = "left",
+        separator = false,
+      }
+    },
   }
 })
