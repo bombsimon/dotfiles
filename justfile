@@ -37,19 +37,7 @@ zsh_theme := "bira"
 
 ssh_config := "Host *
   ForwardAgent no
-  IdentitiesOnly yes
-  AddKeysToAgent yes
-
-Host github.com
-  HostName github.com
-
-Host gist.github.com
-  HostName gist.github.com
-
-Host gist.github.com github.com
-  Port 22
-  User git
-  IdentityFile ~/.ssh/github"
+  IdentityAgent ~/.1password/agent.sock"
 
 _help:
     @just -l
@@ -151,6 +139,10 @@ oh-my-zsh-plugins: oh-my-zsh
         git clone "$plugin" "$fqdn"
     done
 
+# Symlink op-ssh-sign to have git signing working with 1P
+[macos]
+@op-ssh-sign:
+    ln -s /Applications/1Password.app/Contents/MacOS/op-ssh-sign ~/bin/op-ssh-sign
 
 # Setup key repeat and keyboard accessibility
 [macos]
