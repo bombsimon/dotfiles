@@ -3,5 +3,13 @@
     "prefix": "spew",
     "body": "\"github.com/davecgh/go-spew/spew\"",
     "description": "The Go spew path"
+  },
+  "timing": {
+    "prefix": "timing",
+    "body": [
+      "now := time.Now()",
+      "fmt.Printf(\"%s: ${1:text}\\n\", time.Since(now))"
+    ],
+    "description": "Time an action"
   }
 }
