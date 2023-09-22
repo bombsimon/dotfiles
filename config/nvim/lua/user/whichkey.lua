@@ -39,39 +39,59 @@ local setup = {
 }
 
 local mappings = {
-  ["g"] = {
-    ["d"] = { "<cmd>Telescope lsp_definitions<cr>", "Goto definition" },
-    ["i"] = { "<cmd>Telescope lsp_implementations<cr>", "Show implementations" },
-    ["r"] = { "<cmd>Telescope lsp_references<cr>", "Show references" },
+  g = {
+    d = { "<cmd>Telescope lsp_definitions<cr>", "Goto definition" },
+    i = { "<cmd>Telescope lsp_implementations<cr>", "Show implementations" },
+    r = { "<cmd>Telescope lsp_references<cr>", "Show references" },
   },
   ["<leader>"] = {
     [","] = { "<cmd>NvimTreeFindFile | NvimTreeFocus<cr>", "Find and focus current file" },
     ["."] = { "<cmd>NvimTreeToggle<cr>", "Toggle file tree" },
     ["?"] = { "<cmd>WhichKey<cr>", "Halp!?" },
-    ["a"] = { "<cmd>AerialToggle!<cr>", "Toggle Aerial" },
-    ["c"] = { "<cmd>tabclose<cr>", "Close tab (and all panes)" },
-    ["cc"] = { "<cmd>cd %:p:h<cr>", "Change dir for all buffers" },
-    ["cd"] = { "<cmd>lcd %:p:h<cr>", "Change dir for this buffer" },
-    ["h"] = { "<cmd>nohlsearch<cr>", "No Highlight" },
-    ["n"] = { "<cmd>tabnext<cr>", "Next tab" },
-    ["N"] = { "<cmd>tabprevious<cr>", "Previous tab" },
-    ["t"] = { "<cmd>TroubleToggle<cr>", "Show problems" },
+    a = { "<cmd>AerialToggle!<cr>", "Toggle Aerial" },
+    h = { "<cmd>nohlsearch<cr>", "No Highlight" },
+    n = { "<cmd>tabnext<cr>", "Next tab" },
+    N = { "<cmd>tabprevious<cr>", "Previous tab" },
+    t = { "<cmd>TroubleToggle<cr>", "Show problems" },
+
+    c = {
+      name = "Quickfix and navigation",
+      a = { "<cmd>cd %:p:h<cr>", "Change dir for all buffers" },
+      d = { "<cmd>lcd %:p:h<cr>", "Change dir for this buffer" },
+      c = { "<cmd>cclose<cr>", "Close quickfix" },
+      n = { "<cmd>cnext<cr>", "Go to next quickfix item" },
+      o = { "<cmd>copen<cr>", "Open quickfix" },
+      p = { "<cmd>cprevious<cr>", "Go to next quickfix item" },
+      t = { "<cmd>tabclose<cr>", "Close tab (and all panes)" },
+    },
+
+    d = {
+      name = "Debugger",
+      b = { '<cmd>DapToggleBreakpoint<cr>', '[B]reakpoint' },
+      j = { '<cmd>DapStepInto <cr>', 'Step Into' },
+      k = { '<cmd>DapStepOut <cr>', 'Step Out' },
+      l = { '<cmd>DapStepOver<CR>', 'Step Over' },
+      t = { '<cmd>DapTerminate<cr>', 'Terminate' },
+      c = { '<cmd>DapContinue<cr>', 'Continue' },
+      C = { '<cmd>lua require("dapui").close()<cr>', 'Continue' },
+      O = { '<cmd>lua require("dapui").open()<cr>', 'Continue' },
+    },
 
     f = {
       name = "Files and buffers",
-      ["b"] = {
+      b = {
         "<cmd>lua require('telescope.builtin').buffers()<cr>",
         "Buffers",
       },
-      ["f"] = {
+      f = {
         "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown())<cr>",
         "Find files",
       },
-      ["i"] = {
+      i = {
         "<cmd>lua require('telescope.builtin').grep_string(require('telescope.themes').get_dropdown())<cr>",
         "Grep string",
       },
-      ["F"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", "Find Text" },
+      F = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", "Find Text" },
     },
 
     g = {

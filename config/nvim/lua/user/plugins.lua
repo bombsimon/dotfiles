@@ -58,7 +58,13 @@ packer.startup(function(use)
   use({ "L3MON4D3/LuaSnip" })               -- snippets and such
 
   use({ "weilbith/nvim-code-action-menu" }) -- menu for code actions
+  use({ "nvim-lua/plenary.nvim" })          -- Useful lua functions for nvim
 
+  use({
+    "rcarriga/nvim-dap-ui",
+    requires = { "mfussenegger/nvim-dap" }
+  })                            -- DAP (Debugger) and UI
+  use({ "leoluz/nvim-dap-go" }) -- Go DAP support
 
   use({
     "ruifm/gitlinker.nvim",

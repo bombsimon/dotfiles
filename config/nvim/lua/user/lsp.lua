@@ -128,6 +128,7 @@ null_ls.setup({
     }),
     null_ls.builtins.formatting.trim_whitespace,
     null_ls.builtins.formatting.clang_format,
+    null_ls.builtins.formatting.prettier,
 
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.jsonlint,
@@ -157,16 +158,25 @@ mason_null_ls.setup({
   ensure_installed = {
     "bash",
     "black",
+    "clang-format",
+    "codelldb",
+    "eslint",
     "gofumpt",
+    "goimports",
     "golangci-lint",
     "gopls",
     "isort",
     "jsonlint",
     "jq",
+    "lua-language-server",
     "markdownlint",
     "misspell",
+    "prettier",
+    "pyright",
     "ruff",
+    "rust-analyzer",
     "shellcheck",
+    "shfmt",
     "stylua",
     "yamllint",
   },
@@ -195,6 +205,59 @@ mason_lsp_config.setup_handlers({
   end,
 })
 
+local dap, dapui = require("dap"), require("dapui")
+dapui.setup()
+
+dap.configurations.rust = {
+  {
+    type = 'rt_lldb',
+    request = 'launch',
+    name = 'Lauch executable',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    args = function()
+      return vim.split(vim.fn.input('Args: ', ''), ' ')
+    end
+  }
+}
+
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
+
+require('dap-go').setup({
+  dap_configurations = {
+    {
+      type = "go",
+      name = "Attach remote",
+      mode = "remote",
+      request = "attach",
+    },
+  },
+  delve = {
+    path = "dlv",
+    initialize_timeout_sec = 20,
+    port = "${port}",
+    args = {},
+    build_flags = "",
+  },
+})
+
+
+local extension_path = vim.env.HOME .. '/.local/share/nvim/mason/packages/codelldb/extension/'
+local codelldb_path = extension_path .. 'adapter/codelldb'
+local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib' -- or .so for linux
+
 rust_tools.setup({
   tools = {
     inlay_hints = {
@@ -208,6 +271,9 @@ rust_tools.setup({
     capabilities = capabilities,
     on_attach = on_attach,
     settings = servers["rust_analyzer"],
+  },
+  dap = {
+    adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
   },
 })
 
