@@ -69,10 +69,8 @@ linters:
     - varnamelen
   fast: false
 
-
 issues:
-  exclude-use-default: true
+  exclude-use-default: false
   max-issues-per-linter: 0
   max-same-issues: 0
-
 # vim: set sw=2 ts=2 et:
