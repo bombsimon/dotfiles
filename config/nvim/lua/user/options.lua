@@ -46,6 +46,12 @@ vim.api.nvim_create_autocmd(
   { pattern = "yaml", command = "setl sw=2 sts=2 et", group = filetypedetect }
 )
 
+-- make editor nice for screenshots
+vim.api.nvim_create_user_command("Demo",
+  "set nonumber norelativenumber nocursorline noruler noshowcmd showtabline=0 laststatus=0 colorcolumn=",
+  {}
+)
+
 -- play nice with NvimTree, skip loading netrw since we won't use it
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

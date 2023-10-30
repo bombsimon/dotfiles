@@ -16,13 +16,13 @@ local opts = {
 
 local setup = {
   plugins = {
-    registers = false,
+    registers = true,
     spelling = {
       enabled = true,
-      suggestions = 20,
+      suggestions = 10,
     },
     presets = {
-      operators = false,
+      operators = true,
       motions = true,
       text_objects = true,
       windows = true,
@@ -39,6 +39,16 @@ local setup = {
 }
 
 local mappings = {
+  ["<C-b>"] = { "<C-b>", "Up 1 page" },
+  ["<C-d>"] = { "<C-d>", "Up ½ page" },
+  ["<C-e>"] = { "<C-e>", "Show diagnostic" },
+  ["<C-f>"] = { "<C-f>", "Down 1 page" },
+  ["<C-q>"] = { "<C-q>", "Hover actions" },
+  ["<C-u>"] = { "<C-u>", "Down ½ page" },
+
+  ["{"] = { "{", "Previous symbol" },
+  ["}"] = { "}", "Next symbol" },
+
   g = {
     d = { "<cmd>Telescope lsp_definitions<cr>", "Goto definition" },
     i = { "<cmd>Telescope lsp_implementations<cr>", "Show implementations" },
@@ -67,14 +77,16 @@ local mappings = {
 
     d = {
       name = "Debugger",
-      b = { '<cmd>DapToggleBreakpoint<cr>', '[B]reakpoint' },
+      b = { '<cmd>DapToggleBreakpoint<cr>', 'Breakpoint' },
+      g = { '<cmd>lua require("dap-go").debug_test()<cr>', 'Debug Go test' },
       j = { '<cmd>DapStepInto <cr>', 'Step Into' },
       k = { '<cmd>DapStepOut <cr>', 'Step Out' },
       l = { '<cmd>DapStepOver<CR>', 'Step Over' },
       t = { '<cmd>DapTerminate<cr>', 'Terminate' },
+      T = { '<cmd>:lua require("dap-go").debug_test()<cr>', 'Debug Go test' },
       c = { '<cmd>DapContinue<cr>', 'Continue' },
-      C = { '<cmd>lua require("dapui").close()<cr>', 'Continue' },
-      O = { '<cmd>lua require("dapui").open()<cr>', 'Continue' },
+      C = { '<cmd>lua require("dapui").close()<cr>', 'Close DAP UI' },
+      O = { '<cmd>lua require("dapui").open()<cr>', 'Open DAP UI' },
     },
 
     f = {

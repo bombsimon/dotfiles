@@ -129,6 +129,7 @@ null_ls.setup({
     null_ls.builtins.formatting.trim_whitespace,
     null_ls.builtins.formatting.clang_format,
     null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.sql_formatter,
 
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.jsonlint,
@@ -214,7 +215,7 @@ dap.configurations.rust = {
     request = 'launch',
     name = 'Lauch executable',
     program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/${workspaceFolderBasename}', 'file')
     end,
     cwd = '${workspaceFolder}',
     args = function()
