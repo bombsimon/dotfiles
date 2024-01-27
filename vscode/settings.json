@@ -38,6 +38,8 @@
   "cmake.configureOnOpen": true,
   "clang-format.language.proto.style": "{AlignConsecutiveAssignments: true, AlignConsecutiveDeclarations: true, IndentWidth: 4, ColumnLimit: 120}",
   "C_Cpp.clang_format_sortIncludes": true,
+  // Formatting and linting
+  "prettier.tabWidth": 4,
   //
   "go.autocompleteUnimportedPackages": true,
   "go.formatTool": "goimports",
@@ -64,6 +66,9 @@
       "-**/node_modules",
     ],
   },
+  //
+  "monkeyC.developerKeyPath": "/Users/simon/.ciq/developer_key.der",
+  "monkeyC.typeCheckLevel": "Strict",
   //
   "python.terminal.activateEnvironment": false,
   "python.formatting.provider": "black",
@@ -129,5 +134,4 @@
   "gitlens.currentLine.enabled": true,
   "gitlens.codeLens.authors.enabled": false,
   "gitlens.codeLens.recentChange.enabled": false,
-  "monkeyC.developerKeyPath": "/Users/simon/.ciq/developer_key.der",
 }
