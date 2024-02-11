@@ -1,6 +1,7 @@
-local colorscheme = "nord"
+vim.g.nord_uniform_diff_background = true
+vim.g.nord_borders = true
+vim.g.nord_italic = false
+vim.g.nord_bold = false
 
-local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-if not status_ok then
-  return
-end
+-- Load the colorscheme
+require('nord').set()

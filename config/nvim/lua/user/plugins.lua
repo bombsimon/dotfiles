@@ -42,8 +42,8 @@ packer.startup(function(use)
   use({ "folke/which-key.nvim" })            -- help to show key bindings
   use({ "lewis6991/gitsigns.nvim" })         -- git tools
   use({ "ray-x/starry.nvim" })               -- colorscheme to use 'miranda_lighter"
-  use({ "arcticicestudio/nord-vim" })        -- colorscheme 'nord'
   use({ "nvim-treesitter/nvim-treesitter" }) -- parser to help with colors etc
+  use({ "shaunsingh/nord.nvim" })            -- colorscheme 'nord'
 
   use({
     'akinsho/bufferline.nvim',
@@ -74,7 +74,6 @@ packer.startup(function(use)
   use({ "nvim-telescope/telescope-live-grep-args.nvim" }) -- args plugin
   use({
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.1",
     requires = {
       "nvim-lua/plenary.nvim",
     },
