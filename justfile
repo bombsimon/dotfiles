@@ -1,5 +1,5 @@
 symlinks := "\
-    alacritty.yaml \
+    alacritty.toml \
     config/bat/config \
     config/starship.toml \
     config/nvim/init.lua \
