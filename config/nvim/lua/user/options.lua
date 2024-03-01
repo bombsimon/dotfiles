@@ -48,7 +48,7 @@ vim.api.nvim_create_autocmd(
 
 -- make editor nice for screenshots
 vim.api.nvim_create_user_command("Demo",
-  "set nonumber norelativenumber nocursorline noruler noshowcmd showtabline=0 laststatus=0 colorcolumn=",
+  "autocmd! CursorLine | set nonumber norelativenumber nocursorline noruler noshowcmd showtabline=0 laststatus=0 colorcolumn= signcolumn=no",
   {}
 )
 
