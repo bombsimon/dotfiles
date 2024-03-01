@@ -75,6 +75,12 @@ require("nvim-tree").setup({
   on_attach = on_attach,
   view = {
     width = 40,
+    preserve_window_proportions = false,
+  },
+  actions = {
+    open_file = {
+      resize_window = false,
+    },
   },
   tab = {
     sync = {
