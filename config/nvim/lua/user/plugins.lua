@@ -43,7 +43,8 @@ packer.startup(function(use)
   use({ "lewis6991/gitsigns.nvim" })         -- git tools
   use({ "ray-x/starry.nvim" })               -- colorscheme to use 'miranda_lighter"
   use({ "nvim-treesitter/nvim-treesitter" }) -- parser to help with colors etc
-  use({ "shaunsingh/nord.nvim" })            -- colorscheme 'nord'
+  use({ "catppuccin/nvim", as = "catppuccin" })
+
 
   use({
     'akinsho/bufferline.nvim',
@@ -62,7 +63,7 @@ packer.startup(function(use)
 
   use({
     "rcarriga/nvim-dap-ui",
-    requires = { "mfussenegger/nvim-dap" }
+    requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }
   })                            -- DAP (Debugger) and UI
   use({ "leoluz/nvim-dap-go" }) -- Go DAP support
 

@@ -7,7 +7,7 @@ macOS, Linux and Windows.
 
 ## Prerequisites
 
-* [just](https://github.com/casey/just)
+- [just](https://github.com/casey/just)
 
 For `nvim` plugins you need `npm`, `go` and `python`/`pip`.
 
@@ -37,7 +37,8 @@ tmux new-session -A -s main
 
 ## Color palette
 
-I'm currently using [nord](https://www.nordtheme.com/) for `nvim`, `tmux` and
-[iTerm2](https://github.com/arcticicestudio/nord-iterm2).
+I'm currently using [Catppuccin
+Frappe](https://github.com/catppuccin/catppuccin) for `nvim`, `tmux` and
+[iTerm2](https://github.com/catppuccin/iterm).
 
 ![screenshot](./img/screenshot04.png)

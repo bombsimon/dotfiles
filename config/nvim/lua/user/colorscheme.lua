@@ -1,7 +1,5 @@
-vim.g.nord_uniform_diff_background = true
-vim.g.nord_borders = true
-vim.g.nord_italic = false
-vim.g.nord_bold = false
+require("catppuccin").setup({
+  flavour = "frappe"
+})
 
--- Load the colorscheme
-require('nord').set()
+vim.cmd.colorscheme "catppuccin"
