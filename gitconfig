@@ -19,6 +19,7 @@
   nosign      = -c commit.gpgsign=false commit
   reset-hard  = reset --hard @{u}
   branch-name = rev-parse --abbrev-ref HEAD
+  changelog   = "!git log --since 7d --oneline --pretty=format:"%s" --no-merges | sort"
   pushup      = "!git push -u origin $(git branch-name)"
   standup     = "!git log --since yesterday --author $(git config user.email) --pretty=short"
   gone        = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
