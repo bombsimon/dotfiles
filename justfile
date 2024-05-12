@@ -15,6 +15,7 @@ symlinks := "\
     my.cnf \
     perlcriticrc \
     perltidyrc \
+    psqlrc \
     ripgreprc \
     sqliterc \
     tmux.conf \
