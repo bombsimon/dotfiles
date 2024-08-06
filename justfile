@@ -149,6 +149,11 @@ oh-my-zsh-plugins: oh-my-zsh
         git clone "$plugin" "$fqdn"
     done
 
+# Change shell
+change-shell to='/usr/bin/zsh':
+    sudo bash -c 'echo /usr/bin/zsh >> /etc/shells'
+    chsh -s /usr/bin/zsh
+
 # Symlink op-ssh-sign to have git signing working with 1P
 [macos]
 @op-ssh-sign:

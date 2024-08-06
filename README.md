@@ -7,23 +7,17 @@ macOS, Linux and Windows.
 
 ## Prerequisites
 
-- [just](https://github.com/casey/just)
+- [just]
 
-For `nvim` plugins you need `npm`, `go` and `python`/`pip`.
+For `nvim` plugins you often need the related toolchain such as`npm`, `go`,
+`python`/`pip`, `cargo` etc.
 
 ## Other configuration
 
 ### Shell
 
-I use `zsh` in all environments. For OSes where this is not the default shell,
-change with:
-
-```sh
-sudo bash -c 'echo /usr/bin/zsh >> /etc/shells'
-chsh -s /usr/bin/zsh
-```
-
-This is also used together with [oh-my-zsh](https://ohmyz.sh/).
+I use `zsh` in all environments and all OSes. This is also used together with
+[oh-my-zsh].
 
 ### tmux
 
@@ -37,8 +31,16 @@ tmux new-session -A -s main
 
 ## Color palette
 
-I'm currently using [Catppuccin
-Frappe](https://github.com/catppuccin/catppuccin) for `nvim`, `tmux` and
-[iTerm2](https://github.com/catppuccin/iterm).
+I'm currently using [Catppuccin Frappe] which supports most of the editors, CLI
+tools, terminal applications etc that I use.
 
 ![screenshot](./img/screenshot04.png)
+
+## Font
+
+I use [Fira Code Nerd Fonts][Fira Code] wherever possible. Yes, with ligatures!
+
+[Catppuccin Frappe]: https://github.com/catppuccin/catppuccin
+[Fira Code]: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode
+[just]: https://github.com/casey/just
+[oh-my-zsh]: https://ohmyz.sh
