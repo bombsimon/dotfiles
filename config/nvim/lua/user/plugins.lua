@@ -39,11 +39,14 @@ packer.init({
 
 packer.startup(function(use)
   use({ "echasnovski/mini.align" })          -- tabularize/align
-  use({ "folke/which-key.nvim" })            -- help to show key bindings
   use({ "lewis6991/gitsigns.nvim" })         -- git tools
   use({ "ray-x/starry.nvim" })               -- colorscheme to use 'miranda_lighter"
   use({ "nvim-treesitter/nvim-treesitter" }) -- parser to help with colors etc
   use({ "catppuccin/nvim", as = "catppuccin" })
+  use({
+    "folke/which-key.nvim",
+    requires = "echasnovski/mini.icons"
+  }) -- help to show key bindings
 
 
   use({
