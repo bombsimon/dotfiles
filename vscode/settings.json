@@ -11,20 +11,10 @@
   "debug.allowBreakpointsEverywhere": true,
   // Look and feel
   "workbench.colorTheme": "Catppuccin Frappé",
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "catppuccin-frappe",
   "workbench.tree.indent": 20,
   "workbench.tree.renderIndentGuides": "always",
-  "workbench.colorCustomizations": {
-    "[Material Theme]": {
-      "editor.findMatchHighlightBackground": "#449b9b",
-      "editorIndentGuide.activeBackground": "#8bd5eb",
-      "sideBar.border": "#4c6470",
-      "panel.border": "#4c6470",
-      "terminal.background": "#303e46",
-      "tree.indentGuidesStroke": "#4c6470"
-    }
-  },
-  "editor.fontFamily": "Fira Code, Menlo, monospace",
+  "editor.fontFamily": "FiraCode Nerd Font, Fira Code, Menlo, monospace",
   "editor.fontLigatures": true,
   "editor.minimap.maxColumn": 80,
   "editor.rulers": [
@@ -32,17 +22,18 @@
     120
   ],
   //
-  "cmake.mingwSearchDirs": [
-    "C:\\Program Files\\MinGW"
-  ],
-  "cmake.configureOnOpen": true,
-  "clang-format.language.proto.style": "{AlignConsecutiveAssignments: true, AlignConsecutiveDeclarations: true, IndentWidth: 4, ColumnLimit: 120}",
   "C_Cpp.clang_format_sortIncludes": true,
+  "cmake.configureOnOpen": true,
+  "cmake.generator": "Visual Studio 17 2022",
+  "cmake.pinnedCommands": [
+    "workbench.action.tasks.configureTaskRunner",
+    "workbench.action.tasks.runTask"
+  ],
   // Formatting and linting
   "prettier.tabWidth": 4,
   //
   "go.autocompleteUnimportedPackages": true,
-  "go.formatTool": "goimports",
+  "go.formatTool": "gofumpt",
   "go.formatFlags": [
     "-s"
   ],
@@ -67,7 +58,10 @@
     ],
   },
   //
-  "monkeyC.developerKeyPath": "/Users/simon/.ciq/developer_key.der",
+  // macOS
+  // "monkeyC.developerKeyPath": "/Users/simon/.ciq/developer_key.der",
+  // Windows
+  "monkeyC.developerKeyPath": "c:\\Users\\simon\\connect-id\\developer_key.der",
   "monkeyC.typeCheckLevel": "Strict",
   //
   "python.terminal.activateEnvironment": false,
@@ -99,10 +93,6 @@
   "rust-analyzer.checkOnSave.command": "clippy",
   "rust-analyzer.inlayHints.enable": false,
   //
-  // Does not work when trying to expand ${env:HOME}
-  "bazel.buildifierExecutable": "/Users/simon/go/bin/buildifier",
-  "bazel.buildifierFixOnFormat": true,
-  //
   "haskell.formattingProvider": "brittany",
   //
   "Lua.telemetry.enable": false,
@@ -119,7 +109,6 @@
     "*=",
     "/="
   ],
-  //
   //
   // Typescript
   "[typescript]": {
