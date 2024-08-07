@@ -209,6 +209,10 @@ mason_lsp_config.setup_handlers({
   end,
 })
 
+-- Non Mason LSPs
+require("lspconfig").gleam.setup({})
+require("lspconfig").sourcekit.setup({})
+
 local dap, dapui = require("dap"), require("dapui")
 dapui.setup()
 

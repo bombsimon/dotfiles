@@ -47,10 +47,16 @@ vim.api.nvim_create_autocmd(
 )
 
 -- make editor nice for screenshots
-vim.api.nvim_create_user_command("Demo",
-  "autocmd! CursorLine | set nonumber norelativenumber nocursorline noruler noshowcmd showtabline=0 laststatus=0 colorcolumn= signcolumn=no",
-  {}
-)
+local function demo_settings()
+  vim.cmd([[
+    autocmd! CursorLine
+    set nonumber norelativenumber nocursorline noruler noshowcmd showtabline=0 laststatus=0 colorcolumn= signcolumn=no
+  ]])
+
+  require('gitsigns').toggle_current_line_blame(false)
+end
+
+vim.api.nvim_create_user_command("Demo", demo_settings, {})
 
 -- play nice with NvimTree, skip loading netrw since we won't use it
 vim.g.loaded_netrw = 1

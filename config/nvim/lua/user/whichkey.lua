@@ -145,8 +145,12 @@ local mappings = {
   { "<leader>sk", "<cmd>Telescope keymaps<cr>",                          desc = "Keymaps" },
   { "<leader>sr", "<cmd>Telescope oldfiles<cr>",                         desc = "Open Recent File" },
 
+  { "<leader>v",  group = "Virtualenv" },
+  { "<leader>vc", "<cmd>VenvSelectCached<cr>",                           desc = "Select previous Python venv" },
+  { "<leader>vs", "<cmd>VenvSelect<cr>",                                 desc = "Select Python venv" },
+
   { "<leader>t",  "<cmd>TroubleToggle<cr>",                              desc = "Show problems" },
-  { "<leader>v",  "<cmd>WhichKey '' v<cr>",                              desc = "Show visual maps" },
+  { "<leader>vv", "<cmd>WhichKey '' v<cr>",                              desc = "Show visual maps" },
   { "gd",         "<cmd>Telescope lsp_definitions<cr>",                  desc = "Goto definition" },
   { "gi",         "<cmd>Telescope lsp_implementations<cr>",              desc = "Show implementations" },
   { "gr",         "<cmd>Telescope lsp_references<cr>",                   desc = "Show references" },

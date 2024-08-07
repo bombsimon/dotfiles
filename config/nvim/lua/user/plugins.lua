@@ -51,7 +51,8 @@ packer.startup(function(use)
 
   use({
     'akinsho/bufferline.nvim',
-    tag = "*",
+    -- tag = "*",
+    branch = 'main',
     requires = 'nvim-tree/nvim-web-devicons',
   }) -- nice tabs
 
@@ -98,6 +99,17 @@ packer.startup(function(use)
   use({
     'stevearc/aerial.nvim',
   }) -- work with symbols
+
+  -- Venv
+  use({
+    'linux-cultist/venv-selector.nvim',
+    branch = 'regexp',
+    requires = {
+      'neovim/nvim-lspconfig',
+      'nvim-telescope/telescope.nvim',
+      'mfussenegger/nvim-dap-python'
+    }
+  })
 
   -- lsp
   use({ "williamboman/mason.nvim" })           -- simple to use language server installer
@@ -149,7 +161,6 @@ require("trouble").setup({
   use_diagnostic_signs = true,
 })
 
-local actions = require("telescope.actions")
 local trouble = require("trouble.sources.telescope")
 local lga_actions = require("telescope-live-grep-args.actions")
 require("telescope").setup({
@@ -192,20 +203,4 @@ require("nvim-treesitter.configs").setup({
   }
 })
 
-require("bufferline").setup({
-  options = {
-    mode = "tabs",
-    separator_style = "padded_slant",
-    show_close_icon = false,
-    show_buffer_close_icons = false,
-    diagnostics = "nvim_lsp",
-    offsets = {
-      {
-        filetype = "NvimTree",
-        text = "File Explorer",
-        text_align = "left",
-        separator = false,
-      }
-    },
-  }
-})
+require("venv-selector").setup()
