@@ -10,7 +10,7 @@
   "problems.showCurrentInStatus": true,
   "debug.allowBreakpointsEverywhere": true,
   // Look and feel
-  "workbench.colorTheme": "Material Theme",
+  "workbench.colorTheme": "Catppuccin Frappé",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.tree.indent": 20,
   "workbench.tree.renderIndentGuides": "always",
