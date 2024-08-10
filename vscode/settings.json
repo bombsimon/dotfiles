@@ -65,16 +65,16 @@
   "monkeyC.typeCheckLevel": "Strict",
   //
   "python.terminal.activateEnvironment": false,
-  "python.formatting.provider": "black",
-  "python.formatting.blackArgs": [
-    "--line-length=79"
-  ],
-  "python.jediEnabled": false,
-  "python.linting.enabled": true,
-  "python.linting.flake8Enabled": true,
-  "python.linting.lintOnSave": true,
-  "python.linting.pylintEnabled": true,
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports.ruff": "explicit"
+    }
+  },
   "python.languageServer": "Default",
+  "ruff.lineLength": 88,
   //
   // Neovim - Using this on macOS and Linux
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
