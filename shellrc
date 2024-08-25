@@ -79,8 +79,6 @@ export FZF_DEFAULT_OPTS=" \
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS"
 
-[ "$(npm --version 2> /dev/null)" ] && PATH="$PATH:$(npm bin)"
-
 GOPATHS="$GOPATH/bin:$GOROOT/bin"
 LOCALPATHS="$HOME/bin:$HOME/.bin:$HOME/.local/bin:/usr/local/bin"
 PERLPATHS="$HOME/perl5/perlbrew/bin"
@@ -129,16 +127,9 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 [ "$(pyenv -v 2> /dev/null)" ] && eval "$(pyenv init --path)" || true
 [ "$(pyenv -v 2> /dev/null)" ] && eval "$(pyenv init -)"      || true
 
-# Init nvm
-export NVM_DIR="$HOME/.nvm"
 
-# macOS
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-# WSL/Linux
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# fnm
+[ "$(fnm -V 2> /dev/null)" ] && eval "$(fnm env --use-on-cd --shell zsh)"
 
 # Get the actual IP address of a Docker container.
 function container_ip {
