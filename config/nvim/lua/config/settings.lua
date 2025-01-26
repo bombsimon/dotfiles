@@ -30,37 +30,85 @@ vim.opt.wrap = false          -- Don't wrap lines
 
 -- show cursor line only in active window
 local CursorLineOnlyInActiveWindow = vim.api.nvim_create_augroup("CursorLine", { clear = true })
+
+local function is_floating_window()
+    local win_config = vim.api.nvim_win_get_config(0)
+    return win_config.relative ~= ""
+end
+
 vim.api.nvim_create_autocmd(
-  { "VimEnter", "WinEnter", "BufWinEnter" },
-  { pattern = "*", command = "set cursorline colorcolumn=80,120", group = CursorLineOnlyInActiveWindow }
-)
-vim.api.nvim_create_autocmd(
-  { "WinLeave" },
-  { pattern = "*", command = "set nocursorline colorcolumn=", group = CursorLineOnlyInActiveWindow }
+    { "VimEnter", "WinEnter", "BufWinEnter" },
+    {
+        pattern = "*",
+        callback = function()
+            -- We likely don't want to show colorcolumns in floats since they're
+            -- likely not a window to write code but more something like
+            -- diagnostics or a picker.
+            if not is_floating_window() then
+                vim.cmd("set cursorline colorcolumn=80,120")
+            else
+                vim.cmd("set colorcolumn=")
+            end
+        end,
+        group = CursorLineOnlyInActiveWindow
+    }
 )
 
--- set proper indentation for yaml
-local filetypedetect = vim.api.nvim_create_augroup("filetypedetect", { clear = true })
 vim.api.nvim_create_autocmd(
-  { "FileType" },
-  { pattern = "yaml", command = "setl sw=2 sts=2 et", group = filetypedetect }
+    { "WinLeave" },
+    {
+        pattern = "*",
+        command = "set nocursorline colorcolumn=",
+        group = CursorLineOnlyInActiveWindow
+    }
 )
 
 -- make editor nice for screenshots
 local function demo_settings()
-  vim.cmd([[
+    vim.cmd([[
     autocmd! CursorLine
     set nonumber norelativenumber nocursorline noruler noshowcmd showtabline=0 laststatus=0 colorcolumn= signcolumn=no
   ]])
 
-  require('gitsigns').toggle_current_line_blame(false)
+    vim.diagnostic.config({ virtual_text = false })
+
+    require('gitsigns').toggle_current_line_blame(false)
 end
 
 vim.api.nvim_create_user_command("Demo", demo_settings, {})
 
--- play nice with NvimTree, skip loading netrw since we won't use it
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- Trim trailing whitespace
+require('editorconfig').trim_trailing_whitespace = true
 
--- set custom leader
-vim.g.mapleader = " "
+-- Set diagnostics float border to rounded
+local border = "rounded"
+vim.diagnostic.config({
+    virtual_text = true,
+    underline = false,
+    severity_sort = false, -- Less severity first, looks nicer for Rust
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.INFO] = " ",
+            [vim.diagnostic.severity.HINT] = " ",
+        },
+    },
+    float = {
+        show_header = false,
+        source = true,
+        border = border,
+    },
+})
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help, {
+        border = border,
+    }
+)
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+        border = border,
+    }
+)

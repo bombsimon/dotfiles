@@ -1,7 +1,3 @@
-require("user.options")
-require("user.plugins")
-require("user.colorscheme")
-require("user.whichkey")
-require("user.cmp")
-require("user.nvimtree")
-require("user.lsp")
+require("config.lazy")
+require("config.settings")
+
