@@ -1,0 +1,14 @@
+---
+yaml-files:
+  - "*.yaml"
+  - "*.yml"
+  - ".yamllint"
+
+rules:
+  # This rule more often makes it harder to read when you're forced to use
+  # unnatural line breaks.
+  line-length: disable
+
+
+# https://yamllint.readthedocs.io/en/stable/configuration.htm
+# set ft=yaml

@@ -19,6 +19,7 @@ symlinks := "\
     ripgreprc \
     sqliterc \
     tmux.conf \
+    yamllint \
 "
 
 zsh_plugins := "\
