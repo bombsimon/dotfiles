@@ -34,7 +34,7 @@ tmux new-session -A -s main
 I'm currently using [Catppuccin Frappe] which supports most of the editors, CLI
 tools, terminal applications etc that I use.
 
-![screenshot](./img/screenshot04.png)
+![screenshot](./img/screenshot05.png)
 
 ## Font
 
