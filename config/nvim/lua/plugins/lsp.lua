@@ -23,6 +23,9 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+        },
         opts = {
             handlers = {
                 function(server_name)
