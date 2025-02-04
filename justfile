@@ -10,7 +10,6 @@ symlinks := "\
     gitconfig \
     gitignore \
     golangci.yml \
-    ideavimrc \
     markdownlintrc \
     my.cnf \
     perlcriticrc \
