@@ -53,12 +53,25 @@ bat-theme:
     wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
     bat cache --build
 
+# Setup theme for Rio
+rio-theme:
+    mkdir -p ~/.config/rio/themes
+    curl \
+      -o ~/.config/rio/themes/themes/catppuccin-frappe.toml \
+      https://raw.githubusercontent.com/catppuccin/rio/refs/heads/main/themes/catppuccin-frappe.toml
+
+
 # Create symlinks for all config files
 symlink:
     #!/usr/bin/env sh
     set -eu
 
     for file in {{symlinks}}; do
+        if [ ! -e "$file" ]; then
+          echo "File '$file' does not exist - skipping"
+          continue
+        fi
+
         filename=$(basename "$file")
         dirname=$(dirname "$file")
         if [ "$dirname" != "." ] && [ ! -e ~/.$dirname ]; then
@@ -66,8 +79,8 @@ symlink:
             mkdir -p "~/.$dirname"
         fi
 
-        if [ ! -e ~/.$file ]; then
-            echo "Linking $(pwd)/$file"
+        if [ ! -L ~/.$file ]; then
+            echo "Linking $(pwd)/$file to ~/.$file"
             ln -s "$(pwd)/$file" ~/.$file
         fi
     done
@@ -162,8 +175,10 @@ change-shell to='/usr/bin/zsh':
 # Setup key repeat and keyboard accessibility
 [macos]
 @key-repeat: && reload
+    defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
     defaults write com.apple.Accessibility KeyRepeatDelay -float 0.5
     defaults write com.apple.Accessibility KeyRepeatInterval -float 0.083333333
+    defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
     defaults write NSGlobalDomain KeyRepeat -int 2
     defaults write NSGlobalDomain InitialKeyRepeat -int 20
     # Use scroll gesture with the Ctrl (^) modifier key to zoom
