@@ -1,20 +1,6 @@
 # This file contains shared shell configuration which can be used
 # both with zsh and bash. This content can also be used with oh-my-zsh.
 
-source_if_exist=(
-    "$HOME/perl5/perlbrew/etc/bashrc"
-    "$HOME/.ghcup/env"
-    "${HOME}/google-cloud-sdk/path.$(basename ${SHELL}).inc"
-    "${HOME}/google-cloud-sdk/completion.$(basename ${SHELL}).inc"
-    # RVM should be sourced last to make PATH work but we add it manually
-    # anyways so ignore that.
-    "$HOME/.rvm/scripts/rvm"
-)
-
-for f in $source_if_exist; do
-    [ -f "$f" ] && . "$f"
-done
-
 # Use `eza` instead of `ls` if it's installed. And no matter which one is used,
 # alias `l` to long listing format and `lr` to reverse long listing format.
 if [ "$(eza -v 2> /dev/null)" ]; then
@@ -91,7 +77,10 @@ ZIGPATHS="$HOME/bin/zig"
 NVIMPATHS="/usr/local/nvim/bin"
 
 # Keg-only formulas refusing to link for macOS-provided software.
-BREWPATHS="/usr/local/opt/curl/bin:/opt/homebrew/bin:/opt/homebrew/opt/coreutils/bin"
+BREWPATHS="/opt/homebrew/bin:\
+/opt/homebrew/opt/curl/bin:\
+/opt/homebrew/opt/coreutils/bin:\
+/opt/homebrew/opt/libpq/bin"
 
 export PATH="$CIQPATHS:\
 $RUSTPATHS:\
@@ -105,6 +94,23 @@ $RANCHER_DESKTOP_PATHS:\
 $ZIGPATHS:\
 $NVIMPATHS:\
 $PATH"
+
+source_if_exist=(
+    "$HOME/perl5/perlbrew/etc/bashrc"
+    "$HOME/.ghcup/env"
+    "${HOME}/google-cloud-sdk/path.$(basename ${SHELL}).inc"
+    "${HOME}/google-cloud-sdk/completion.$(basename ${SHELL}).inc"
+    "$HOME/.cargo/env"
+    "$HOME/.rye/env"
+    "$HOME/.rvm/scripts/rvm"
+)
+
+for f in $source_if_exist; do
+    [ -f "$f" ] && . "$f"
+done
+
+# TODO: This should not be here!
+export PATH="$HOME/.rye/shims:$PATH"
 
 # We must add paths depending on brew after first updating PATH but it's only
 # needed if we're on macOS/Darwin.
@@ -199,6 +205,22 @@ function count_success {
         printf "\r| %-10d | %-10d | %-10d | %-15.3f | %-15.3f" $total $s $f $run_time $avg_time
         sleep $delay
     done
+}
+
+function slack-status {
+    if nc -z -G1 ${1:-10.10.1.1} ${2:-22} &> /dev/null; then
+        icon="🏡"
+    else
+        icon=""
+    fi
+
+    token="$(op read "op://${WORK_VAULT:-}/Slack/api-token")"
+
+    http --quiet POST \
+        https://slack.com/api/users.profile.set \
+        "profile[status_emoji]=$icon" \
+        "profile[status_text]=" \
+        "Authorization: Bearer $token"
 }
 
 function zsh_prompt {

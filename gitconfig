@@ -6,6 +6,9 @@
 [includeIf "gitdir:~/workspace/"]
   path = .gitconfig.work
 
+[include]
+  path = ~/themes.gitconfig
+
 [alias]
   s           = status
   as          = commit -a --amend --no-edit
@@ -30,9 +33,26 @@
     done"
 
 [core]
-  pager = less -R
+  pager = delta --paging=always
   editor = nvim
   excludesfile = ~/.gitignore
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  features = "arctic-fox"
+  syntax-theme = "Catppuccin Frappe"
+  side-by-side = false
+  true-color = always
+  navigate = true  # use n and N to move between diff sections
+  line-numbers = true
+  line-numbers-zero-style = "gray"
+  line-numbers-plus-style = "green"
+  line-numbers-minus-style = "red"
+
+[merge]
+  conflictstyle = zdiff3
 
 [color]
   ui = auto

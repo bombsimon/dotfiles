@@ -1,3 +1,5 @@
+poetry.toml
+
 .vscode/settings.json
 .env
 

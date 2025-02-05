@@ -1,5 +1,6 @@
 --smart-case
 --hidden
+--type-add=perl:*.{t,pm,pl}
+--max-columns=150
 --glob=!.git/*
 --glob=!node_modules/*
---type-add=perl:*.{t,pm,pl}

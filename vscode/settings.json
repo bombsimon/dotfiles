@@ -59,9 +59,9 @@
   },
   //
   // macOS
-  // "monkeyC.developerKeyPath": "/Users/simon/.ciq/developer_key.der",
+  "monkeyC.developerKeyPath": "/Users/simon/.ciq/developer_key.der",
   // Windows
-  "monkeyC.developerKeyPath": "c:\\Users\\simon\\connect-id\\developer_key.der",
+  // "monkeyC.developerKeyPath": "c:\\Users\\simon\\connect-id\\developer_key.der",
   "monkeyC.typeCheckLevel": "Strict",
   //
   "python.terminal.activateEnvironment": false,
