@@ -58,7 +58,7 @@ return {
             init_options = {
               settings = {
                 fixAll = true,
-                lineLength = 90,
+                lineLength = 88,
                 organizeImports = true,
               },
             }

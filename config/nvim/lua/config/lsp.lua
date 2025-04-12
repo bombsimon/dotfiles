@@ -1,15 +1,19 @@
 capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local function setup_autocmds(_, bufnr)
+local function setup_autocmds(client, bufnr)
   local au_group = vim.api.nvim_create_augroup("lsp_stuff" .. bufnr, { clear = true })
 
   vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()
-      vim.lsp.buf.code_action({
-        apply = true,
-        context = { only = { "source.fixAll" } },
-        async = false,
-      })
+      -- Specific for Rust we want to run the code actions too because features
+      -- like sorting imports are part of the LSP code action and not formatter.
+      if client.supports_method("textDocument/codeAction") then
+        vim.lsp.buf.code_action({
+          apply = true,
+          context = { only = { "source.fixAll" } },
+          async = false,
+        })
+      end
 
       vim.lsp.buf.format({}, 5000)
     end,

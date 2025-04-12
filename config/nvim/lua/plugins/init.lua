@@ -10,7 +10,7 @@ return {
   {
     "chrisgrieser/nvim-lsp-endhints",
     event = "LspAttach",
-    opts = {},     -- required, even if empty
+    opts = {}, -- required, even if empty
   },
   {
     -- issues with filetype detecting if not lazy loaded
@@ -42,6 +42,7 @@ return {
     },
     opts = {},
     branch = "regexp",
+    event = "VeryLazy",
     keys = {
       { "<leader>vs", "<cmd>VenvSelect<cr>" },
       { "<leader>vc", "<cmd>VenvSelectCached<cr>" },

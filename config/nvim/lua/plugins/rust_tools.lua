@@ -4,9 +4,9 @@ require("config.lsp")
 -- `rustup component add rust-analyzer`
 return {
   "mrcjkb/rustaceanvim",
-  version = "^5",
-  lazy = false,   -- This plugin is already lazy
-  config = function()
+  version = "^6",
+  lazy = false, -- This plugin is already lazy
+  init = function()
     vim.g.rustaceanvim = function()
       -- Original path
       local extension_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/codelldb/extension/"
@@ -27,14 +27,21 @@ return {
       local cfg = require("rustaceanvim.config")
 
       return {
+        tools = {
+          rustc = {
+            default_edition = "2024"
+          }
+        },
         server = {
           on_attach = on_attach,
           settings = {
+            -- https://rust-analyzer.github.io/book/configuration.html
             ["rust-analyzer"] = {
               checkOnSave = {
                 command = "clippy",
               },
               cargo = {
+                features = "all",
                 allFeatures = true,
               },
               procMacro = {

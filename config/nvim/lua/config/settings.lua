@@ -110,6 +110,8 @@ vim.diagnostic.config({
   },
 })
 
+-- vim.lsp.set_log_level("debug")
+
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   vim.lsp.handlers.signature_help, {
     border = border,
