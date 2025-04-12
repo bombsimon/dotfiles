@@ -76,7 +76,7 @@ symlink:
         dirname=$(dirname "$file")
         if [ "$dirname" != "." ] && [ ! -e ~/.$dirname ]; then
             echo "Creating ~/.$dirname"
-            mkdir -p "~/.$dirname"
+            mkdir -p ~/.$dirname
         fi
 
         if [ ! -L ~/.$file ]; then
