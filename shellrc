@@ -72,7 +72,6 @@ RUBYPATHS="$HOME/.rvm/bin"
 RUSTPATHS="$HOME/.cargo/bin"
 CIQPATHS="$HOME/.connectiq-sdk/bin"
 JENVPATHS="$HOME/.jenv/bin"
-RANCHER_DESKTOP_PATHS="$HOME/.rd/bin"
 ZIGPATHS="$HOME/bin/zig"
 NVIMPATHS="/usr/local/nvim/bin"
 
@@ -82,17 +81,16 @@ BREWPATHS="/opt/homebrew/bin:\
 /opt/homebrew/opt/coreutils/bin:\
 /opt/homebrew/opt/libpq/bin"
 
-export PATH="$CIQPATHS:\
+export PATH="$LOCALPATHS:\
 $RUSTPATHS:\
+$BREWPATHS:\
+$NVIMPATHS:\
+$CIQPATHS:\
 $GOPATHS:\
 $PERLPATHS:\
 $RUBYPATHS:\
-$LOCALPATHS:\
-$BREWPATHS:\
 $JENVPATHS:\
-$RANCHER_DESKTOP_PATHS:\
 $ZIGPATHS:\
-$NVIMPATHS:\
 $PATH"
 
 source_if_exist=(
