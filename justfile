@@ -21,6 +21,8 @@ symlinks := "\
     yamllint \
 "
 
+# `zsh-syntax-highlighting` result in ligatures working differently
+# https://github.com/zsh-users/zsh-syntax-highlighting/issues/750
 zsh_plugins := "\
     https://github.com/zsh-users/zsh-syntax-highlighting.git \
     https://github.com/zsh-users/zsh-autosuggestions \
