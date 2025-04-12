@@ -1,76 +1,71 @@
 ---
+version: "2"
+
 run:
-  deadline: 1m
   issues-exit-code: 1
   tests: true
-  skip-dirs:
-    - vendor$
 
 output:
-  format: colored-line-number
-  print-issued-lines: false
+  formats:
+    text:
+      path: stdout
+      print-issued-lines: false
 
-linters-settings:
-  gocognit:
-    min-complexity: 10
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
 
-  depguard:
-    list-type: blacklist
-    include-go-root: false
-    packages:
-      - github.com/davecgh/go-spew/spew
-
-  misspell:
-    locale: US
-
-  gocritic:
-    # Enable multiple checks by tags, run `GL_DEBUG=gocritic golangci-lint run`
-    # to see all tags and checks. Empty list by default. See
-    # https://github.com/go-critic/go-critic#usage -> section "Tags".
-    enabled-tags:
-      - diagnostic
-      - experimental
-      - opinionated
-      - performance
-      - style
+formatters:
+  enable:
+    - gofmt
+    - gofumpt
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
 
 linters:
-  enable-all: true
+  default: all
   disable:
     - cyclop
-    - deadcode
     - dupl
-    - dupword
-    - exhaustivestruct
     - exhaustruct
     - forbidigo
     - funlen
-    - gci
     - gocognit
     - gocyclo
     - godox
-    - golint
-    - gomnd
-    - ifshort
-    - interfacer
     - lll
     - maintidx
-    - maligned
+    - mnd
     - nakedret
     - nestif
-    - nlreturn
-    - nosnakecase
     - paralleltest
     - prealloc
-    - scopelint
-    - structcheck
     - testpackage
-    - varcheck
     - varnamelen
-  fast: false
 
-issues:
-  exclude-use-default: false
-  max-issues-per-linter: 0
-  max-same-issues: 0
-# vim: set sw=2 ts=2 et:
+  settings:
+    gocognit:
+      min-complexity: 10
+
+    gocritic:
+      enabled-tags:
+        - diagnostic
+        - experimental
+        - opinionated
+        - performance
+        - style
+
+    misspell:
+      locale: US
+
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
