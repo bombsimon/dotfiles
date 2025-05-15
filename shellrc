@@ -4,7 +4,7 @@
 # Use `eza` instead of `ls` if it's installed. And no matter which one is used,
 # alias `l` to long listing format and `lr` to reverse long listing format.
 if [ "$(eza -v 2> /dev/null)" ]; then
-    alias ezaa="eza --icons=always --git --git-repos"
+    alias ezaa="eza --group-directories-first --icons=always --git --git-repos"
     alias l="ezaa -lh"
     alias la="ezaa -la"
     alias lr="ezaa -lh --sort newest"
