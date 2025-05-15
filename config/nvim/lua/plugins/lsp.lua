@@ -7,13 +7,78 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require("lspconfig").gleam.setup({
+      -- Non Mason LSP clients
+      vim.lsp.enable("gleam")
+      vim.lsp.enable("sourcekit")
+
+      vim.lsp.config("*", {
         on_attach = on_attach,
         capabilities = capabilities
       })
-      require("lspconfig").sourcekit.setup({
+
+      vim.lsp.config("ruff", {
         on_attach = on_attach,
-        capabilities = capabilities
+        capabilities = capabilities,
+        init_options = {
+          settings = {
+            fixAll = true,
+            lineLength = 88,
+            organizeImports = true,
+          },
+        }
+      })
+
+      vim.lsp.config("pyright", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+          },
+          python = {
+            analysis = {
+              -- Ignore all files for analysis to exclusively use Ruff for linting
+              ignore = { "*" },
+            },
+          },
+        },
+      })
+
+      local runtime, workspace = {}, {}
+
+      -- Custom setup for Playdate development
+      if exists("Source/main.lua") then
+        runtime = { nonstandardSymbol = { "+=", "-=", "*=", "/=" } }
+        workspace = {
+          library = { os.getenv("HOME") .. "/Developer/PlaydateSDK/CoreLibs/" },
+        }
+      end
+
+      vim.lsp.config("lua_ls", {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            runtime = runtime,
+            workspace = workspace,
+            format = {
+              enable = true,
+              defaultConfig = {
+                -- Indentation settings will not have
+                -- any effect since the editor's
+                -- settings have precedenceo.
+                -- https://luals.github.io/wiki/formatter/#default-configuration
+                indent_style = "space",
+                indent_size = "2",
+                quote_style = "double"
+              },
+            },
+            diagnostics = {
+              globals = { "vim" },
+            },
+          },
+        }
       })
     end,
   },
@@ -26,83 +91,7 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
     },
-    opts = {
-      handlers = {
-        function(server_name)
-          require("lspconfig")[server_name].setup({
-            on_attach = on_attach
-          })
-        end,
-        ["pyright"] = function()
-          require("lspconfig").pyright.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            settings = {
-              pyright = {
-                -- Using Ruff's import organizer
-                disableOrganizeImports = true,
-              },
-              python = {
-                analysis = {
-                  -- Ignore all files for analysis to exclusively use Ruff for linting
-                  ignore = { "*" },
-                },
-              },
-            },
-          })
-        end,
-        ["ruff"] = function()
-          require("lspconfig").ruff.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            init_options = {
-              settings = {
-                fixAll = true,
-                lineLength = 88,
-                organizeImports = true,
-              },
-            }
-          })
-        end,
-        ["lua_ls"] = function()
-          local runtime, workspace = {}, {}
-
-          -- Custom setup for Playdate development
-          if exists("Source/main.lua") then
-            runtime = { nonstandardSymbol = { "+=", "-=", "*=", "/=" } }
-            workspace = {
-              library = { os.getenv("HOME") .. "/Developer/PlaydateSDK/CoreLibs/" },
-            }
-          end
-
-          require("lspconfig")["lua_ls"].setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            settings = {
-              Lua = {
-                runtime = runtime,
-                workspace = workspace,
-                format = {
-                  enable = true,
-                  defaultConfig = {
-                    -- Indentation settings will not have
-                    -- any effect since the editor's
-                    -- settings have precedenceo.
-                    -- https://luals.github.io/wiki/formatter/#default-configuration
-                    indent_style = "space",
-                    indent_size = "2",
-                    quote_style = "double"
-                  },
-                },
-                diagnostics = {
-                  globals = { "vim" },
-                },
-              },
-            }
-          })
-        end
-      }
-    }
+    opts = {}
   },
   {
     "jayp0521/mason-null-ls.nvim",
