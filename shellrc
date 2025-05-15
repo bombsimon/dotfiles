@@ -106,8 +106,13 @@ for f in $source_if_exist; do
     [ -f "$f" ] && . "$f"
 done
 
-# TODO: This should not be here!
+# Both rye and uv have some issues with their shims and globally managed python
+# installations.
 export PATH="$HOME/.rye/shims:$PATH"
+
+# For uv add the path to where the python shim is linked to PATH
+# https://github.com/astral-sh/uv/issues/8821#issuecomment-2710003787
+export PATH=$(dirname $(realpath $(which python))):$PATH
 
 # We must add paths depending on brew after first updating PATH but it's only
 # needed if we're on macOS/Darwin.
@@ -330,6 +335,9 @@ function __zshrc {
 
     [ -f ~/.fzf.zsh ]                        && . ~/.fzf.zsh
     [ "$(starhsip --version 2> /dev/null)" ] && eval "$(starhsip init zsh)" || true
+
+    # De-duplicate path which gets copies for each new tab/pane in tmux
+    typeset -gU PATH
 }
 
 function __bashrc {
