@@ -45,7 +45,6 @@ export VISUAL="nvim"
 [ -e "/usr/local/go" ] && export GOROOT="/usr/local/go" # Darwin
 [ -e "/usr/lib/go" ]   && export GOROOT="/usr/lib/go"   # Linux
 export GOPATH="$HOME/go"
-export GO111MODULE="auto"
 
 # `dlv` and debugging Go doesn't work properly with these set
 if [ $(uname -s) = "Darwin" ]; then
