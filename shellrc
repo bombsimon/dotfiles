@@ -110,10 +110,6 @@ done
 # installations.
 export PATH="$HOME/.rye/shims:$PATH"
 
-# For uv add the path to where the python shim is linked to PATH
-# https://github.com/astral-sh/uv/issues/8821#issuecomment-2710003787
-export PATH=$(dirname $(realpath $(which python))):$PATH
-
 # We must add paths depending on brew after first updating PATH but it's only
 # needed if we're on macOS/Darwin.
 if [ "$(uname -s)" = "Darwin" ]; then
