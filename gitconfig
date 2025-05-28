@@ -28,6 +28,7 @@
   gone        = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
   ignore      = "!f() { curl -sL https://www.gitignore.io/api/$@ ;}; f"
   diffignore  = "!f() { b=$1;for e in ${@:2};do x+=(':(exclude)'$e);done;git diff $b -- . ${x[@]}; }; f"
+  diff-sbs    = -c delta.side-by-side=true diff
   remote-info = "!for branch in $(git branch -r | egrep -v 'HEAD|develop|stage|master|main'); do \
     git show --format=\"%<(45)%an %<(25)%ar %s %d\" $branch | head -1; \
     done"
