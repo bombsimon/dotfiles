@@ -10,7 +10,7 @@ local function setup_autocmds(client, bufnr)
       if client.supports_method("textDocument/codeAction") then
         vim.lsp.buf.code_action({
           apply = true,
-          context = { only = { "source.fixAll" } },
+          context = { only = { "source.organizeImports", "source.fixAll" } },
           async = false,
         })
       end
