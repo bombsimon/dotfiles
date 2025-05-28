@@ -37,6 +37,11 @@ return {
           settings = {
             -- https://rust-analyzer.github.io/book/configuration.html
             ["rust-analyzer"] = {
+              diagnostics = {
+                enable = true,
+                disabled = {},
+                enableExperimental = true,
+              },
               checkOnSave = {
                 command = "clippy",
               },
@@ -46,6 +51,9 @@ return {
               },
               procMacro = {
                 enable = true
+              },
+              cleanup = {
+                unusedImports = true,
               },
             },
           },
