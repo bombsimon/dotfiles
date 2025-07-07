@@ -1,3 +1,18 @@
+local function enum_first(entry1, entry2)
+  local kind1 = entry1:get_kind() or 0
+  local kind2 = entry2:get_kind() or 0
+
+  local enum_kind = 20 -- LSP CompletionItemKind.EnumMember
+
+  if kind1 == enum_kind and kind2 ~= enum_kind then
+    return true
+  elseif kind2 == enum_kind and kind1 ~= enum_kind then
+    return false
+  end
+
+  return nil -- Let next comparator decide
+end
+
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -13,6 +28,19 @@ return {
     config = function()
       local cmp = require("cmp")
       cmp.setup({
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            enum_first,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
+        },
         snippet = {
           -- REQUIRED - you must specify a snippet engine
           expand = function(args)

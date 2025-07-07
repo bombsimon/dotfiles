@@ -90,7 +90,9 @@ vim.api.nvim_create_user_command("Demo", demo_settings, {})
 require("editorconfig").trim_trailing_whitespace = true
 
 -- Set diagnostics float border to rounded
-local border = "rounded"
+local cmp = require("cmp")
+local border = cmp.config.window.bordered().border
+
 vim.diagnostic.config({
   virtual_text = true,
   underline = false,
