@@ -33,6 +33,9 @@
     git show --format=\"%<(45)%an %<(25)%ar %s %d\" $branch | head -1; \
     done"
 
+[branch]
+  sort = committerdate
+
 [core]
   pager = delta --paging=always
   editor = nvim
@@ -87,6 +90,9 @@
 
 [pull]
   rebase = false
+
+[branch]
+  sort = version:refname
 
 [url "git@bitbucket.org:"]
   insteadOf = https://bitbucket.org/
