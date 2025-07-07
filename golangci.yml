@@ -47,6 +47,7 @@ linters:
     - prealloc
     - testpackage
     - varnamelen
+    - wsl
 
   settings:
     gocognit:
