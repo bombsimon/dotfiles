@@ -325,9 +325,14 @@ function __zshrc {
     ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_bold[yellow]%}"
     ZSH_THEME_GIT_PROMPT_DIRTY=" %{$reset_color%}%{$fg_bold[red]%}*%{$reset_color%}"
     ZSH_THEME_GIT_PROMPT_CLEAN=""
-    PROMPT='%{$fg_bold[green]%}%3c%{$reset_color%}$(git_prompt_info)
+
+    LAST_EXIT='%B%(?..%F{red}󱞩 %?%f › )%b'
+    PROMPT='${LAST_EXIT}%{$fg_bold[green]%}%3c%{$reset_color%}$(git_prompt_info)
 %{$fg_bold[white]%}› %{$reset_color%}'
-    # zsh_prompt
+
+    # We keep the exit code and error status in the regular prompt.
+    RPROMPT=''
+
 
     [ -f ~/.fzf.zsh ]                        && . ~/.fzf.zsh
     [ "$(starhsip --version 2> /dev/null)" ] && eval "$(starhsip init zsh)" || true
