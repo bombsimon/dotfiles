@@ -45,7 +45,6 @@ return {
       "mfussenegger/nvim-dap-python",
     },
     opts = {},
-    branch = "regexp",
     event = "VeryLazy",
     keys = {
       { "<leader>vs", "<cmd>VenvSelect<cr>" },
@@ -74,7 +73,8 @@ return {
       }
 
       if (vim.g.colors_name or ""):find("catppuccin") then
-        opts.highlights = require("catppuccin.groups.integrations.bufferline").get()
+        -- https://github.com/catppuccin/nvim/issues/919
+        opts.highlights = require("catppuccin.groups.integrations.bufferline").get_theme()
       end
     end
   }

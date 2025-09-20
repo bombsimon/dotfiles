@@ -3,17 +3,15 @@ return {
     "catppuccin/nvim",
     name = "catppucin",
     lazy = false,
-    priority = 1000,     -- make sure to load this before all the other start plugins
+    priority = 1000, -- make sure to load this before all the other start plugins
     opts = {
+      flavour = "frappe",
       integrations = {
-        -- add integration:
-        -- TODO: Seems to always be enabled?
+        bufferline = true
       },
     },
-    config = function()
-      require("catppuccin").setup({
-        flavour = "frappe",
-      })
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
 
       vim.cmd.colorscheme "catppuccin"
     end,

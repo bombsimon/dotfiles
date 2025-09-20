@@ -29,6 +29,11 @@ return {
     },
   },
   config = function()
+    local function toggle_neotree_git()
+      vim.cmd("Neotree git_status toggle")
+      vim.opt_local.foldenable = false
+    end
+
     -- i can't let go of shift
     vim.api.nvim_create_user_command("W", "w", {})
     vim.api.nvim_create_user_command("Wa", "wa", {})
@@ -51,7 +56,7 @@ return {
 
         { "<leader>,",  "<cmd>Neotree reveal<cr>",                  desc = "Find and focus current file" },
         { "<leader>.",  "<cmd>Neotree action=show toggle=true<cr>", desc = "Toggle file tree" },
-        { "<leader>>",  "<cmd>Neotree git_status toggle<cr>",       desc = "Toggle git changed files" },
+        { "<leader>>",  toggle_neotree_git,                         desc = "Toggle git changed files" },
         { "<leader>?",  "<cmd>WhichKey<cr>",                        desc = "Halp!?" },
         { "<leader>N",  "<cmd>tabprevious<cr>",                     desc = "Previous tab" },
         { "<leader>a",  "<cmd>AerialToggle!<cr>",                   desc = "Toggle Aerial" },
