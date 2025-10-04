@@ -63,12 +63,14 @@ return {
             runtime = runtime,
             workspace = workspace,
             format = {
-              enable = true,
+              enable = false,
               defaultConfig = {
-                -- Indentation settings will not have
-                -- any effect since the editor's
-                -- settings have precedenceo.
+                -- Indentation settings will not have any effect since the
+                -- editors' settings have precedence.
                 -- https://luals.github.io/wiki/formatter/#default-configuration
+                --
+                -- These settings are instead set and configured with `stylua`
+                -- via `null_ls`.
                 indent_style = "space",
                 indent_size = "2",
                 quote_style = "double"
@@ -146,6 +148,14 @@ return {
           null_ls.builtins.diagnostics.golangci_lint,
           null_ls.builtins.formatting.shfmt.with({
             extra_args = { "-i 2" },
+          }),
+          null_ls.builtins.formatting.stylua.with({
+            extra_args = {
+              "--indent-type",
+              "Spaces",
+              "--indent-width",
+              "2",
+            },
           }),
 
           require("none-ls-shellcheck.diagnostics"),
