@@ -74,7 +74,7 @@ return {
 
       if (vim.g.colors_name or ""):find("catppuccin") then
         -- https://github.com/catppuccin/nvim/issues/919
-        opts.highlights = require("catppuccin.groups.integrations.bufferline").get_theme()
+        opts.highlights = require("catppuccin.special.bufferline").get_theme()
       end
     end
   }
