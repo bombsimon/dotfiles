@@ -34,7 +34,7 @@ return {
         },
         server = {
           on_attach = on_attach,
-          settings = {
+          default_settings = {
             -- https://rust-analyzer.github.io/book/configuration.html
             ["rust-analyzer"] = {
               diagnostics = {
@@ -42,9 +42,7 @@ return {
                 disabled = {},
                 enableExperimental = true,
               },
-              checkOnSave = {
-                command = "clippy",
-              },
+              checkOnSave = true,
               cargo = {
                 features = "all",
                 allFeatures = true,
