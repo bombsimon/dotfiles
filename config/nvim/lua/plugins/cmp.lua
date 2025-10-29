@@ -66,6 +66,7 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert({
+          ["<C-x><C-e>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<C-n>"] = cmp.mapping.select_next_item(),
           ["<C-j>"] = cmp.mapping.select_next_item({ count = 5 }),

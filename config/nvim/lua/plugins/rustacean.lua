@@ -34,6 +34,7 @@ return {
         },
         server = {
           on_attach = on_attach,
+          capabilities = capabilities,
           default_settings = {
             -- https://rust-analyzer.github.io/book/configuration.html
             ["rust-analyzer"] = {
