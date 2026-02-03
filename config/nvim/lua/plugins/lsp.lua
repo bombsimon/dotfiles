@@ -158,6 +158,10 @@ return {
               "Spaces",
               "--indent-width",
               "2",
+              "--quote-style",
+              "AutoPreferDouble",
+              "--preserve-block-newline-gabs",
+              "Never",
             },
           }),
 
