@@ -79,7 +79,7 @@ local function demo_settings()
     set nonumber norelativenumber nocursorline noruler noshowcmd showtabline=0 laststatus=0 colorcolumn= signcolumn=no
   ]])
 
-  vim.diagnostic.config({ virtual_text = false })
+  vim.diagnostic.config({ virtual_text = false, float = { border = border } })
 
   require("gitsigns").toggle_current_line_blame(false)
 end
