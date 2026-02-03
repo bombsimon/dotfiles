@@ -22,7 +22,6 @@ return {
         init_options = {
           settings = {
             fixAll = true,
-            lineLength = 88,
             organizeImports = true,
           },
         }
@@ -73,7 +72,9 @@ return {
                 -- via `null_ls`.
                 indent_style = "space",
                 indent_size = "2",
-                quote_style = "double"
+                quote_style = "double",
+                trailing_table_separator = "never",
+                align_continuous_inline_comment = "true",
               },
             },
             diagnostics = {
@@ -139,7 +140,9 @@ return {
             extra_args = { "--fast=false" },
           }),
 
-          null_ls.builtins.formatting.clang_format,
+          null_ls.builtins.formatting.clang_format.with({
+            filetypes = { "c", "cs", "cpp", "objc", "objcpp" },
+          }),
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.sql_formatter,
           null_ls.builtins.formatting.phpcsfixer,
