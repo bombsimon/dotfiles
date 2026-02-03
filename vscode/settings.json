@@ -90,8 +90,7 @@
   "vim.showcmd": true,
   "vim.textwidth": 80,
   // Rust
-  "rust-analyzer.checkOnSave.command": "clippy",
-  "rust-analyzer.inlayHints.enable": false,
+  "rust-analyzer.checkOnSave": true,
   //
   "haskell.formattingProvider": "brittany",
   //
@@ -109,8 +108,6 @@
     "*=",
     "/="
   ],
-  //
-  // Typescript
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
