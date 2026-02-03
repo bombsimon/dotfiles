@@ -160,7 +160,7 @@ return {
               "2",
               "--quote-style",
               "AutoPreferDouble",
-              "--preserve-block-newline-gabs",
+              "--preserve-block-newline-gaps",
               "Never",
             },
           }),
