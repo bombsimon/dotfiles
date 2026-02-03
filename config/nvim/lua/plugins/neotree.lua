@@ -4,7 +4,7 @@ return {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     "nvim-tree/nvim-web-devicons",
-    "s1n7ax/nvim-window-picker",     -- window picker
+    "s1n7ax/nvim-window-picker", -- window picker
   },
   config = function()
     require("window-picker").setup({
@@ -12,8 +12,8 @@ return {
       picker_config = {
         floating_big_letter = {
           font = "ansi-shadow",
-        }
-      }
+        },
+      },
     })
 
     require("neo-tree").setup({
@@ -38,5 +38,5 @@ return {
         },
       },
     })
-  end
+  end,
 }

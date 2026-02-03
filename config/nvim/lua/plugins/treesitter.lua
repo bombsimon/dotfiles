@@ -16,7 +16,7 @@ return {
       },
       highlight = {
         enable = true,
-      }
+      },
     })
-  end
+  end,
 }

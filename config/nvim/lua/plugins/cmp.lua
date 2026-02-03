@@ -55,7 +55,9 @@ return {
           -- Limit the max width of the completion window
           format = function(_, vim_item)
             local function truncate(str, len)
-              if not str then return end
+              if not str then
+                return
+              end
               local truncated = vim.fn.strcharpart(str, 0, len)
               return truncated == str and str or truncated .. "..."
             end
@@ -76,15 +78,12 @@ return {
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
           ["<CR>"] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Insert }),
         }),
-        sources = cmp.config.sources(
-          {
-            { name = "nvim_lsp" },
-            { name = "vsnip" },
-          },
-          {
-            { name = "buffer" },
-          }
-        ),
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "vsnip" },
+        }, {
+          { name = "buffer" },
+        }),
       })
     end,
   },

@@ -25,8 +25,7 @@ local function setup_autocmds(client, bufnr)
   vim.api.nvim_create_autocmd({ "CursorHold" }, {
     callback = function()
       local notify = vim.notify
-      vim.notify = function(_, _)
-      end
+      vim.notify = function(_, _) end
 
       vim.lsp.buf.clear_references()
       vim.lsp.buf.document_highlight()
@@ -42,8 +41,7 @@ local function setup_autocmds(client, bufnr)
   vim.api.nvim_create_autocmd({ "CursorHoldI" }, {
     callback = function()
       local notify = vim.notify
-      vim.notify = function(_, _)
-      end
+      vim.notify = function(_, _) end
 
       vim.lsp.buf.clear_references()
 
@@ -93,7 +91,9 @@ local function setup_keybinds(_, bufnr)
   vim.keymap.set("n", "[e", vim.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
 
-  vim.keymap.set("i", "<C-q>", function() vim.lsp.buf.signature_help({ border = "rounded" }) end, opts)
+  vim.keymap.set("i", "<C-q>", function()
+    vim.lsp.buf.signature_help({ border = "rounded" })
+  end, opts)
   vim.keymap.set("n", "<C-q>", custom_hover, opts)
 end
 

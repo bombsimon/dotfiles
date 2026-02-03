@@ -13,10 +13,10 @@ return {
       local codelldb_path = extension_path .. "adapter/codelldb"
       local liblldb_path = extension_path .. "lldb/lib/liblldb"
 
-      local this_os = vim.uv.os_uname().sysname;
+      local this_os = vim.uv.os_uname().sysname
 
       -- The path is different on Windows
-      if this_os:find "Windows" then
+      if this_os:find("Windows") then
         codelldb_path = extension_path .. "adapter\\codelldb.exe"
         liblldb_path = extension_path .. "lldb\\bin\\liblldb.dll"
       else
@@ -29,8 +29,8 @@ return {
       return {
         tools = {
           rustc = {
-            default_edition = "2024"
-          }
+            default_edition = "2024",
+          },
         },
         server = {
           on_attach = on_attach,
@@ -49,7 +49,7 @@ return {
                 allFeatures = true,
               },
               procMacro = {
-                enable = true
+                enable = true,
               },
               cleanup = {
                 unusedImports = true,
@@ -62,5 +62,5 @@ return {
         },
       }
     end
-  end
+  end,
 }

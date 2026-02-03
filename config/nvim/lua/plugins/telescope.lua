@@ -16,10 +16,10 @@ return {
       },
       extensions = {
         ["ui-select"] = {
-          require("telescope.themes").get_dropdown {},
+          require("telescope.themes").get_dropdown({}),
         },
         live_grep_args = {
-          auto_quoting = true,           -- enable/disable auto-quoting
+          auto_quoting = true, -- enable/disable auto-quoting
           mappings = {
             -- extend mappings
             i = {
@@ -27,11 +27,11 @@ return {
               ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
             },
           },
-        }
+        },
       },
     })
 
     require("telescope").load_extension("live_grep_args")
     require("telescope").load_extension("ui-select")
-  end
+  end,
 }

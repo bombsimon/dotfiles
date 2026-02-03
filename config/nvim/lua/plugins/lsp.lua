@@ -13,7 +13,7 @@ return {
 
       vim.lsp.config("*", {
         on_attach = on_attach,
-        capabilities = capabilities
+        capabilities = capabilities,
       })
 
       vim.lsp.config("ruff", {
@@ -24,7 +24,7 @@ return {
             fixAll = true,
             organizeImports = true,
           },
-        }
+        },
       })
 
       vim.lsp.config("pyright", {
@@ -81,20 +81,20 @@ return {
               globals = { "vim" },
             },
           },
-        }
+        },
       })
     end,
   },
   {
     "williamboman/mason.nvim",
-    opts = {}
+    opts = {},
   },
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = {
       "williamboman/mason.nvim",
     },
-    opts = {}
+    opts = {},
   },
   {
     "jayp0521/mason-null-ls.nvim",
@@ -170,5 +170,5 @@ return {
         },
       })
     end,
-  }
+  },
 }

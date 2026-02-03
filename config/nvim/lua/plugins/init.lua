@@ -22,7 +22,7 @@ return {
     cmd = "GitLink",
     opts = {},
     keys = {
-      { "<leader>gy", "<cmd>GitLink<cr>",  mode = { "n", "v" }, desc = "Yank git link" },
+      { "<leader>gy", "<cmd>GitLink<cr>", mode = { "n", "v" }, desc = "Yank git link" },
       { "<leader>gY", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link" },
     },
   },
@@ -31,11 +31,11 @@ return {
     version = "*",
     config = function()
       require("mini.align").setup()
-    end
+    end,
   },
   {
     "stevearc/aerial.nvim",
-    opts = {}
+    opts = {},
   },
   {
     "linux-cultist/venv-selector.nvim",
@@ -68,7 +68,7 @@ return {
             text = "File Explorer",
             text_align = "left",
             separator = false,
-          }
+          },
         },
       }
 
@@ -76,7 +76,6 @@ return {
         -- https://github.com/catppuccin/nvim/issues/919
         opts.highlights = require("catppuccin.special.bufferline").get_theme()
       end
-    end
-  }
-
+    end,
+  },
 }

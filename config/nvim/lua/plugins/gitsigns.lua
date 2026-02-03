@@ -7,5 +7,5 @@ return {
         delay = 200,
       },
     })
-  end
+  end,
 }
