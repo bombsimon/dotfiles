@@ -55,6 +55,37 @@ local function setup_autocmds(client, bufnr)
   })
 end
 
+local function clean_pyright_markdown(contents)
+  if type(contents) == "string" then
+    contents = contents:gsub("&nbsp;", " ")
+    contents = contents:gsub("&gt;", ">")
+    contents = contents:gsub("&lt;", "<")
+    contents = contents:gsub("\\_", "_")
+  elseif type(contents) == "table" and contents.value then
+    contents.value = clean_pyright_markdown(contents.value)
+  end
+  return contents
+end
+
+local function custom_hover()
+  local clients = vim.lsp.get_clients({ bufnr = 0, name = "pyright" })
+  if #clients > 0 then
+    local params = vim.lsp.util.make_position_params(0, clients[1].offset_encoding)
+    clients[1].request("textDocument/hover", params, function(err, result, ctx)
+      vim.schedule(function()
+        if result and result.contents then
+          result.contents = clean_pyright_markdown(result.contents)
+          vim.lsp.handlers.hover(err, result, ctx, { border = "rounded" })
+        else
+          vim.lsp.buf.hover()
+        end
+      end)
+    end)
+  else
+    vim.lsp.buf.hover()
+  end
+end
+
 local function setup_keybinds(_, bufnr)
   local opts = { noremap = true, buffer = bufnr }
 
@@ -62,8 +93,8 @@ local function setup_keybinds(_, bufnr)
   vim.keymap.set("n", "[e", vim.diagnostic.goto_prev, opts)
   vim.keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
 
-  vim.keymap.set("i", "<C-q>", vim.lsp.buf.signature_help, opts)
-  vim.keymap.set("n", "<C-q>", vim.lsp.buf.hover, opts)
+  vim.keymap.set("i", "<C-q>", function() vim.lsp.buf.signature_help({ border = "rounded" }) end, opts)
+  vim.keymap.set("n", "<C-q>", custom_hover, opts)
 end
 
 function on_attach(client, bufnr)
