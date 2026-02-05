@@ -2,6 +2,7 @@ symlinks := "\
     alacritty.toml \
     config/bat/config \
     config/ghostty/config \
+    config/mise/config.toml \
     config/starship.toml \
     config/nvim/init.lua \
     config/nvim/lua \

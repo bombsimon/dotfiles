@@ -336,6 +336,7 @@ function __zshrc {
 
     [ -f ~/.fzf.zsh ]                        && . ~/.fzf.zsh
     [ "$(starhsip --version 2> /dev/null)" ] && eval "$(starhsip init zsh)" || true
+    [ "$(mise --version 2> /dev/null)" ]     && eval "$(mise activate zsh)"
 
     # De-duplicate path which gets copies for each new tab/pane in tmux
     typeset -gU PATH
