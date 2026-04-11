@@ -1,5 +1,6 @@
 mise.local.toml
 __pycache__/
+CLAUDE.local.md
 .claude/
 poetry.toml
 
