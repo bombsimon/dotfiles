@@ -1,15 +1,18 @@
 {
-  // General options
-  "files.insertFinalNewline": true,
-  "terminal.integrated.defaultProfile.osx": "zsh",
-  "explorer.confirmDragAndDrop": false,
-  "explorer.confirmDelete": false,
-  "editor.formatOnSave": true,
-  "editor.autoClosingBrackets": "never",
-  "files.autoSave": "afterDelay",
-  "problems.showCurrentInStatus": true,
+  "settingsSync.ignoredSettings": [
+    "monkeyC.developerKeyPath",
+    "prettierMonkeyC.outputPath"
+  ],
   "debug.allowBreakpointsEverywhere": true,
-  // Look and feel
+  "editor.autoClosingBrackets": "never",
+  "editor.formatOnSave": true,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.autoSave": "afterDelay",
+  "files.insertFinalNewline": true,
+  "problems.showCurrentInStatus": true,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
   "workbench.colorTheme": "Catppuccin Frappé",
   "workbench.iconTheme": "catppuccin-frappe",
   "workbench.tree.indent": 20,
@@ -21,7 +24,6 @@
     80,
     120
   ],
-  //
   "C_Cpp.clang_format_sortIncludes": true,
   "cmake.configureOnOpen": true,
   "cmake.generator": "Visual Studio 17 2022",
@@ -29,102 +31,106 @@
     "workbench.action.tasks.configureTaskRunner",
     "workbench.action.tasks.runTask"
   ],
-  // Formatting and linting
+  "gitlens.ai.enabled": false,
+  "gitlens.currentLine.enabled": true,
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.recentChange.enabled": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
   "prettier.tabWidth": 4,
-  //
-  "go.autocompleteUnimportedPackages": true,
-  "go.formatTool": "gofumpt",
-  "go.formatFlags": [
-    "-s"
-  ],
-  "go.lintOnSave": "package",
-  "go.lintTool": "golangci-lint",
-  "go.lintFlags": [
-    "--fast"
-  ],
-  "go.testFlags": [
-    "-v"
-  ],
-  "go.useLanguageServer": true,
-  "go.toolsManagement.autoUpdate": true,
-  "gopls": {
-    "experimentalWorkspaceModule": true,
-    "build.directoryFilters": [
-      "-bazel-bin",
-      "-bazel-out",
-      "-bazel-src",
-      "-bazel-testlogs",
-      "-**/node_modules",
-    ],
-  },
-  //
-  // macOS
-  "monkeyC.developerKeyPath": "/Users/simon/.ciq/developer_key.der",
-  // Windows
-  // "monkeyC.developerKeyPath": "c:\\Users\\simon\\connect-id\\developer_key.der",
-  "monkeyC.typeCheckLevel": "Strict",
-  //
-  "python.terminal.activateEnvironment": false,
-  "[python]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.ruff": "explicit",
-      "source.organizeImports.ruff": "explicit"
-    }
-  },
-  "python.languageServer": "Default",
-  "ruff.lineLength": 88,
-  //
+  "redhat.telemetry.enabled": false,
   // Neovim - Using this on macOS and Linux
+  // For clipboard: https://github.com/vscode-neovim/vscode-neovim/issues/979
+  // For speed: https://github.com/vscode-neovim/vscode-neovim/issues/1051
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
   "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
   "vscode-neovim.neovimInitVimPaths.darwin": "/Users/simon/git/dotfiles/vscode/init.vim",
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   "vscode-neovim.neovimInitVimPaths.linux": "/home/simon/.config/nvim/init.vim",
-  // Vim - Using this on Windows
-  "vim.autoindent": true,
-  "vim.hlsearch": true,
-  "vim.ignorecase": true,
-  "vim.incsearch": true,
-  "vim.leader": "<space>",
-  "vim.showcmd": true,
-  "vim.textwidth": 80,
-  // Rust
-  "rust-analyzer.checkOnSave": true,
-  //
-  "haskell.formattingProvider": "brittany",
-  //
-  "Lua.telemetry.enable": false,
-  "Lua.diagnostics.globals": [
-    "playdate",
-    "import"
-  ],
-  "Lua.workspace.library": [
-    "${env:HOME}/Developer/PlaydateSDK/CoreLibs"
-  ],
-  "Lua.runtime.nonstandardSymbol": [
-    "+=",
-    "-=",
-    "*=",
-    "/="
-  ],
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "vscode-neovim.neovimExecutablePaths.win32": "C:\\Program Files\\Neovim\\bin\\nvim.exe",
+  "[go]": {
+    "go.autocompleteUnimportedPackages": true,
+    "go.formatTool": "gofumpt",
+    "go.formatFlags": [
+      "-s"
+    ],
+    "go.lintOnSave": "package",
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+      "--fast"
+    ],
+    "go.testFlags": [
+      "-v"
+    ],
+    "go.useLanguageServer": true,
+    "go.toolsManagement.autoUpdate": true,
+    "gopls": {
+      "experimentalWorkspaceModule": true,
+      "build.directoryFilters": [
+        "-bazel-bin",
+        "-bazel-out",
+        "-bazel-src",
+        "-bazel-testlogs",
+        "-**/node_modules",
+      ],
+    },
+  },
+  "[haskell]": {
+    "haskell.formattingProvider": "brittany",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[lua]": {
+    "Lua.telemetry.enable": false,
+    "Lua.diagnostics.globals": [
+      "playdate",
+      "import"
+    ],
+    "Lua.workspace.library": [
+      "${env:HOME}/Developer/PlaydateSDK/CoreLibs"
+    ],
+    "Lua.runtime.nonstandardSymbol": [
+      "+=",
+      "-=",
+      "*=",
+      "/="
+    ],
   },
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 80
   },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+  "[monkeyc]": {
+    // macOS
+    // "monkeyC.developerKeyPath": "/Users/simon/.ciq/developer_key.der",
+    // Windows
+    "monkeyC.developerKeyPath": "C:\\Users\\simon\\connect-iq\\developer_key.der",
+    "monkeyC.developerId": "098964e2-92bc-4730-a2dd-a3ff1cfcd60f",
+    "monkeyC.typeCheckLevel": "Informative",
+    "prettierMonkeyC.typeCheckLevel": "Default", // Derive from type check level
+    "prettierMonkeyC.strictTypeCheck": "Default", // Do it typeCheckLevel is strict
+    "prettierMonkeyC.outputPath": "C:\\Users\\simon\\AppData\\Local\\Temp\\prettier-monkeyc",
   },
   "[proto3]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
-  "gitlens.currentLine.enabled": true,
-  "gitlens.codeLens.authors.enabled": false,
-  "gitlens.codeLens.recentChange.enabled": false,
-  "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports.ruff": "explicit"
+    },
+    "python.terminal.activateEnvironment": false,
+    "python.languageServer": "Default",
+    "ruff.lineLength": 88,
+  },
+  "[rust]": {
+    "rust-analyzer.checkOnSave": true,
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 }
+
