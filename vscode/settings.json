@@ -3,6 +3,7 @@
     "monkeyC.developerKeyPath",
     "prettierMonkeyC.outputPath"
   ],
+  "claudeCode.preferredLocation": "sidebar",
   "debug.allowBreakpointsEverywhere": true,
   "editor.autoClosingBrackets": "never",
   "editor.formatOnSave": true,
@@ -10,20 +11,19 @@
   "explorer.confirmDragAndDrop": false,
   "files.autoSave": "afterDelay",
   "files.insertFinalNewline": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
   "problems.showCurrentInStatus": true,
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.defaultProfile.windows": "Git Bash",
   "workbench.colorTheme": "Catppuccin Frappé",
   "workbench.iconTheme": "catppuccin-frappe",
+  "workbench.secondarySideBar.showLabels": false,
   "workbench.tree.indent": 20,
   "workbench.tree.renderIndentGuides": "always",
   "editor.fontFamily": "FiraCode Nerd Font, Fira Code, Menlo, monospace",
   "editor.fontLigatures": true,
   "editor.minimap.maxColumn": 80,
-  "editor.rulers": [
-    80,
-    120
-  ],
+  "editor.rulers": [80, 120],
   "C_Cpp.clang_format_sortIncludes": true,
   "cmake.configureOnOpen": true,
   "cmake.generator": "Visual Studio 17 2022",
@@ -52,17 +52,11 @@
   "[go]": {
     "go.autocompleteUnimportedPackages": true,
     "go.formatTool": "gofumpt",
-    "go.formatFlags": [
-      "-s"
-    ],
+    "go.formatFlags": ["-s"],
     "go.lintOnSave": "package",
     "go.lintTool": "golangci-lint",
-    "go.lintFlags": [
-      "--fast"
-    ],
-    "go.testFlags": [
-      "-v"
-    ],
+    "go.lintFlags": ["--fast"],
+    "go.testFlags": ["-v"],
     "go.useLanguageServer": true,
     "go.toolsManagement.autoUpdate": true,
     "gopls": {
@@ -72,31 +66,21 @@
         "-bazel-out",
         "-bazel-src",
         "-bazel-testlogs",
-        "-**/node_modules",
-      ],
-    },
+        "-**/node_modules"
+      ]
+    }
   },
   "[haskell]": {
-    "haskell.formattingProvider": "brittany",
+    "haskell.formattingProvider": "brittany"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[lua]": {
     "Lua.telemetry.enable": false,
-    "Lua.diagnostics.globals": [
-      "playdate",
-      "import"
-    ],
-    "Lua.workspace.library": [
-      "${env:HOME}/Developer/PlaydateSDK/CoreLibs"
-    ],
-    "Lua.runtime.nonstandardSymbol": [
-      "+=",
-      "-=",
-      "*=",
-      "/="
-    ],
+    "Lua.diagnostics.globals": ["playdate", "import"],
+    "Lua.workspace.library": ["${env:HOME}/Developer/PlaydateSDK/CoreLibs"],
+    "Lua.runtime.nonstandardSymbol": ["+=", "-=", "*=", "/="]
   },
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
@@ -111,7 +95,7 @@
     "monkeyC.typeCheckLevel": "Informative",
     "prettierMonkeyC.typeCheckLevel": "Default", // Derive from type check level
     "prettierMonkeyC.strictTypeCheck": "Default", // Do it typeCheckLevel is strict
-    "prettierMonkeyC.outputPath": "C:\\Users\\simon\\AppData\\Local\\Temp\\prettier-monkeyc",
+    "prettierMonkeyC.outputPath": "C:\\Users\\simon\\AppData\\Local\\Temp\\prettier-monkeyc"
   },
   "[proto3]": {
     "editor.defaultFormatter": "ms-vscode.cpptools"
@@ -124,13 +108,12 @@
     },
     "python.terminal.activateEnvironment": false,
     "python.languageServer": "Default",
-    "ruff.lineLength": 88,
+    "ruff.lineLength": 88
   },
   "[rust]": {
-    "rust-analyzer.checkOnSave": true,
+    "rust-analyzer.checkOnSave": true
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  }
 }
-
