@@ -133,6 +133,7 @@ return {
       { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
       { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols" },
       { "<leader>lw", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
+      { "<leader>t", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Buffer Diagnostics" },
 
       { "<leader>n", "<cmd>tabnext<cr>", desc = "Next tab" },
 
@@ -160,8 +161,6 @@ return {
         desc = "Select previous Python venv",
       },
       { "<leader>vs", "<cmd>VenvSelect<cr>", desc = "Select Python venv" },
-
-      { "<leader>t", "<cmd>TroubleToggle<cr>", desc = "Show problems" },
       { "<leader>vv", "<cmd>WhichKey '' v<cr>", desc = "Show visual maps" },
       { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto definition" },
       { "gi", "<cmd>Telescope lsp_implementations<cr>", desc = "Show implementations" },
