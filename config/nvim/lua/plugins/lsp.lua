@@ -1,3 +1,5 @@
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 local exists = function(name)
   local path = require("plenary.path")
   return path:new(vim.fn.getcwd() .. "/" .. name):exists()

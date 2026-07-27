@@ -1,13 +1,12 @@
-capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 local function setup_autocmds(client, bufnr)
   local au_group = vim.api.nvim_create_augroup("lsp_stuff" .. bufnr, { clear = true })
 
   vim.api.nvim_create_autocmd("BufWritePre", {
-    callback = function()
-      -- Specific for Rust we want to run the code actions too because features
-      -- like sorting imports are part of the LSP code action and not formatter.
-      if client.supports_method("textDocument/codeAction") then
+    callback = function(args)
+      -- Specific for Rust and Monkey C we want to run the code actions too
+      -- because features like sorting imports are part of the LSP code action
+      -- and not formatter.
+      if next(vim.lsp.get_clients({ bufnr = args.buf, method = "textDocument/codeAction" })) then
         vim.lsp.buf.code_action({
           apply = true,
           context = { only = { "source.fixAll" } },
@@ -29,7 +28,6 @@ local function setup_autocmds(client, bufnr)
 
       vim.lsp.buf.clear_references()
       vim.lsp.buf.document_highlight()
-      vim.lsp.codelens.refresh()
 
       vim.notify = notify
     end,
@@ -73,4 +71,5 @@ end
 function on_attach(client, bufnr)
   setup_autocmds(client, bufnr)
   setup_keybinds(client, bufnr)
+  vim.lsp.codelens.enable(true, { bufnr = bufnr })
 end
