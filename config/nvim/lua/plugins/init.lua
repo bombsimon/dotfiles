@@ -1,6 +1,5 @@
 -- TODO:
 -- * Look into text objects: https://github.com/nvim-lua/kickstart.nvim/blob/f6d67b69c3/init.lua#L330-L363
--- * Setup DAP and friends: dap, dapui, dap-go
 return {
   "nvim-tree/nvim-web-devicons",
   "nvim-lua/plenary.nvim",
