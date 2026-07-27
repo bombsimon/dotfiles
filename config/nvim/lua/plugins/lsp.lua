@@ -9,6 +9,23 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
+      -- Local dev
+      -- vim.api.nvim_create_autocmd("FileType", {
+      --   pattern = "monkeyc",
+      --   callback = function(args)
+      --     vim.lsp.start({
+      --       name = "monkey-c-lsp",
+      --       cmd = { "~/git/monkey-c-rs/target/release/monkey-c-lsp" },
+      --       root_dir = vim.fs.root(args.buf, { "manifest.xml", ".git" }) or vim.fn.getcwd(),
+      --       -- A raw `vim.lsp.start` doesn't inherit the `vim.lsp.config("*")`
+      --       -- defaults, so wire the shared on_attach (format-on-save, keybinds)
+      --       -- and completion capabilities explicitly.
+      --       on_attach = on_attach,
+      --       capabilities = capabilities,
+      --     })
+      --   end,
+      -- })
+
       -- Non Mason LSP clients
       vim.lsp.enable("gleam")
       vim.lsp.enable("sourcekit")
@@ -70,6 +87,32 @@ return {
       })
     end,
   },
+  --   garmin-monkeyc.nvim    - https://github.com/bombsimon/garmin-monkeyc.nvim
+  {
+    name = "garmin-monkeyc.nvim",
+    dir = vim.fn.expand("~/git/garmin-monkeyc.nvim"),
+    -- jungle/mss so their bundled syntax files load when those files are opened.
+    ft = { "monkeyc", "jungle", "mss" },
+    config = function()
+      require("garmin-monkeyc").setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        developer_key = "~/.ciq/developer_key.der",
+        type_check_level = "Strict",
+      })
+    end,
+  },
+  --   monkeyc-optimizer.nvim - https://github.com/bombsimon/monkeyc-optimizer.nvim
+  {
+    name = "monkeyc-optimizer.nvim",
+    dir = vim.fn.expand("~/git/monkeyc-optimizer.nvim"),
+    ft = "monkeyc",
+    dependencies = { "garmin-monkeyc.nvim" },
+    config = function()
+      require("monkeyc-optimizer").setup({})
+    end,
+  },
+
   {
     "williamboman/mason.nvim",
     opts = {},
@@ -113,7 +156,11 @@ return {
         },
       })
 
-      null_ls = require("null-ls")
+      -- npm install -g prettier @markw65/prettier-plugin-monkeyc
+      local monkeyc_plugin = vim.trim(vim.fn.system({ "npm", "root", "-g" }))
+        .. "/@markw65/prettier-plugin-monkeyc/build/prettier-plugin-monkeyc.cjs"
+
+      local null_ls = require("null-ls")
       null_ls.setup({
         debug = false,
         border = "rounded",
@@ -129,7 +176,11 @@ return {
           null_ls.builtins.formatting.clang_format.with({
             filetypes = { "c", "cs", "cpp", "objc", "objcpp" },
           }),
-          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.prettier.with({
+            name = "prettier_monkeyc",
+            extra_filetypes = { "monkeyc" },
+            extra_args = { "--plugin", monkeyc_plugin },
+          }),
           null_ls.builtins.formatting.sql_formatter,
           null_ls.builtins.formatting.phpcsfixer,
           null_ls.builtins.formatting.goimports,

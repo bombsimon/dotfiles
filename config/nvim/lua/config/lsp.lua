@@ -52,6 +52,10 @@ local function setup_autocmds(client, bufnr)
 end
 
 local function custom_hover()
+  if #vim.lsp.get_clients({ bufnr = 0, name = "monkeyc-lsp" }) > 0 then
+    return require("garmin-monkeyc").hover()
+  end
+
   vim.lsp.buf.hover()
 end
 
@@ -63,6 +67,10 @@ local function setup_keybinds(_, bufnr)
   vim.keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
 
   vim.keymap.set("i", "<C-q>", function()
+    if #vim.lsp.get_clients({ bufnr = 0, name = "monkeyc-lsp" }) > 0 then
+      return require("garmin-monkeyc").signature_help()
+    end
+
     vim.lsp.buf.signature_help({ border = "rounded" })
   end, opts)
   vim.keymap.set("n", "<C-q>", custom_hover, opts)
