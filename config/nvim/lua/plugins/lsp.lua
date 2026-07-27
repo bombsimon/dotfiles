@@ -131,6 +131,7 @@ return {
       null_ls = require("null-ls")
       null_ls.setup({
         debug = false,
+        border = "rounded",
         on_attach = on_attach,
         sources = {
           null_ls.builtins.diagnostics.markdownlint,

@@ -81,8 +81,12 @@ vim.api.nvim_create_user_command("Demo", demo_settings, {})
 require("editorconfig").trim_trailing_whitespace = true
 
 -- Set diagnostics float border to rounded
-local cmp = require("cmp")
-local border = cmp.config.window.bordered().border
+local border = "rounded"
+
+-- Global default border for floating windows. open_floating_preview falls back
+-- to this, so LSP hover/signature help and plugins that don't hardcode a border
+-- inherit it.
+vim.o.winborder = border
 
 vim.diagnostic.config({
   virtual_text = true,
@@ -105,10 +109,14 @@ vim.diagnostic.config({
 
 -- vim.lsp.set_log_level("debug")
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = border,
-})
+-- Wrap hover and signature_help so every invocation gets our default border
+-- unless the caller explicitly overrides it.
+local orig_hover = vim.lsp.buf.hover
+vim.lsp.buf.hover = function(config)
+  return orig_hover(vim.tbl_extend("keep", config or {}, { border = border }))
+end
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = border,
-})
+local orig_signature_help = vim.lsp.buf.signature_help
+vim.lsp.buf.signature_help = function(config)
+  return orig_signature_help(vim.tbl_extend("keep", config or {}, { border = border }))
+end
