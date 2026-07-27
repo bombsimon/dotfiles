@@ -27,23 +27,6 @@ return {
         },
       })
 
-      vim.lsp.config("pyright", {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-          pyright = {
-            -- Using Ruff's import organizer
-            disableOrganizeImports = true,
-          },
-          python = {
-            analysis = {
-              -- Ignore all files for analysis to exclusively use Ruff for linting
-              ignore = { "*" },
-            },
-          },
-        },
-      })
-
       local runtime, workspace = {}, {}
 
       -- Custom setup for Playdate development
@@ -118,12 +101,12 @@ return {
           "lua-language-server",
           "markdownlint",
           "prettier",
-          "pyright",
           "ruff",
           "shellcheck",
           "shfmt",
           "sql-formatter",
           "stylua",
+          "ty",
           "yamllint",
         },
       })
