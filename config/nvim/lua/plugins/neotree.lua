@@ -31,6 +31,20 @@ return {
             require("neo-tree.sources.manager").refresh("filesystem")
           end,
         },
+        {
+          -- Speed up git diff:
+          -- https://github.com/nvim-neo-tree/neo-tree.nvim/discussions/2019
+          event = "before_git_status",
+          handler = function(args)
+            if vim.tbl_contains(args.status_args, "--untracked-files=all") then
+              for i, arg in ipairs(args.status_args) do
+                if arg == "--ignored=traditional" then
+                  args.status_args[i] = "--ignored=no"
+                end
+              end
+            end
+          end,
+        },
       },
       window = {
         mappings = {
