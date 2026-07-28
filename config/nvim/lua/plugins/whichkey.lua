@@ -34,6 +34,19 @@ return {
       vim.opt_local.foldenable = false
     end
 
+    local function pick_window()
+      local window = require("window-picker").pick_window({
+        filter_rules = {
+          autoselect_one = false,
+          include_current_win = true,
+        },
+      })
+
+      if window then
+        vim.api.nvim_set_current_win(window)
+      end
+    end
+
     -- i can't let go of shift
     vim.api.nvim_create_user_command("W", "w", {})
     vim.api.nvim_create_user_command("Wa", "wa", {})
@@ -162,6 +175,7 @@ return {
       },
       { "<leader>vs", "<cmd>VenvSelect<cr>", desc = "Select Python venv" },
       { "<leader>vv", "<cmd>WhichKey '' v<cr>", desc = "Show visual maps" },
+      { "<leader>w", pick_window, desc = "Pick window" },
       { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto definition" },
       { "gi", "<cmd>Telescope lsp_implementations<cr>", desc = "Show implementations" },
       { "gr", "<cmd>Telescope lsp_references<cr>", desc = "Show references" },
