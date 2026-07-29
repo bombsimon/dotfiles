@@ -20,6 +20,7 @@ fi
     alias vi="nvim" && \
     alias vim="nvim"
 
+alias claude-personal='CLAUDE_CONFIG_DIR=~/.claude-personal claude'
 alias glogin='gcloud auth login --update-adc'
 alias fzff="fzf --height 100% --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
