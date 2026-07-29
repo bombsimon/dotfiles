@@ -21,36 +21,54 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
-    version = "v17.33.0",
+    version = "^19.0.0",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
     opts = {
+      display = {
+        action_palette = {
+          provider = "default",
+        },
+      },
       adapters = {
         acp = {
-          -- npm install -g @zed-industries/claude-code-acp
-          -- npm install -g @anthropic-ai/claude-code
+          -- https://code.claude.com/docs/en/quickstart#step-1-install-claude-code
+          -- npm i -g @agentclientprotocol/claude-agent-acp
           claude_code = function()
             return require("codecompanion.adapters").extend("claude_code", {
+              formatted_name = "Claude Code (personal)",
               env = {
-                -- ANTHROPIC_API_KEY for `antrophic` adapter
-                CLAUDE_CODE_OAUTH_TOKEN = "cmd:op read 'op://Personal/Antrophic API key/credential'",
+                -- CLAUDE_CONFIG_DIR = "~/.claude-personal"
+                CLAUDE_CODE_OAUTH_TOKEN = "cmd:op read 'op://Personal/Claude Code oAuth token/credential'",
               },
             })
           end,
-          -- npm i -g @openai/codex
-          -- npm i -g @zed-industries/codex-acp
+          claude_code_work = function()
+            return require("codecompanion.adapters").extend("claude_code", {
+              name = "claude_code_work",
+              formatted_name = "Claude Code (work)",
+              env = {
+                CLAUDE_CODE_OAUTH_TOKEN = ("cmd:op read 'op://%s/Claude Code oAuth token/credential'"):format(
+                  vim.env.WORK_VAULT
+                ),
+              },
+            })
+          end,
+
+          -- https://github.com/openai/codex#quickstart
+          -- npm i -g @agentclientprotocol/codex-acp
           codex = function()
             return require("codecompanion.adapters").extend("codex", {
               defaults = {
-                auth_method = "chatgpt", -- "openai-api-key"|"codex-api-key"|"chatgpt"
+                auth_method = "chat-gpt", -- "api-key"|"chat-gpt"
               },
             })
           end,
         },
       },
-      strategies = {
+      interactions = {
         chat = {
           adapter = "claude_code",
         },
