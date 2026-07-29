@@ -49,69 +49,61 @@
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   "vscode-neovim.neovimInitVimPaths.linux": "/home/simon/.config/nvim/init.vim",
   "vscode-neovim.neovimExecutablePaths.win32": "C:\\Program Files\\Neovim\\bin\\nvim.exe",
-  "[go]": {
-    "go.autocompleteUnimportedPackages": true,
-    "go.formatTool": "gofumpt",
-    "go.formatFlags": ["-s"],
-    "go.lintOnSave": "package",
-    "go.lintTool": "golangci-lint",
-    "go.lintFlags": ["--fast"],
-    "go.testFlags": ["-v"],
-    "go.useLanguageServer": true,
-    "go.toolsManagement.autoUpdate": true,
-    "gopls": {
-      "experimentalWorkspaceModule": true,
-      "build.directoryFilters": [
-        "-bazel-bin",
-        "-bazel-out",
-        "-bazel-src",
-        "-bazel-testlogs",
-        "-**/node_modules"
-      ]
-    }
+  // Go
+  "go.formatTool": "gofumpt",
+  "go.formatFlags": ["-s"],
+  "go.lintOnSave": "package",
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": ["--fast"],
+  "go.testFlags": ["-v"],
+  "go.useLanguageServer": true,
+  "go.toolsManagement.autoUpdate": true,
+  "gopls": {
+    "experimentalWorkspaceModule": true,
+    "build.directoryFilters": [
+      "-bazel-bin",
+      "-bazel-out",
+      "-bazel-src",
+      "-bazel-testlogs",
+      "-**/node_modules"
+    ]
   },
-  "[haskell]": {
-    "haskell.formattingProvider": "brittany"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[lua]": {
-    "Lua.telemetry.enable": false,
-    "Lua.diagnostics.globals": ["playdate", "import"],
-    "Lua.workspace.library": ["${env:HOME}/Developer/PlaydateSDK/CoreLibs"],
-    "Lua.runtime.nonstandardSymbol": ["+=", "-=", "*=", "/="]
-  },
-  "[markdown]": {
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.wordWrapColumn": 80
-  },
-  "[monkeyc]": {
-    // macOS
-    // "monkeyC.developerKeyPath": "/Users/simon/.ciq/developer_key.der",
-    // Windows
-    "monkeyC.developerKeyPath": "C:\\Users\\simon\\connect-iq\\developer_key.der",
-    "monkeyC.developerId": "098964e2-92bc-4730-a2dd-a3ff1cfcd60f",
-    "monkeyC.typeCheckLevel": "Informative",
-    "prettierMonkeyC.typeCheckLevel": "Default", // Derive from type check level
-    "prettierMonkeyC.strictTypeCheck": "Default", // Do it typeCheckLevel is strict
-    "prettierMonkeyC.outputPath": "C:\\Users\\simon\\AppData\\Local\\Temp\\prettier-monkeyc"
-  },
-  "[proto3]": {
-    "editor.defaultFormatter": "ms-vscode.cpptools"
-  },
+  // Haskell
+  "haskell.formattingProvider": "brittany",
+  // Lua
+  "Lua.diagnostics.globals": ["playdate", "import"],
+  "Lua.workspace.library": ["${env:HOME}/Developer/PlaydateSDK/CoreLibs"],
+  "Lua.runtime.nonstandardSymbol": ["+=", "-=", "*=", "/="],
+  // Monkey C
+  "monkeyC.developerKeyPath": "/Users/simon/.ciq/developer_key.der",
+  // "C:\\Users\\simon\\connect-iq\\developer_key.der",
+  "monkeyC.developerId": "098964e2-92bc-4730-a2dd-a3ff1cfcd60f",
+  "monkeyC.typeCheckLevel": "Strict",
+  "prettierMonkeyC.typeCheckLevel": "Default", // Derive from type check level
+  "prettierMonkeyC.strictTypeCheck": "Default", // Do it typeCheckLevel is strict
+  // Python
+  "python.terminal.activateEnvironment": false,
+  "python.languageServer": "Default",
+  "ruff.lineLength": 88,
+  // Rust
+  "rust-analyzer.checkOnSave": true,
+  // Language specifics
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.codeActionsOnSave": {
       "source.fixAll.ruff": "explicit",
       "source.organizeImports.ruff": "explicit"
-    },
-    "python.terminal.activateEnvironment": false,
-    "python.languageServer": "Default",
-    "ruff.lineLength": 88
+    }
   },
-  "[rust]": {
-    "rust-analyzer.checkOnSave": true
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[proto3]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
