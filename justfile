@@ -1,5 +1,8 @@
 symlinks := "\
     alacritty.toml \
+    claude/CLAUDE.md \
+    claude/settings.json \
+    claude/skills \
     config/bat/config \
     config/ghostty/config \
     config/mise/config.toml \
