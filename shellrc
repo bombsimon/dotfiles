@@ -138,6 +138,52 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 # fnm
 [ "$(fnm -V 2> /dev/null)" ] && eval "$(fnm env --use-on-cd --shell zsh)"
 
+# Create a new git worktree as a sibling directory next to the repo, named
+# <repo>-<branch-with-slashes-replaced>, and cd into it.
+function gwt {
+    local branch="$1"
+    local repo_root
+    repo_root="$(git rev-parse --show-toplevel)" || return 1
+
+    local dir="${repo_root}-${branch//\//-}"
+
+    git worktree add -b "$branch" "$dir" && cd "$dir"
+}
+
+# Check out a GitHub PR into its own worktree, named <repo>-pr-<number>. If
+# the PR comes from a fork, add the fork as a remote (named after its owner)
+# and track its branch so the worktree can push back to the PR.
+function gwt-pr {
+    local pr_number="$1"
+    local repo_root
+    repo_root="$(git rev-parse --show-toplevel)" || return 1
+
+    local pr_json
+    pr_json="$(gh pr view "$pr_number" --json headRefName,headRepositoryOwner,headRepository,isCrossRepository)" || return 1
+
+    local branch is_fork
+    branch="$(jq -r '.headRefName' <<< "$pr_json")"
+    is_fork="$(jq -r '.isCrossRepository' <<< "$pr_json")"
+
+    local dir="${repo_root}-pr-${pr_number}"
+    local remote="origin"
+
+    if [ "$is_fork" = "true" ]; then
+        local owner repo_name
+        owner="$(jq -r '.headRepositoryOwner.login' <<< "$pr_json")"
+        repo_name="$(jq -r '.headRepository.name' <<< "$pr_json")"
+        remote="$owner"
+
+        git remote get-url "$remote" &> /dev/null || \
+            git remote add "$remote" "git@github.com:${owner}/${repo_name}.git"
+    fi
+
+    git fetch "$remote" "$branch" && \
+        git worktree add -b "$branch" "$dir" "$remote/$branch" && \
+        git -C "$dir" branch --set-upstream-to="$remote/$branch" "$branch" && \
+        cd "$dir"
+}
+
 # Get the actual IP address of a Docker container.
 function container_ip {
     docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" "${1:-}"
