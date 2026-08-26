@@ -24,3 +24,4 @@ selection-foreground = c6d0f5
 
 font-family = "FiraCode Nerd Font"
 title = " "
+mouse-reporting = false
