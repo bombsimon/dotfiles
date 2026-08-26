@@ -6,8 +6,14 @@
 - Use clear and descriptive function and variable names. Don't use short
   abbreviations
 - Always try to find existing paths in the codebase to follow the same structure
-- Always use an empty line after blocks or sections when writing code, try to do
-  semantic grouping
+- Use semantic newlines in new code you fully own (a new function, block, or
+  file - e.g. a file written from scratch): always a blank line after a
+  block (if/for/while/try/etc.) before the next statement, and always a
+  blank line before a `return` when two or more plain statements (not
+  counting a preceding block, already covered above) come directly before
+  it - one statement then `return` needs no blank line. Don't retrofit
+  this onto existing code you're only editing in part - match that file's
+  existing style there instead
 - Ensure comments are always up to date and reflect changes
 - Never remove clarifying comments unless behaviour is changed
 - Imports always go at the top grouped in all languages (Python, Rust, Java etc)
@@ -22,8 +28,6 @@
 
 - Run `cargo clippy --all-features --tests` to check linting and
   `cargo fmt --all` to format the code
-- If there is more than one statement above a return statement or last statement
-  it should be separated by a newline
 
 ## Python
 
@@ -38,6 +42,10 @@
 - Keep the commit message short and clear, don't reference files
 - Always reference methods, types and functions in backticks (`)
 - Look at historical commit and use the same pattern (e.g. conventional commits)
+- **NEVER** `git push` or create a pull request (`gh pr create`) without being
+  explicitly asked to do so in that specific instance. This is a hard rule,
+  no exceptions - committing locally does not imply permission to push or
+  open a PR
 
 ## Testing Requirements
 
