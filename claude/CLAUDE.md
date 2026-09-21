@@ -2,7 +2,6 @@
 
 ## Core behaviors
 
-- Only comment code to explain WHY, never WHAT the code does
 - Use clear and descriptive function and variable names. Don't use short
   abbreviations
 - Always try to find existing paths in the codebase to follow the same structure
@@ -14,9 +13,20 @@
   it - one statement then `return` needs no blank line. Don't retrofit
   this onto existing code you're only editing in part - match that file's
   existing style there instead
+- Imports always go at the top grouped in all languages (Python, Rust, Java etc)
+
+## Comments
+
+- Only comment code to explain WHY, never WHAT the code does
+- Keep comments to one or two lines, not a paragraph
+- Avoid naming specific files, line numbers, or functions in comments -
+  describe behaviour conceptually instead; name one only if the concept
+  alone would be ambiguous
+- Never use comments as a changelog or reference removed/legacy code -
+  that's what git history is for
+- Link reference docs in comments when relevant and possible
 - Ensure comments are always up to date and reflect changes
 - Never remove clarifying comments unless behaviour is changed
-- Imports always go at the top grouped in all languages (Python, Rust, Java etc)
 
 ## Go
 
@@ -61,4 +71,6 @@
   anti-patterns
 - **Do** reason around it and explain what the effect would be when when asked
   'can we', don't just do it
-- **Do** Admit gaps when hitting knowledge limits, don't fabricate solutions
+- **Do** admit gaps when hitting knowledge limits, don't fabricate solutions
+- **Do** write as a human in style, tone and formatting, avoid over using
+  dashes, semicolons etc
