@@ -1,4 +1,4 @@
 .headers ON
-.mode    column
+.mode    table
 
 PRAGMA foreign_keys = 1;
