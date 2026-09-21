@@ -174,7 +174,7 @@ return {
           }),
 
           null_ls.builtins.formatting.clang_format.with({
-            filetypes = { "c", "cs", "cpp", "objc", "objcpp" },
+            filetypes = { "c", "cpp", "objc", "objcpp" },
           }),
           null_ls.builtins.formatting.prettier.with({
             name = "prettier_monkeyc",
