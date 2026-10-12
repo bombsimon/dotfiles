@@ -4,7 +4,7 @@ require("config.lsp")
 -- `rustup component add rust-analyzer`
 return {
   "mrcjkb/rustaceanvim",
-  version = "^6",
+  version = "^9",
   lazy = false, -- This plugin is already lazy
   init = function()
     vim.g.rustaceanvim = function()
