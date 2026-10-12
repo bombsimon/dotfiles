@@ -389,7 +389,7 @@ function __zshrc {
     RPROMPT=''
 
 
-    [ -f ~/.fzf.zsh ]                        && . ~/.fzf.zsh
+    [ "$(fzf --version 2> /dev/null)" ]      && source <(fzf --zsh)
     [ "$(starhsip --version 2> /dev/null)" ] && eval "$(starhsip init zsh)" || true
     [ "$(mise --version 2> /dev/null)" ]     && eval "$(mise activate zsh)"
 
